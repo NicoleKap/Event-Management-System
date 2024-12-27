@@ -13,9 +13,9 @@ class Event {
     private int minutes;
     private String duration;
     private Organizer organizer;
-    private String status;
+    private boolean status;
 
-    public Event(String title, String theme, String description, String location, int maxCapacity, String day, String month, String year, int hour, int minutes, String duration, Organizer organizer, String status) {
+    public Event(String title, String theme, String description, String location, int maxCapacity, String day, String month, String year, int hour, int minutes, String duration, Organizer organizer, boolean status) {
         this.title = title;
         this.theme = theme;
         this.description = description;
@@ -31,7 +31,26 @@ class Event {
         this.status = status;
     }
 
+    public String getTitle() {
+        return title;
+    }
 
-
+    @Override
+    public String toString() {
+        return  Organizer.generateId()
+                + ". Event title: " + title + '\'' +
+                "\nTheme='" + theme + '\'' +
+                "\nDescription='" + description + '\'' +
+                "\nLocation='" + location + '\'' +
+                "\nMax Capacity=" + maxCapacity +
+                "\nDay='" + day + '\'' +
+                "\nMonth='" + month + '\'' +
+                "\nYear='" + year + '\'' +
+                "\nHour=" + hour +
+                "\nMinutes=" + minutes +
+                "\nDuration='" + duration + '\'' +
+                "\nOrganizer=" + organizer +
+                "\nStatus=" + status;
+    }
 }
 
