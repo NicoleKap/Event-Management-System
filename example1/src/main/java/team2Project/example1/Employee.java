@@ -11,7 +11,7 @@ public class Employee {
 	 */
 	public Employee(String name, String surname, String email) {
 		super();
-		this.name = "Joan";
+		this.name = name;
 		this.surname = surname;
 		this.email = email;
 	}
