@@ -49,18 +49,18 @@ class Event {
 
     @Override
     public String toString() {
-        return  "\n" +id
-                + ". Event title: " + title + '\'' +
-                "\nTheme: " + theme + '\'' +
-                "\nDescription: " + description + '\'' +
-                "\nLocation: " + location + '\'' +
+        return  "\n" + id
+                + ". Event title: " + title  +
+                "\nTheme: " + theme +
+                "\nDescription: " + description  +
+                "\nLocation: " + location +
                 "\nMax Capacity: " + maxCapacity +
-                "\nDay: " + day + '\'' +
-                "\nMonth: '" + month + '\'' +
-                "\nYear: '" + year + '\'' +
+                "\nDay: " + day +
+                "\nMonth: " + month +
+                "\nYear: " + year  +
                 "\nHour: " + hour +
                 "\nMinutes: " + minutes +
-                "\nDuration: " + duration + '\'' +
+                "\nDuration: " + duration  +
                 "\nOrganizer: " + organizer +
                 "\nStatus: " + status;
     }

@@ -15,11 +15,15 @@ public class App
 
         Organizer org2 = new Organizer("111654321","Maria","Papadopoulou","Computer Scientist");
         Event event2 = new Event("Cinema Festival","Cinema History","Come and enjoy movies of all time","Athens",500,"Thursday","May","2025",5,30,"5:30",org1,true);
-        org2.addEvent(event2);
+        org2.addEvent(event2); // test: it adds a new event in the list
+        org2.addEvent(event2); // test: it shows that the event exists
+
+        Event event3 = new Event("Spring Festival","Welcome Spring","Come and enjoy the beauty of the nature with us","Patra",350,"Saturday","March","2025",12,30,"12:30",org1,true);
 
         org1.addEvent(event2);
         System.out.println(org1.getEventsList());
-        org1.deleteEvent(event);
+        org1.deleteEvent(event); // test: it deletes an existing event from the list
         System.out.println(org1.getEventsList());
+        org1.deleteEvent(event3); // test: We haven't added this event to the list so we get the message "The event is not found in the list"
     }
 }
