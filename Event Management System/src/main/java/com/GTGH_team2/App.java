@@ -21,9 +21,10 @@ public class App
         Event event3 = new Event("Spring Festival","Welcome Spring","Come and enjoy the beauty of the nature with us","Patra",350,"Saturday","March","2025",12,30,"12:30",org1,true);
 
         org1.addEvent(event2);
-        System.out.println(org1.getEventsList());
+        org1.viewEvents();
         org1.deleteEvent(event); // test: it deletes an existing event from the list
-        System.out.println(org1.getEventsList());
+        org1.viewEvents();
         org1.deleteEvent(event3); // test: We haven't added this event to the list so we get the message "The event is not found in the list"
+        org2.viewEvents();
     }
 }

@@ -23,6 +23,18 @@ class Organizer {
         return eventsList;
     }
 
+    // A list of the Events by organizer
+
+    public void viewEvents() {
+        System.out.println("------------------------------------------------------------------------");
+        System.out.println("Events organized by " + name + " " + surname);
+        for( Event event : eventsList) {
+            System.out.println(event +" ");
+        }
+        System.out.println("------------------------------------------------------------------------");
+
+    }
+
 
     // The Organizer can create a new Event
     
