@@ -14,6 +14,8 @@ class Event {
     private String duration;
     private Organizer organizer;
     private boolean status;
+    private static int nextId = 1;
+    private int id;
 
     public Event(String title, String theme, String description, String location, int maxCapacity, String day, String month, String year, int hour, int minutes, String duration, Organizer organizer, boolean status) {
         this.title = title;
@@ -29,6 +31,16 @@ class Event {
         this.duration = duration;
         this.organizer = organizer;
         this.status = status;
+        this.id = nextId++;
+
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getTitle() {
@@ -37,20 +49,20 @@ class Event {
 
     @Override
     public String toString() {
-        return  Organizer.generateId()
+        return  "\n" +id
                 + ". Event title: " + title + '\'' +
-                "\nTheme='" + theme + '\'' +
-                "\nDescription='" + description + '\'' +
-                "\nLocation='" + location + '\'' +
-                "\nMax Capacity=" + maxCapacity +
-                "\nDay='" + day + '\'' +
-                "\nMonth='" + month + '\'' +
-                "\nYear='" + year + '\'' +
-                "\nHour=" + hour +
-                "\nMinutes=" + minutes +
-                "\nDuration='" + duration + '\'' +
-                "\nOrganizer=" + organizer +
-                "\nStatus=" + status;
+                "\nTheme: " + theme + '\'' +
+                "\nDescription: " + description + '\'' +
+                "\nLocation: " + location + '\'' +
+                "\nMax Capacity: " + maxCapacity +
+                "\nDay: " + day + '\'' +
+                "\nMonth: '" + month + '\'' +
+                "\nYear: '" + year + '\'' +
+                "\nHour: " + hour +
+                "\nMinutes: " + minutes +
+                "\nDuration: " + duration + '\'' +
+                "\nOrganizer: " + organizer +
+                "\nStatus: " + status;
     }
 }
 
