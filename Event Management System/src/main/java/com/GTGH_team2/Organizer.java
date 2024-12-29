@@ -1,6 +1,7 @@
 package com.GTGH_team2;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 class Organizer {
     private String afm;
@@ -8,6 +9,7 @@ class Organizer {
     private String surname;
     private String description;
     private Event events;
+    private static int nextId = 0;
     private final ArrayList<Event> eventsList = new ArrayList<>(); // The events are stored here
 
     // Constructor
@@ -32,41 +34,53 @@ class Organizer {
             System.out.println(event +" ");
         }
         System.out.println("------------------------------------------------------------------------");
-
     }
-
 
     // The Organizer can create a new Event
     
     public void addEvent(Event event) {
         // Check if the event already exists or the event is null
         if(event != null && !eventsList.contains(event)) {
-            this.eventsList.add(event);
-            System.out.println("The organizer " + name + " created the event " + event.getTitle());
+            if(Objects.equals(event.getStatus(), "Approved")){
+                event.setId(nextId++);
+                this.eventsList.add(event);
+                System.out.println("The organizer " + name + " created the event " + event.getTitle());
+            }else if(Objects.equals(event.getStatus(), "Pending")) {
+                System.out.println("The approval is pending!");
+            }else {
+                System.out.println("This event is not approved!");
+            }
         }else if (eventsList.contains(event)){
             System.out.println("This event already exists in the list");
         }else {
             System.out.println("This event is empty");
         }
-
-
     }
 
     // The Organizer can delete an existing Event
 
     public void deleteEvent(Event event) {
         if(eventsList.contains(event)) {
-            this.eventsList.remove(event);
-            System.out.println("The event " + event.getTitle() + " is successfully deleted by " + name);
+            if(Objects.equals(event.getStatus(), "Approved")) {
+                this.eventsList.remove(event);
+                System.out.println("The event " + event.getTitle() + " is successfully deleted by " + name);
+                event.setId(0);
+                for(Event ev : eventsList) {
+                    ev.setId(event.getId() + 1);
+                }
+            }else if(Objects.equals(event.getStatus(), "Pending")) {
+                System.out.println("The approval is pending!");
+            }
+            else {
+                System.out.println("This event is not approved!");
+            }
         }else {
             System.out.println("The event " + event.getTitle() + " is not found in the list");
         }
 
         // IDs update after the event removal
 
-        for(int i = 0; i < eventsList.size(); i++) {
-            eventsList.get(i).setId(i + 1);
-        }
+
 
     }
 

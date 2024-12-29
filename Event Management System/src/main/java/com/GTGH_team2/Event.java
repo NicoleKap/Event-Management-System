@@ -13,11 +13,11 @@ class Event {
     private int minutes;
     private String duration;
     private Organizer organizer;
-    private boolean status;
-    private static int nextId = 1;
+    private String status;
     private int id;
 
-    public Event(String title, String theme, String description, String location, int maxCapacity, String day, String month, String year, int hour, int minutes, String duration, Organizer organizer, boolean status) {
+
+    public Event(String title, String theme, String description, String location, int maxCapacity, String day, String month, String year, int hour, int minutes, String duration, Organizer organizer, String status) {
         this.title = title;
         this.theme = theme;
         this.description = description;
@@ -31,7 +31,6 @@ class Event {
         this.duration = duration;
         this.organizer = organizer;
         this.status = status;
-        this.id = nextId++;
 
     }
 
@@ -45,6 +44,10 @@ class Event {
 
     public String getTitle() {
         return title;
+    }
+
+    public String getStatus() {
+        return status;
     }
 
     @Override
