@@ -1,4 +1,4 @@
-package team2Project.example1;
+package Team2.Team2_Joana;
 
 import junit.framework.Test;
 import junit.framework.TestCase;

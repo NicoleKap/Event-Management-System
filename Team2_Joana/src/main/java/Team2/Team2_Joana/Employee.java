@@ -1,4 +1,4 @@
-package team2Project.example1;
+package Team2.Team2_Joana;
 
 public class Employee {
 	private String name;
@@ -15,7 +15,5 @@ public class Employee {
 		this.surname = surname;
 		this.email = email;
 	}
-	
-	
 	
 }
