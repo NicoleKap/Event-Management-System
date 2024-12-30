@@ -1,6 +1,4 @@
-
-package Team2.Team2_Joana;
-//package com.GTGH_team2;
+package com.GTGH_team2;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +12,6 @@ public class Employee {
 	 * @param surname
 	 * @param email
 	 */
-
 	
 	public Employee(String name, String surname, String email) {
 		this.name = name;
@@ -70,3 +67,5 @@ public class Employee {
 	
 	
 }
+
+
