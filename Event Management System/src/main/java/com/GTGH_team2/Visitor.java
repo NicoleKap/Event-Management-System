@@ -4,11 +4,13 @@ class Visitor {
 	private String name;
     private String surname;
     private String email;
+    private ArrayList<Event> events;
     
     public Visitor(String name, String surname, String email) {
         this.name = name;
         this.surname = surname;
         this.email = email;
+        this.events = new ArrayList<>();
     }
 
     public String getName() {
@@ -34,5 +36,28 @@ class Visitor {
     public void setEmail(String email) {
         this.email = email;
     }
+    
+    public ArrayList<Event> getEvents() {
+        return events;
+    }
+    
+    //anazhthsh ekdhlwsewn 
+    public ArrayList<Event> EventsSearching() {
+    	
+    }
+    
+    //krahthsh ekdhlwshs
+    public String bookingAnEvent() {
+    	
+    }
+    
+    //akurwsh krathshs
+    public String ReservationCanceling() {
+    	
+    }
+    
+    
+    
+    
 }
 
