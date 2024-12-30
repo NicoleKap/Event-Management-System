@@ -7,6 +7,7 @@ public class Employee {
 	private String name;
 	private String surname;
 	private String email;
+	private List<String> events = new ArrayList<String>();
 	/**
 	 * @param name
 	 * @param surname

@@ -1,4 +1,4 @@
-package com.GTGH-team2;
+package com.GTGH_team2;
 
 import junit.framework.Test;
 import junit.framework.TestCase;

@@ -10,7 +10,7 @@ class Organizer {
     private String description;
     private Event events;
     private static int nextId = 0;
-    private final ArrayList<Event> eventsList = new ArrayList<>(); // The events are stored here
+    private final ArrayList<Event> eventsList = new ArrayList(); // The events are stored here
 
     // Constructor
 
