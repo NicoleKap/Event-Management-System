@@ -80,10 +80,9 @@ class Organizer {
 
         // IDs update after the event removal
 
-
-
     }
 
+    // It returns the name and the surname of the Organizer
 
     @Override
     public String toString() {
