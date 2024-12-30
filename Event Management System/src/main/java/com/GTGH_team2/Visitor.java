@@ -1,9 +1,13 @@
 package com.GTGH_team2;
 
+import java.util.ArrayList;
+
+import org.w3c.dom.events.Event;
+
 class Visitor {
 	private String name;
     private String surname;
-    private String email;
+    private StringEventl;
     private ArrayList<Event> events;
     
     public Visitor(String name, String surname, String email) {
@@ -42,22 +46,33 @@ class Visitor {
     }
     
     //anazhthsh ekdhlwsewn 
-    public ArrayList<Event> EventsSearching() {
+    public ArrayList<Event> EventsSearching(ArrayList<Event> events, String date, String location, String theme) {
     	
     }
     
     //krahthsh ekdhlwshs
-    public String bookingAnEvent() {
-    	
+    public boolean bookingAnEvent(Event event) {
+    	if ( events.contains(event)) {
+    		events.add(event);
+    		System.out.println("Η κράτηση για την εκδήλωση " + event.getName() + " ολοκληρώθηκε!");
+            return true;
+        } else {
+            System.out.println("Έχετε ήδη κάνει κράτηση για την συγκεκριμένη εκδήλωση " + event.getName());
+            return false;
+        }
     }
     
     //akurwsh krathshs
     public String ReservationCanceling() {
-    	
+    	if ( events.contains(events)) {
+    		events.remove(events)
+    		System.out.println("Η κράτηση για την εκδήλωση " + event.getName() + " διαγράφτηκε!");
+            return true;
+    	} else {
+            System.out.println("Η κράτηση " + event.getName() + " δεν βρίσκεται στο σύστημα!");
+            return false;
+        }
     }
-    
-    
-    
     
 }
 
