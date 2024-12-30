@@ -1,33 +1,47 @@
 package com.GTGH_team2;
 
-import java.util.ArrayList;
-import java.util.List;
 
 public class Employee {
-	private String name;
-	private String surname;
-	private String email;
-	/**
-	 * @param name
-	 * @param surname
-	 * @param email
-	 */
+	private String name; //name of the employee
+	private String surname; //surname of the employee
+	private String email; //email of the employee
 	
+
+	// Constructor
 	public Employee(String name, String surname, String email) {
 		this.name = name;
 		this.surname = surname;
 		this.email = email;
 	}
 	
-		
-	public boolean disapproveEvent(String event) {
-		return true;
+	public void approveEvent(Event event) {
+	    if (event.getStatus().equals("Pending")) {
+	    	event.setStatus("Approved");
+	        System.out.println("Event : " + event.getTitle() + " has been approved.");
+	        } 
+	    else {
+	         System.out.println("Event: " + event.getTitle() + " is already " + event.getStatus() + ".");
+		    }
 	}
 	
-	public boolean approveEvent(String event) {
-		return true;
+	public void rejectEvent(Event event) {
+	    if (event.getStatus().equals("Pending")) {
+	    	event.setStatus("Rejected");
+	        System.out.println("Event : " + event.getTitle() + " has been rejected.");
+	        } 
+	    else {
+         System.out.println("Event: " + event.getTitle() + " is already " + event.getStatus() + ".");
+	    }
 	}
-
+	
+	public void deleteEvent(String title) {
+		 if (Event.deleteEvent(title)) {
+	        System.out.println("Event : " + title + " has been deleted by Employee " + name + " " + surname + ".");
+	    } else {
+	        System.out.println("Event not found.");
+	    }
+    }
+	
 	public String getName() {
 		return name;
 	}
@@ -52,20 +66,10 @@ public class Employee {
 		this.email = email;
 	}
 
-	public List<String> getEvents() {
-		return events;
-	}
-
-	public void setEvents(List<String> events) {
-		this.events = events;
-	}
-
 	@Override
 	public String toString() {
-		return "Employee [name=" + name + ", surname=" + surname + ", email=" + email + ", events=" + events + "]";
+		return "Employee [name=" + name + ", surname=" + surname + ", email=" + email + "]";
 	}
 	
 	
 }
-
-
