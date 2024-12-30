@@ -7,17 +7,6 @@ class Organizer {
     private String description;
     private Event events;
 
-    public Organizer(String afm, String name, String surname, String description, Event events) {
-        this.afm = afm;
-        this.name = name;
-        this.surname = surname;
-        this.description = description;
-        this.events = events;
-    }
-
-    public void addEvent() {
-        
-    }
 
 }
 
