@@ -4,13 +4,12 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 class Organizer {
-    private String afm;
+    private final String afm;
     private String name;
     private String surname;
     private String description;
     private Event events;
-    private static int nextId = 0;
-    private final ArrayList<Event> eventsList = new ArrayList<>(); // The events are stored here
+    private final ArrayList<Event> eventsListByOrganizer = new ArrayList<>(); // The events are stored here
 
     // Constructor
 
@@ -21,8 +20,24 @@ class Organizer {
         this.description = description;
     }
 
-    public ArrayList<Event> getEventsList() {
-        return eventsList;
+    public String getName() {
+        return name;
+    }
+
+    public String getSurname() {
+        return surname;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
+
+    public String getDescription() {
+        return description;
     }
 
     // A list of the Events by organizer
@@ -30,7 +45,7 @@ class Organizer {
     public void viewEvents() {
         System.out.println("------------------------------------------------------------------------");
         System.out.println("Events organized by " + name + " " + surname);
-        for( Event event : eventsList) {
+        for( Event event : eventsListByOrganizer) {
             System.out.println(event +" ");
         }
         System.out.println("------------------------------------------------------------------------");
@@ -40,17 +55,17 @@ class Organizer {
     
     public void addEvent(Event event) {
         // Check if the event already exists or the event is null
-        if(event != null && !eventsList.contains(event)) {
+        if(event != null && !eventsListByOrganizer.contains(event)) {
             if(Objects.equals(event.getStatus(), "Approved")){
-                event.setId(nextId++);
-                this.eventsList.add(event);
+                this.eventsListByOrganizer.add(event);
+                event.addEvent(event);
                 System.out.println("The organizer " + name + " created the event " + event.getTitle());
             }else if(Objects.equals(event.getStatus(), "Pending")) {
                 System.out.println("The approval is pending!");
             }else {
                 System.out.println("This event is not approved!");
             }
-        }else if (eventsList.contains(event)){
+        }else if (eventsListByOrganizer.contains(event)){
             System.out.println("This event already exists in the list");
         }else {
             System.out.println("This event is empty");
@@ -60,17 +75,11 @@ class Organizer {
     // The Organizer can delete an existing Event
 
     public void deleteEvent(Event event) {
-        if(eventsList.contains(event)) {
+        if(eventsListByOrganizer.contains(event)) {
             if(Objects.equals(event.getStatus(), "Approved")) {
-                this.eventsList.remove(event);
+                this.eventsListByOrganizer.remove(event);
+                event.removeEvent(event);
                 System.out.println("The event " + event.getTitle() + " is successfully deleted by " + name);
-
-                // IDs update after the event removal
-
-                event.setId(0);
-                for(Event ev : eventsList) {
-                    ev.setId(event.getId() + 1);
-                }
             }else if(Objects.equals(event.getStatus(), "Pending")) {
                 System.out.println("The approval is pending!");
             }
@@ -89,6 +98,11 @@ class Organizer {
     @Override
     public String toString() {
         return name + " " + surname;
+    }
+
+
+    public String getAfm() {
+        return afm;
     }
 }
 
