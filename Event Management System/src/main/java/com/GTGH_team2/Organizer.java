@@ -64,6 +64,9 @@ class Organizer {
             if(Objects.equals(event.getStatus(), "Approved")) {
                 this.eventsList.remove(event);
                 System.out.println("The event " + event.getTitle() + " is successfully deleted by " + name);
+
+                // IDs update after the event removal
+
                 event.setId(0);
                 for(Event ev : eventsList) {
                     ev.setId(event.getId() + 1);
@@ -78,7 +81,6 @@ class Organizer {
             System.out.println("The event " + event.getTitle() + " is not found in the list");
         }
 
-        // IDs update after the event removal
 
     }
 
