@@ -46,27 +46,27 @@ class Visitor {
     }
     
     //anazhthsh ekdhlwsewn 
-    public ArrayList<Event> EventsSearching(ArrayList<Event> events, String date, String location, String theme) {
+  //  public ArrayList<Event> EventsSearching(ArrayList<Event> events, String date, String location, String theme) {
     	
-    }
+  //  }
     
     //krahthsh ekdhlwshs
     public boolean bookingAnEvent(Event event) {
     	if ( events.contains(event)) {
     		events.add(event);
-    		System.out.println("Η κράτηση για την εκδήλωση " + event.getName() + " ολοκληρώθηκε!");
+    		System.out.println("Η κράτηση για την εκδήλωση " + event.getEventPhase() + " ολοκληρώθηκε!");
             return true;
         } else {
-            System.out.println("Έχετε ήδη κάνει κράτηση για την συγκεκριμένη εκδήλωση " + event.getName());
+            System.out.println("Έχετε ήδη κάνει κράτηση για την συγκεκριμένη εκδήλωση " + event.getEventPhase());
             return false;
         }
     }
     
     //akurwsh krathshs
-    public boolean ReservationCanceling() {
-    	if ( events.contains(events)) {
-    		events.remove(events);
-    		System.out.println("Η κράτηση για την εκδήλωση " + events.getName() + " διαγράφτηκε!");
+    public boolean ReservationCanceling(Event event) {
+    	if ( events.contains(event)) {
+    		events.remove(event);
+    		System.out.println("Η κράτηση για την εκδήλωση " + event.getName() + " διαγράφτηκε!");
             return true;
     	} else {
             System.out.println("Η κράτηση " + event.getName() + " δεν βρίσκεται στο σύστημα!");
