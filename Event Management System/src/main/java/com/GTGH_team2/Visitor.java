@@ -7,7 +7,7 @@ import org.w3c.dom.events.Event;
 class Visitor {
 	private String name;
     private String surname;
-    private StringEventl;
+    private String email;
     private ArrayList<Event> events;
     
     public Visitor(String name, String surname, String email) {
@@ -63,10 +63,10 @@ class Visitor {
     }
     
     //akurwsh krathshs
-    public String ReservationCanceling() {
+    public boolean ReservationCanceling() {
     	if ( events.contains(events)) {
-    		events.remove(events)
-    		System.out.println("Η κράτηση για την εκδήλωση " + event.getName() + " διαγράφτηκε!");
+    		events.remove(events);
+    		System.out.println("Η κράτηση για την εκδήλωση " + events.getName() + " διαγράφτηκε!");
             return true;
     	} else {
             System.out.println("Η κράτηση " + event.getName() + " δεν βρίσκεται στο σύστημα!");
