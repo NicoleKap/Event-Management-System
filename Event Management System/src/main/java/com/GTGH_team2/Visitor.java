@@ -8,13 +8,13 @@ class Visitor {
 	private String name;
     private String surname;
     private String email;
-    private ArrayList<Event> events;
+    private ArrayList<Event> events = new ArrayList<>();
+    private ArrayList<Visitor> participants = new ArrayList<>();
     
     public Visitor(String name, String surname, String email) {
         this.name = name;
         this.surname = surname;
         this.email = email;
-        this.events = new ArrayList<>();
     }
 
     public String getName() {
@@ -62,14 +62,16 @@ class Visitor {
         }
     }
     
+    //lista participants
+    
     //akurwsh krathshs
     public boolean ReservationCanceling(Event event) {
     	if ( events.contains(event)) {
     		events.remove(event);
-    		System.out.println("Η κράτηση για την εκδήλωση " + event.getName() + " διαγράφτηκε!");
+    		System.out.println("Η κράτηση για την εκδήλωση " + event.getTitle() + " διαγράφτηκε!");
             return true;
     	} else {
-            System.out.println("Η κράτηση " + event.getName() + " δεν βρίσκεται στο σύστημα!");
+            System.out.println("Η κράτηση " + event.ge + " δεν βρίσκεται στο σύστημα!");
             return false;
         }
     }
