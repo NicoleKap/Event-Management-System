@@ -2,8 +2,6 @@ package com.GTGH_team2;
 
 import java.util.ArrayList;
 
-import org.w3c.dom.events.Event;
-
 class Visitor {
 	private String name;
     private String surname;
@@ -50,8 +48,9 @@ class Visitor {
                 (location == null || event.getLocation().equals(location)) &&
                 (theme == null || event.getTheme().equals(theme))) {
                 specificEvents.add(event);
+               
             }
-        }
+        } 
         return specificEvents;
     }
     
@@ -76,13 +75,12 @@ class Visitor {
     			reservations.remove(res);
     			System.out.println("The booking for the event " + event.getTitle() + " is deleted!");
                 return true;
-    		} else {
+    		} 
+    	}
             System.out.println("The booking " + event.getTitle() + " can not be found in the system!");
             return false;
         }
     }
-    }
-}
     
 
 
