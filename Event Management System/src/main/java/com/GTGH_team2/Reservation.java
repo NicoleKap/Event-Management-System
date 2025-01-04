@@ -5,7 +5,6 @@ class Reservation {
     private Event event;
     
 	public Reservation(Visitor visitor, Event event) {
-		super();
 		this.visitor = visitor;
 		this.event = event;
 	}

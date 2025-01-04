@@ -8,7 +8,7 @@ class Visitor {
 	private String name;
     private String surname;
     private String email;
-    private ArrayList<Event> events = new ArrayList<>();
+    private ArrayList<Reservation> reservations = new ArrayList<>();
     
     
     public Visitor(String name, String surname, String email) {
@@ -41,13 +41,10 @@ class Visitor {
         this.email = email;
     }
     
-    public ArrayList<Event> getEvents() {
-        return events;
-    }
     
     //anazhthsh ekdhlwsewn 
     public ArrayList<Event> EventsSearching(ArrayList<Event> events, String day, String location, String theme) {
-    	ArrayList<Event> specificEvents = new ArrayList<>();
+    	ArrayList<Event> specificEvents = new ArrayList<>(); //ekdhlwseis pou plhroun ta krithria
         for (Event event : events) {
             if ((day == null || event.getDay().equals(day)) &&
                 (location == null || event.getLocation().equals(location)) &&
@@ -60,27 +57,32 @@ class Visitor {
     
     //krahthsh ekdhlwshs
     public boolean bookingAnEvent(Event event) {
-    	if ( events.contains(event)) {
-    		events.add(event);
+    	for ( Reservation res : reservations) {
+    		if ( res.getEvent().equals(event)) {
+    			System.out.println(" You have already booked that event " + event.getTitle() );
+                return false;
+    		}
+    	} 
+    	Reservation newReservation = new Reservation(this, event);
+    		reservations.add(newReservation);
     		System.out.println("The booking for the event " + event.getTitle() + " is done!");	
             return true;
-        } else {
-            System.out.println(" You have already booked that event " + event.getTitle() );
-            return false;
-        }
-    }
+        } 
     
     //akurwsh krathshs
     public boolean ReservationCanceling(Event event) {
-    	if ( events.contains(event)) {
-    		events.remove(event);
-    		System.out.println("The booking for the event " + event.getTitle() + " is deleted!");
-            return true;
-    	} else {
+    	for ( Reservation res : reservations) {
+    		if ( res.getEvent().equals(event)) {
+    			reservations.remove(res);
+    			System.out.println("The booking for the event " + event.getTitle() + " is deleted!");
+                return true;
+    		} else {
             System.out.println("The booking " + event.getTitle() + " can not be found in the system!");
             return false;
         }
     }
-    
+    }
 }
+    
+
 
