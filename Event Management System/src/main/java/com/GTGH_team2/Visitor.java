@@ -40,9 +40,9 @@ class Visitor {
     }
     
     
-    //anazhthsh ekdhlwsewn 
+    //Searching for events 
     public ArrayList<Event> EventsSearching(ArrayList<Event> events, String day, String location, String theme) {
-    	ArrayList<Event> specificEvents = new ArrayList<>(); //ekdhlwseis pou plhroun ta krithria
+    	ArrayList<Event> specificEvents = new ArrayList<>(); //events that meet the criteria
         for (Event event : events) {
             if ((day == null || event.getDay().equals(day)) &&
                 (location == null || event.getLocation().equals(location)) &&
@@ -54,7 +54,7 @@ class Visitor {
         return specificEvents;
     }
     
-    //krahthsh ekdhlwshs
+    //Booking an Event
     public boolean bookingAnEvent(Event event) {
     	for ( Reservation res : reservations) {
     		if ( res.getEvent().equals(event)) {
@@ -68,7 +68,7 @@ class Visitor {
             return true;
         } 
     
-    //akurwsh krathshs
+    //Canceling an Event
     public boolean ReservationCanceling(Event event) {
     	for ( Reservation res : reservations) {
     		if ( res.getEvent().equals(event)) {
@@ -80,7 +80,5 @@ class Visitor {
             System.out.println("The booking " + event.getTitle() + " can not be found in the system!");
             return false;
         }
-    }
+}
     
-
-
