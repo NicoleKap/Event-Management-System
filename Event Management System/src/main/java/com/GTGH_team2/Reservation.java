@@ -29,7 +29,8 @@ class Reservation {
 	@Override
     public String toString() {
         return "Reservation{" +
-                "visitor=" + visitor.getName() + " " + visitor.getSurname() + ", event=" + event.getTitle() + '}';
+                "visitor=" + visitor.getName() + " " + visitor.getSurname() +
+                ", event=" + event.getTitle() + '}';
     }
     
 }
