@@ -1,6 +1,8 @@
 package com.GTGH_team2;
 
 import java.util.Date;
+import java.util.List;
+import java.util.ArrayList;
 
 public class ApprovalRequest {
     private String type; // Type of the request ("Add" or "Delete")
@@ -12,6 +14,7 @@ public class ApprovalRequest {
     private Date closedAt; // Date when the request was closed
     private String comments; 
 
+    private static List<ApprovalRequest> allPendingRequests = new ArrayList<>(); // All requests that are pending
     
     // Constructor
 	public ApprovalRequest(String type, Event event, Organizer submittedBy, Date createdAt, String status) {
@@ -23,8 +26,19 @@ public class ApprovalRequest {
 		this.handledBy = null;
 		this.closedAt = null;
 		this.comments = "";
-		allRequests.add(this);
+		allPendingRequests.add(this);
 	}
+	
+	public static void viewAllPendingRequests() {
+        if (allPendingRequests.isEmpty()) {
+            System.out.println("There are no pending requests.");
+        } else {
+            System.out.println("Pending requests:");
+            for (ApprovalRequest request : allPendingRequests) {
+            	System.out.println(request);
+            }
+        }
+    }
 	
 	@Override
 	public String toString() {
