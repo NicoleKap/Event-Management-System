@@ -10,8 +10,9 @@ public class ApprovalRequest {
     private String status; // Status of the request("Pending", "Approved", "Rejected")
     private Employee handledBy; // The employee who handles the request
     private Date closedAt; // Date when the request was closed
-    private String comments; 
+    private String comments;
 
+    
     // Constructor
 	public ApprovalRequest(String type, Event event, Organizer submittedBy, Date createdAt, String status) {
 	    this.type = type;
@@ -22,16 +23,15 @@ public class ApprovalRequest {
 		this.handledBy = null;
 		this.closedAt = null;
 		this.comments = "";
+		allRequests.add(this);
 	}
 	
-	
-    // Method to view the request details
-    public void viewRequest() {
-        System.out.println("Approval Request:");
-        
-    }
+	@Override
+	public String toString() {
+		return "Request for event:" + event + ", Submitted by=" + submittedBy + ", created at=" + createdAt + "]";
+	}
 
-
+    
     // Getter and setter methods
     
 	public String getType() {
@@ -114,5 +114,6 @@ public class ApprovalRequest {
 	}
 
 }
+
 
 

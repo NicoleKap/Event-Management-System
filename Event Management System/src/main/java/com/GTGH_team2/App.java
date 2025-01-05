@@ -43,8 +43,16 @@ public class App
         
         Employee emp1 = new Employee("Dimitra", "Filippou", "dimitrafilippou@gmail.com");
         Employee emp2 = new Employee("Viktor", "Petrou", "viktorp7@gmail.com");
-        emp1.approveEvent(event3);
-        emp2.approveEvent(event4);
-        emp1.deleteEvent(event4);
+        
+        
+      //  ApprovalRequest request1 = org1.createEventRequest(event3); organiser has to create "createEventRequest"
+     
+        //emp1.approveRequest(request1);
+       
+    //  ApprovalRequest request2 = org1.createEventRequest(event4); 
+        
+        //emp2.rejectRequest(request2);
+       
+        emp1.deleteEvent(event3);
     }
 }
