@@ -36,5 +36,15 @@ public class App
             System.out.println();
             System.out.println(e +" ");
         }
+        
+        //Employees
+        Event event3 = new Event("Music Festival","Rock Bands of 1980s","Music contest for best band from the 80s","Larissa",1000,"Saturday","July","2025",21,00,"3 hours",org1,"Pending");
+        Event event4 = new Event("Choir Festival","Greek cinema","Choirs of Thessaloniki come together to present covers of songs from the Greek cinema","Thessaloniki",500,"Friday","August","2025",19,30,"3 hours",org1,"Pending");
+        
+        Employee emp1 = new Employee("Dimitra", "Filippou", "dimitrafilippou@gmail.com");
+        Employee emp2 = new Employee("Viktor", "Petrou", "viktorp7@gmail.com");
+        emp1.approveEvent(event3);
+        emp2.approveEvent(event4);
+        emp1.deleteEvent(event4);
     }
 }
