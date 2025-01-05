@@ -1,7 +1,8 @@
 package com.GTGH_team2;
 
 import java.util.Date;
-
+import java.util.ArrayList;
+import java.util.List;
 
 public class Employee {
 	private String name; //name of the employee
@@ -25,7 +26,7 @@ public class Employee {
             request.setClosedAt(new java.util.Date());
             allRequests.add(request);
             Event.addEvent(request.getEvent());
-            System.out.println("Request : " + request.getEvent().getTitle()" has been approved.");
+            System.out.println("Request : " + request.getEvent().getTitle( )+ " has been approved.");
         } else {
             System.out.println("Request : " + request.getEvent().getTitle() + " is already " + request.getStatus() + ".");
         }
@@ -39,7 +40,7 @@ public class Employee {
             request.setClosedAt(new java.util.Date());
             allRequests.add(request);
             Event.addEvent(request.getEvent());
-            System.out.println("Request : " + request.getEvent().getTitle()" has been rejected.");
+            System.out.println("Request : " + request.getEvent().getTitle() + " has been rejected.");
         } else {
             System.out.println("Request : " + request.getEvent().getTitle() + " is already " + request.getStatus() + ".");
         }
@@ -53,6 +54,7 @@ public class Employee {
 	    }
 	}
 	
+	//Method for employee to view all his previous requests
 	public void viewAllRequests() {
         if (allRequests.isEmpty()) {
             System.out.println("There are no previous requests.");
@@ -63,6 +65,12 @@ public class Employee {
             }
         }
     }
+	
+	//Method for employee to view all the pending requests
+	public void viewPendingRequests() {
+        ApprovalRequest.viewAllPendingRequests(); 
+    }
+
 	
 	public String getName() {
 		return name;
