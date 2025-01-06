@@ -17,6 +17,7 @@ class Event {
     private Organizer organizer;
     private String status;
     private static final ArrayList<Event> allEvents = new ArrayList<>();
+    private ArrayList<Visitor> participants = new ArrayList<>();
 
     public Event(String title, String theme, String description, String location, int maxCapacity, String day, String month, String year, int hour, int minutes, String duration,Organizer organizer, String status) {
         this.title = title;
@@ -32,7 +33,19 @@ class Event {
         this.duration = duration;
         this.organizer = organizer;
         this.status = status;
-        
+
+    }
+
+    public String getTheme() {
+        return theme;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public String getDay() {
+        return day;
     }
 
     public String getTitle() {
@@ -55,6 +68,12 @@ class Event {
         return allEvents;
     }
 
+    public void addParticipant(Visitor visitor) {
+        if (!participants.contains(visitor)) {
+            participants.add(visitor);
+        }
+    }
+    
     @Override
     public String toString() {
         return  "Event title: " + title  +
