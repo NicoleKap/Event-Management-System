@@ -68,6 +68,7 @@ class Event {
         return allEvents;
     }
 
+    // Add participant to this event
     public void addParticipant(Visitor visitor) {
         if (!participants.contains(visitor)) {
             participants.add(visitor);
