@@ -3,21 +3,21 @@ package com.GTGH_team2;
 import java.util.ArrayList;
 
 class Event {
-    private String title;
-    private String theme;
-    private String description;
-    private String location;
-    private int maxCapacity;
-    private String day;
-    private String month;
-    private String year;
-    private int hour;
-    private int minutes;
-    private String duration;
-    private Organizer organizer;
-    private String status;
+    private final String title;
+    private final String theme;
+    private final String description;
+    private final String location;
+    private final int maxCapacity;
+    private final String day;
+    private final String month;
+    private final String year;
+    private final int hour;
+    private final int minutes;
+    private final String duration;
+    private final Organizer organizer;
+    private final String status;
     private static final ArrayList<Event> allEvents = new ArrayList<>();
-    private ArrayList<Visitor> participants = new ArrayList<>();
+    private final ArrayList<Visitor> participants = new ArrayList<>();
 
     public Event(String title, String theme, String description, String location, int maxCapacity, String day, String month, String year, int hour, int minutes, String duration,Organizer organizer, String status) {
         this.title = title;
@@ -47,25 +47,6 @@ class Event {
     public String getDay() {
         return day;
     }
-    
-    public void addParticipant(Visitor visitor) {
-        if (!participants.contains(visitor)) {
-            participants.add(visitor);
-        }
-    }
-
-    public String getTheme() {
-		return theme;
-	}
-
-	public String getLocation() {
-		return location;
-	}
-
-
-	public String getDay() {
-		return day;
-	}
 
 	public String getTitle() {
         return title;
@@ -88,10 +69,19 @@ class Event {
     }
 
     // Add participant to this event
+
     public void addParticipant(Visitor visitor) {
         if (!participants.contains(visitor)) {
             participants.add(visitor);
+            System.out.println("Participant added: " + visitor.getName());
         }
+    }
+
+    // Remove a participant from this event
+    
+    public void removeParticipant(Visitor visitor) {
+        participants.remove(visitor);
+        System.out.println("Participant removed: " + visitor.getName());
     }
     
     @Override
