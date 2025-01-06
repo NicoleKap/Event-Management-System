@@ -47,8 +47,27 @@ class Event {
     public String getDay() {
         return day;
     }
+    
+    public void addParticipant(Visitor visitor) {
+        if (!participants.contains(visitor)) {
+            participants.add(visitor);
+        }
+    }
 
-    public String getTitle() {
+    public String getTheme() {
+		return theme;
+	}
+
+	public String getLocation() {
+		return location;
+	}
+
+
+	public String getDay() {
+		return day;
+	}
+
+	public String getTitle() {
         return title;
     }
 
