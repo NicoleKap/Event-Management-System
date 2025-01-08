@@ -2,21 +2,22 @@ package com.GTGH_team2;
 
 import java.util.ArrayList;
 
-class Event {
-    private String title;
-    private String theme;
-    private String description;
-    private String location;
-    private int maxCapacity;
-    private String day;
-    private String month;
-    private String year;
-    private int hour;
-    private int minutes;
-    private String duration;
-    private Organizer organizer;
-    private String status;
+public class Event {
+    private final String title;
+    private final String theme;
+    private final String description;
+    private final String location;
+    private final int maxCapacity;
+    private final String day;
+    private final String month;
+    private final String year;
+    private final int hour;
+    private final int minutes;
+    private final String duration;
+    private final Organizer organizer;
+    private final String status;
     private static final ArrayList<Event> allEvents = new ArrayList<>();
+    private final ArrayList<Visitor> participants = new ArrayList<>();
 
     public Event(String title, String theme, String description, String location, int maxCapacity, String day, String month, String year, int hour, int minutes, String duration,Organizer organizer, String status) {
         this.title = title;
@@ -32,10 +33,22 @@ class Event {
         this.duration = duration;
         this.organizer = organizer;
         this.status = status;
-        
+
     }
 
-    public String getTitle() {
+    public String getTheme() {
+        return theme;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public String getDay() {
+        return day;
+    }
+
+	public String getTitle() {
         return title;
     }
 
@@ -55,6 +68,22 @@ class Event {
         return allEvents;
     }
 
+    // Add participant to this event
+
+    public void addParticipant(Visitor visitor) {
+        if (!participants.contains(visitor)) {
+            participants.add(visitor);
+            System.out.println("Participant added: " + visitor.getName());
+        }
+    }
+
+    // Remove a participant from this event
+    
+    public void removeParticipant(Visitor visitor) {
+        participants.remove(visitor);
+        System.out.println("Participant removed: " + visitor.getName());
+    }
+    
     @Override
     public String toString() {
         return  "Event title: " + title  +
@@ -72,4 +101,3 @@ class Event {
                 "\nStatus: " + status;
     }
 }
-

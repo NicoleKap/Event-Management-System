@@ -2,6 +2,9 @@ package com.GTGH_team2;
 
 import java.util.Date;
 import java.util.List;
+
+import com.GTGH_team2.employee.Employee;
+
 import java.util.ArrayList;
 
 public class ApprovalRequest {

@@ -1,23 +1,16 @@
-package com.GTGH_team2;
+package com.GTGH_team2.employee;
 
-import java.util.Date;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Employee {
-	private String name; //name of the employee
-	private String surname; //surname of the employee
-	private String email; //email of the employee
-	private List<ApprovalRequest> allRequests; //list of all the previous requests that the employee had
+import com.GTGH_team2.ApprovalRequest;
+import com.GTGH_team2.Event;
 
-	// Constructor
-	public Employee(String name, String surname, String email) {
-		this.name = name;
-		this.surname = surname;
-		this.email = email;
-		this.allRequests = new ArrayList<>();
-	}
+public class EmployeeServices {
 	
+	private List<Employee> employees = new ArrayList<Employee>();
+
+
 	public void approveRequest(ApprovalRequest request) {
         if (request.getStatus().equals("Pending")) {
             request.setStatus("Approved");
@@ -71,39 +64,4 @@ public class Employee {
         ApprovalRequest.viewAllPendingRequests(); 
     }
 
-	
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getSurname() {
-		return surname;
-	}
-
-	public void setSurname(String surname) {
-		this.surname = surname;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	@Override
-	public String toString() {
-		return "Employee [name=" + name + ", surname=" + surname + ", email=" + email + "]";
-	}
-	
-	//events services -> 
-	//reservation -> make reservation (eventID ,visitorID)
-	// visitor services -> apothikeuei neous visitor, (opos book)
-	// visitor -> mono setters getters
-	
 }
