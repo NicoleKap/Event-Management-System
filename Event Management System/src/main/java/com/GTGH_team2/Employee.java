@@ -1,5 +1,6 @@
 package com.GTGH_team2;
 
+import com.GTGH_team2.approvalRequests.ApprovalRequest;
 
 public class Employee {
 	private String name; //name of the employee

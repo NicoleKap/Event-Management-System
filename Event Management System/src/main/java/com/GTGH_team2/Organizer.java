@@ -3,7 +3,7 @@ package com.GTGH_team2;
 import java.util.ArrayList;
 import java.util.Objects;
 
-class Organizer {
+public class Organizer {
     private final String afm;
     private String name;
     private String surname;

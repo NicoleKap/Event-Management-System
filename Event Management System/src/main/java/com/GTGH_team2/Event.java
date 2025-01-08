@@ -2,7 +2,7 @@ package com.GTGH_team2;
 
 import java.util.ArrayList;
 
-class Event {
+public class Event {
     private String title;
     private String theme;
     private String description;
@@ -55,7 +55,59 @@ class Event {
         return allEvents;
     }
 
-    @Override
+    public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public void setTheme(String theme) {
+		this.theme = theme;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public void setLocation(String location) {
+		this.location = location;
+	}
+
+	public void setMaxCapacity(int maxCapacity) {
+		this.maxCapacity = maxCapacity;
+	}
+
+	public void setDay(String day) {
+		this.day = day;
+	}
+
+	public void setMonth(String month) {
+		this.month = month;
+	}
+
+	public void setYear(String year) {
+		this.year = year;
+	}
+
+	public void setHour(int hour) {
+		this.hour = hour;
+	}
+
+	public void setMinutes(int minutes) {
+		this.minutes = minutes;
+	}
+
+	public void setDuration(String duration) {
+		this.duration = duration;
+	}
+
+	public void setOrganizer(Organizer organizer) {
+		this.organizer = organizer;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	@Override
     public String toString() {
         return  "Event title: " + title  +
                 "\nTheme: " + theme +
