@@ -101,5 +101,9 @@ public class Employee {
 		return "Employee [name=" + name + ", surname=" + surname + ", email=" + email + "]";
 	}
 	
+	//events services -> 
+	//reservation -> make reservation (eventID ,visitorID)
+	// visitor services -> apothikeuei neous visitor, (opos book)
+	// visitor -> mono setters getters
 	
 }
