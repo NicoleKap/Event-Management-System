@@ -1,27 +1,28 @@
 package com.GTGH_team2.Events;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import com.GTGH_team2.Visitors.Visitor;
 
 public class EventServices {
 
-	private static ArrayList<Event> allEvents = new ArrayList<>();
-	private ArrayList<Visitor> participants = new ArrayList<>();
+	private List<Event> allEvents = new ArrayList<>();
+	private List<Visitor> participants = new ArrayList<>();
 	
-	public static ArrayList<Event> getAllEvents() {
+	public List<Event> getAllEvents() {
 		return allEvents;
 	}
 
-	public static void setAllEvents(ArrayList<Event> allEvents) {
-		EventServices.allEvents = allEvents;
+	public void setAllEvents(ArrayList<Event> allEvents) {
+		this.allEvents = allEvents;
 	}
 
 	public void setParticipants(ArrayList<Visitor> participants) {
 		this.participants = participants;
 	}
 
-	 public ArrayList<Visitor> getParticipants() {
+	 public List<Visitor> getParticipants() {
 			return participants;
 		}
 	    
@@ -41,13 +42,13 @@ public class EventServices {
     			eventToBeRemoved = event;
     			break;
     		}
-    		if(eventToBeRemoved != null) {
-    			allEvents.remove(eventToBeRemoved);
-    			System.out.println("The event " + eventToBeRemoved.getTitle() + " is removed successfully!");
-    		}else {
-    			System.out.println("The event does not exists in the list!");
-    		}
-    	}   
+    	}
+    	if(eventToBeRemoved != null) {
+			allEvents.remove(eventToBeRemoved);
+			System.out.println("The event " + eventToBeRemoved.getTitle() + " is removed successfully!");
+		}else {
+			System.out.println("The event does not exists in the list!");
+		}
     }
     
     // Update an Event
@@ -100,4 +101,10 @@ public class EventServices {
 				participant.setEmail(newEmail);
 		}
 	}
+
+	@Override
+	public String toString() {
+		return "EventServices [allEvents=" + allEvents + "]";
+	}
+	
 }
