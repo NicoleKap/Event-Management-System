@@ -1,4 +1,8 @@
-package com.GTGH_team2.Entities;
+package com.GTGH_team2.Events;
+
+import  com.GTGH_team2.*;
+import com.GTGH_team2.Organizers.Organizer;
+import com.GTGH_team2.Visitors.Visitor;
 
 import java.util.ArrayList;
 

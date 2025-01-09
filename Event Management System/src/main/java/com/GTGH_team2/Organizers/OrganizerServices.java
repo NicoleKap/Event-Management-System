@@ -1,11 +1,11 @@
-package com.GTGH_team2.Services;
+package com.GTGH_team2.Organizers;
 
 import java.util.ArrayList;
 import java.util.Objects;
 
-import com.GTGH_team2.Entities.Event;
+import com.GTGH_team2.Events.Event;
 
-public class OrganizerService {
+public class OrganizerServices {
 
 //	private final ArrayList<Event> eventsListByOrganizer = new ArrayList<>(); // The events are stored here
 	
