@@ -1,6 +1,6 @@
-package com.GTGH_team2;
+package com.GTGH_team2.Entities;
 
-class Reservation {
+public class Reservation {
 	private Visitor visitor;
     private Event event;
     

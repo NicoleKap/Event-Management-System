@@ -1,8 +1,8 @@
-package com.GTGH_team2;
+package com.GTGH_team2.Entities;
 
 import java.util.ArrayList;
 
-class Event {
+public class Event {
     private String title;
     private String theme;
     private String description;
@@ -35,12 +35,8 @@ class Event {
         this.status = status;
         
     }
-    
-    public void addParticipant(Visitor visitor) {
-        if (!participants.contains(visitor)) {
-            participants.add(visitor);
-        }
-    }
+   
+    // Setters & Getters
 
     public String getTheme() {
 		return theme;
@@ -63,18 +59,6 @@ class Event {
         return status;
     }
 
-    public void addEvent(Event event) {
-        allEvents.add(event);
-    }
-
-    public void removeEvent(Event event) {
-        allEvents.remove(event);
-    }
-
-    public static ArrayList<Event> viewEvents() {
-        return allEvents;
-    }
-
     @Override
     public String toString() {
         return  "Event title: " + title  +
@@ -91,5 +75,7 @@ class Event {
                 "\nOrganizer: " + organizer +
                 "\nStatus: " + status;
     }
+
+	
 }
 

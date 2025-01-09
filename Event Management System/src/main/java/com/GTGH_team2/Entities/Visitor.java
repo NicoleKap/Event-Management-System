@@ -1,8 +1,8 @@
-package com.GTGH_team2;
+package com.GTGH_team2.Entities;
 
 import java.util.ArrayList;
 
-class Visitor {
+public class Visitor {
 	private String name;
     private String surname;
     private String email;
