@@ -7,23 +7,8 @@ import com.GTGH_team2.Visitors.Visitor;
 import java.util.ArrayList;
 
 public class Event {
-<<<<<<< HEAD:Event Management System/src/main/java/com/GTGH_team2/Event.java
-    private final String title;
-    private final String theme;
-    private final String description;
-    private final String location;
-    private final int maxCapacity;
-    private final String day;
-    private final String month;
-    private final String year;
-    private final int hour;
-    private final int minutes;
-    private final String duration;
-    private final Organizer organizer;
-    private final String status;
-    private static final ArrayList<Event> allEvents = new ArrayList<>();
-    private final ArrayList<Visitor> participants = new ArrayList<>();
-=======
+	private static int nextId = 1; // Initializing the counter for auto-uncrementing IDs
+	private int id;
     private String title;
     private String theme;
     private String description;
@@ -39,7 +24,6 @@ public class Event {
     private String status;
     private static final ArrayList<Event> allEvents = new ArrayList<>();
     private ArrayList<Visitor> participants = new ArrayList<>();
->>>>>>> main:Event-Management-System/src/main/java/com/GTGH_team2/Events/Event.java
 
     public Event(String title, String theme, String description, String location, int maxCapacity, String day, String month, String year, int hour, int minutes, String duration,Organizer organizer, String status) {
         this.title = title;
@@ -55,76 +39,136 @@ public class Event {
         this.duration = duration;
         this.organizer = organizer;
         this.status = status;
-
+        this.id = nextId;
+        
     }
    
     // Setters & Getters
 
-    public String getTheme() {
-<<<<<<< HEAD:Event Management System/src/main/java/com/GTGH_team2/Event.java
-        return theme;
-    }
+    public int getId() {
+		return id;
+	}
+    
+	public String getTitle() {
+		return title;
+	}
 
-    public String getLocation() {
-        return location;
-    }
+	public void setId(int id) {
+		this.id = id;
+	}
 
-    public String getDay() {
-        return day;
-    }
-=======
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public String getTheme() {
 		return theme;
+	}
+
+	public void setTheme(String theme) {
+		this.theme = theme;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 	public String getLocation() {
 		return location;
 	}
 
+	public void setLocation(String location) {
+		this.location = location;
+	}
+
+	public int getMaxCapacity() {
+		return maxCapacity;
+	}
+
+	public void setMaxCapacity(int maxCapacity) {
+		this.maxCapacity = maxCapacity;
+	}
 
 	public String getDay() {
 		return day;
 	}
->>>>>>> main:Event-Management-System/src/main/java/com/GTGH_team2/Events/Event.java
 
-	public String getTitle() {
-        return title;
-    }
+	public void setDay(String day) {
+		this.day = day;
+	}
 
-    public String getStatus() {
-        return status;
-    }
+	public String getMonth() {
+		return month;
+	}
 
-<<<<<<< HEAD:Event Management System/src/main/java/com/GTGH_team2/Event.java
-    public void addEvent(Event event) {
-        allEvents.add(event);
-    }
+	public void setMonth(String month) {
+		this.month = month;
+	}
 
-    public void removeEvent(Event event) {
-        allEvents.remove(event);
-    }
+	public String getYear() {
+		return year;
+	}
 
-    public static ArrayList<Event> viewEvents() {
-        return allEvents;
-    }
+	public void setYear(String year) {
+		this.year = year;
+	}
 
-    // Add participant to this event
+	public int getHour() {
+		return hour;
+	}
 
-    public void addParticipant(Visitor visitor) {
-        if (!participants.contains(visitor)) {
-            participants.add(visitor);
-            System.out.println("Participant added: " + visitor.getName());
-        }
-    }
+	public void setHour(int hour) {
+		this.hour = hour;
+	}
 
-    // Remove a participant from this event
-    
-    public void removeParticipant(Visitor visitor) {
-        participants.remove(visitor);
-        System.out.println("Participant removed: " + visitor.getName());
-    }
-    
-=======
->>>>>>> main:Event-Management-System/src/main/java/com/GTGH_team2/Events/Event.java
+	public int getMinutes() {
+		return minutes;
+	}
+
+	public void setMinutes(int minutes) {
+		this.minutes = minutes;
+	}
+
+	public String getDuration() {
+		return duration;
+	}
+
+	public void setDuration(String duration) {
+		this.duration = duration;
+	}
+
+	public Organizer getOrganizer() {
+		return organizer;
+	}
+
+	public void setOrganizer(Organizer organizer) {
+		this.organizer = organizer;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	public ArrayList<Visitor> getParticipants() {
+		return participants;
+	}
+
+	public void setParticipants(ArrayList<Visitor> participants) {
+		this.participants = participants;
+	}
+
+	public static ArrayList<Event> getAllevents() {
+		return allEvents;
+	}
+
     @Override
     public String toString() {
         return  "Event title: " + title  +
@@ -141,6 +185,5 @@ public class Event {
                 "\nOrganizer: " + organizer +
                 "\nStatus: " + status;
     }
-
 	
 }
