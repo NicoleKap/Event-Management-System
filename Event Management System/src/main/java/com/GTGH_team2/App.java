@@ -2,7 +2,7 @@ package com.GTGH_team2;
 
 import java.beans.EventSetDescriptor;
 
-import com.GTGH_team2.employee.Employee;
+import com.GTGH_team2.employees.Employee;
 
 public class App
 {

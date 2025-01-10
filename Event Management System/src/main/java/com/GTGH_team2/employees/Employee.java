@@ -1,4 +1,4 @@
-package com.GTGH_team2.employee;
+package com.GTGH_team2.employees;
 
 import java.util.ArrayList;
 import java.util.List;
