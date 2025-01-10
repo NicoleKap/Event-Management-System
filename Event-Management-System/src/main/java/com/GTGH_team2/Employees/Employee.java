@@ -1,6 +1,9 @@
 package com.GTGH_team2.Employees;
 
-import com.GTGH_team2.approvalRequests.ApprovalRequest;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.GTGH_team2.ApprovalRequests.ApprovalRequest;
 
 public class Employee {
 	private String name; //name of the employee
@@ -15,46 +18,7 @@ public class Employee {
 		this.email = email;
 		this.allRequests = new ArrayList<>();
 	}
-	
-	public void approveEvent(Event event) {
-	    if (event.getStatus().equals("Pending")) {
-	    	event.setStatus("Approved");
-	        System.out.println("Event : " + event.getTitle() + " has been approved.");
-	        } 
-	    else {
-	         System.out.println("Event: " + event.getTitle() + " is already " + event.getStatus() + ".");
-		    }
-	}
-	
-	public void rejectEvent(Event event) {
-	    if (event.getStatus().equals("Pending")) {
-	    	event.setStatus("Rejected");
-	        System.out.println("Event : " + event.getTitle() + " has been rejected.");
-	        } 
-	    else {
-         System.out.println("Event: " + event.getTitle() + " is already " + event.getStatus() + ".");
-	    }
-	}
-	
-	public void deleteEvent(Event event) {
-	    if (Event.getAllEvents().remove(event)) {
-	        System.out.println("Event: " + event.getTitle() + " has been deleted by Employee " + name + " " + surname + ".");
-	    } else {
-	        System.out.println("Event: " + event.getTitle() + " was not found in the list.");
-	    }
-	}
-	
-	public void viewAllRequests() {
-        if (allRequests.isEmpty()) {
-            System.out.println("There are no previous requests.");
-        } else {
-            System.out.println("Previous Requests:");
-            for (ApprovalRequest request : allRequests) {
-                System.out.println(request);
-            }
-        }
-    }
-	
+		
 	public String getName() {
 		return name;
 	}
@@ -83,6 +47,4 @@ public class Employee {
 	public String toString() {
 		return "Employee [name=" + name + ", surname=" + surname + ", email=" + email + "]";
 	}
-	
-	
 }
