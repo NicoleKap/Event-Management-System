@@ -13,7 +13,8 @@ public class Employee {
 	private List<ApprovalRequest> allRequests; //list of all the previous requests that the employee had
 
 	// Constructor
-	public Employee(String name, String surname, String email) {
+	public Employee(Integer id,String name, String surname, String email) {
+		this.id = id;
 		this.name = name;
 		this.surname = surname;
 		this.email = email;
