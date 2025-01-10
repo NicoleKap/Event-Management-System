@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 	@Service
 	public class VisitorServices {
 	    private List<Visitor> visitors = new ArrayList<Visitor>();
+	    private List<Visitor> participants = new ArrayList<Visitor>();
 
 	    public List<Visitor> getVisitors() {
 			return visitors;
@@ -39,5 +40,25 @@ import org.springframework.stereotype.Service;
 	            }
 	        }
 	        return visitors;
+	    }
+	    
+	    //Add a participant to the list
+	    public void addParticipant(Visitor visitor) {
+	    	if(!participants.contains(visitor)) {
+	    	participants.add(visitor);
+	    	}
+	    }
+	    
+	    //Update a participant in the list
+	    public void updateParticipant(int id, String newName, String newSurname, String newEmail) {
+		       for(Visitor participant : participants)
+		            if (id == participant.getId()) { 
+		                if (newName != null)
+		                	participant.setName(newName); 
+		                if (newSurname != null) 
+		                	participant.setSurname(newSurname);
+		                if (newEmail != null)
+		                	participant.setEmail(newEmail);
+		            }
 	    }
 	}
