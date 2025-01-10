@@ -61,6 +61,10 @@ public class Employee {
 		return allRequests;
 	}
 
+	public void addRequest(ApprovalRequest approvalRequest) {
+		allRequests.add(approvalRequest);
+		
+	}
 
 	@Override
 	public String toString() {
