@@ -6,17 +6,28 @@ import com.GTGH_team2.Events.Event;
 import com.GTGH_team2.Reservations.Reservation;
 
 public class Visitor {
+	private int id;
 	private String name;
     private String surname;
     private String email;
     private ArrayList<Reservation> reservations = new ArrayList<>();
     
     
-    public Visitor(String name, String surname, String email) {
+    public Visitor(int id,String name, String surname, String email) {
+    	this.id = id;
         this.name = name;
         this.surname = surname;
         this.email = email;
+        
     }
+    
+    public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
 
     public String getName() {
         return name;
@@ -40,6 +51,12 @@ public class Visitor {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+    
+    @Override
+    public String toString() {
+        return "Visitor{" +  "id='" + id + '\'' + ", name='" + name + '\'' +  ", surname='" + surname + '\'' +
+                ", email='" + email + '\'' +  '}';
     }
     
     
