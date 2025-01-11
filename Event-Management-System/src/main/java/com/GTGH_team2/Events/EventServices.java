@@ -27,15 +27,19 @@ public class EventServices {
 		}
 	    
 	// Add an Event to the list
-	 
+	  
     public void addEvent(Event event) {
-        allEvents.add(event);
-        System.out.println("The event " + event.getTitle() + " is added!");
-    }
+    	if(!allEvents.contains(event)) {
+	        allEvents.add(event);
+	        System.out.println("The event " + event.getTitle() + " is added!");
+    	}else {
+    		System.out.println("This event already exists in the list");
+    	}
+    }	
 
     // Remove an Event from the list
     
-    public void removeEvent(int id) {
+    public void removeEvent(Integer id) {
     	Event eventToBeRemoved = null;
     	for(Event event : allEvents) {
     		if(event.getId() == id) {
@@ -81,27 +85,17 @@ public class EventServices {
     	}
     }
     
-    // Add a participant to the list
-    
-	public void addParticipant(Visitor visitor) {
-        if (!participants.contains(visitor)) {
-            participants.add(visitor);
-        }
+    public void bookingAnEvent(Integer id) {
+    	for(Event event : allEvents) { // Check if the id is part of the event list
+    		if(event.getId() == id) {
+    			System.out.println("The event " + event.getTitle() + " has been booked successfully");
+    			return; // To stop the rest of the loop
+    		}else {
+    			System.out.println("This event does not exist");
+    		}
+    	}
     }
-	
-	// Update a participant in the list
-	
-	public void updateParticipant(String newName, String newSurname, String newEmail) {
-		for(Visitor participant : participants) {
-			if(newName!= null)
-				participant.setName(newName);
-			if(newSurname!= null)
-				participant.setSurname(newSurname);
-			if(newEmail!= null)
-				participant.setEmail(newEmail);
-		}
-	}
-
+    
 	@Override
 	public String toString() {
 		return "EventServices [allEvents=" + allEvents + "]";
