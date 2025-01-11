@@ -1,65 +1,49 @@
-package com.GTGH_team2.ApprovalRequests;
+package com.GTGH_team2.approvalRequests;
 
 import java.util.Date;
 import java.util.List;
 
-import com.GTGH_team2.Employees.Employee;
-import com.GTGH_team2.Events.Event;
-import com.GTGH_team2.Organizers.Organizer;
+import com.GTGH_team2.Employee;
+import com.GTGH_team2.Event;
+import com.GTGH_team2.Organizer;
 
 import java.util.ArrayList;
 
 public class ApprovalRequest {
-	private Integer id;
+	//private int id;
     private String type; // Type of the request ("Add" or "Delete")
     private Event event; // The event
     private Organizer submittedBy; // The organizer who submitted the request
-    private String createdAt; // Date when the request was created
+    private Date createdAt; // Date when the request was created
     private String status; // Status of the request("Pending", "Approved", "Rejected")
     private Employee handledBy; // The employee who handles the request
-    private String closedAt; // Date when the request was closed
+    private Date closedAt; // Date when the request was closed
     private String comments; 
 
     
     // Constructor
-	public ApprovalRequest(Integer id,String type, Event event, Organizer submittedBy, String createdAt, String status,Employee handledBy, String closedAt, String comments) {
-	    this.id = id;
+	public ApprovalRequest(String type, Event event, Organizer submittedBy, Date createdAt, String status) {
+	    
 		this.type = type;
 		this.event = event;
 		this.submittedBy = submittedBy;
 		this.createdAt = createdAt;
 		this.status = status;
-		this.handledBy = handledBy;
-		this.closedAt = closedAt;
-		this.comments = comments;
+		this.handledBy = null;
+		this.closedAt = null;
+		this.comments = "";
 	}
 	
 	
+	
+	@Override
+	public String toString() {
+		return "Request for event:" + event + ", Submitted by=" + submittedBy + ", created at=" + createdAt + "]";
+	}
+
     
     // Getter and setter methods
     
-	@Override
-	public String toString() {
-		return "ApprovalRequest [id=" + id + ", type=" + type + ", event=" + event + ", submittedBy=" + submittedBy
-				+ ", createdAt=" + createdAt + ", status=" + status + ", handledBy=" + handledBy + ", closedAt="
-				+ closedAt + ", comments=" + comments + "]";
-	}
-
-
-
-
-	public Integer getId() {
-		return id;
-	}
-
-
-
-	public void setId(Integer id) {
-		this.id = id;
-	}
-
-
-
 	public String getType() {
 		return type;
 	}
@@ -90,12 +74,12 @@ public class ApprovalRequest {
 	}
 
 
-	public String getCreatedAt() {
+	public Date getCreatedAt() {
 		return createdAt;
 	}
 
 
-	public void setCreatedAt(String createdAt) {
+	public void setCreatedAt(Date createdAt) {
 		this.createdAt = createdAt;
 	}
 
@@ -120,12 +104,12 @@ public class ApprovalRequest {
 	}
 
 
-	public String getClosedAt() {
+	public Date getClosedAt() {
 		return closedAt;
 	}
 
 
-	public void setClosedAt(String closedAt) {
+	public void setClosedAt(Date closedAt) {
 		this.closedAt = closedAt;
 	}
 
@@ -139,7 +123,7 @@ public class ApprovalRequest {
 		this.comments = comments;
 	}
 
-
 }
+
 
 
