@@ -6,7 +6,8 @@ import java.util.Objects;
 import com.GTGH_team2.Events.Event;
 
 public class Organizer {
-    private final String afm;
+	private Integer id;
+    private String afm;
     private String name;
     private String surname;
     private String description;
@@ -21,7 +22,23 @@ public class Organizer {
         this.description = description;
     }
 
-    public String getName() {
+    public Integer getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getAfm() {
+	     return afm;
+	}
+	
+	public void setAfm(String afm) {
+		this.afm = afm;
+	}
+
+	public String getName() {
         return name;
     }
 
@@ -37,7 +54,19 @@ public class Organizer {
         this.surname = surname;
     }
 
-    public String getDescription() {
+    public Event getEvents() {
+		return events;
+	}
+
+	public void setEvents(Event events) {
+		this.events = events;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public String getDescription() {
         return description;
     }
 
@@ -48,9 +77,5 @@ public class Organizer {
         return name + " " + surname;
     }
 
-
-    public String getAfm() {
-        return afm;
-    }
 }
 
