@@ -34,6 +34,7 @@ public class OrganizerServices {
 
 	public List<Organizer> removeOrganizer(Integer id) {
 		organizers.removeIf(organizer -> organizer.getId() == id);
+		//cancel events, delete reservations
 		return organizers;
 	}
 	

@@ -19,7 +19,7 @@ public class Event {
     private Organizer organizer;
     private String status;
 
-    public Event(String title, String theme, String description, String location, int maxCapacity, String day, String month, String year, int hour, int minutes, String duration,Organizer organizer, String status) {
+    public Event(String title, String theme, String description, String location, int maxCapacity, String day, String month, String year, int hour, int minutes, String duration, String status) {
         this.title = title;
         this.theme = theme;
         this.description = description;
@@ -31,7 +31,7 @@ public class Event {
         this.hour = hour;
         this.minutes = minutes;
         this.duration = duration;
-        this.organizer = organizer;
+        this.organizer = null;
         this.status = status;
         this.id = nextId;
         
