@@ -1,66 +1,59 @@
 package com.GTGH_team2.Organizers;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.web.server.ResponseStatusException;
 
 import com.GTGH_team2.Events.Event;
 
 public class OrganizerServices {
 
-//	private final ArrayList<Event> eventsListByOrganizer = new ArrayList<>(); // The events are stored here
+	private List<Organizer> organizers = new ArrayList<>(); // The organizers are stored here
 	
-	// A list of the Events by organizer
+	
+	// Add an organizer to the list
+	
+	public List<Organizer> getOrganizers() {
+		return organizers;
+	}
 
-//    public void viewEvents() {
-//        System.out.println("------------------------------------------------------------------------");
-//        System.out.println("Events organized by " + name + " " + surname);
-//        for( Event event : eventsListByOrganizer) {
-//            System.out.println(event +" ");
-//        }
-//        System.out.println("------------------------------------------------------------------------");
-//    }
+	public void setOrganizers(List<Organizer> organizers) {
+		this.organizers = organizers;
+	}
 
-    // The Organizer can create a new Event
-    
-//    public void addEvent(Event event) {
-//        // Check if the event already exists or the event is null
-//        if(event != null && !eventsListByOrganizer.contains(event)) {
-//            if(Objects.equals(event.getStatus(), "Approved")){
-//                this.eventsListByOrganizer.add(event);
-//                event.addEvent(event);
-//                System.out.println("The organizer " + name + " created the event " + event.getTitle());
-//            }else if(Objects.equals(event.getStatus(), "Pending")) {
-//                System.out.println("The approval is pending!");
-//            }else {
-//                System.out.println("This event is not approved!");
-//            }
-//        }else if (eventsListByOrganizer.contains(event)){
-//            System.out.println("This event already exists in the list");
-//        }else {
-//            System.out.println("This event is empty");
-//        }
-//    }
+	public List<Organizer> addOrganizer(Organizer organizer) {
+		organizers.add(organizer);
+		return organizers;
+		
+	}
+	
+	// Remove an organizer from the list
 
-    // The Organizer can delete an existing Event
-
-//    public void deleteEvent(Event event) {
-//        if(eventsListByOrganizer.contains(event)) {
-//            if(Objects.equals(event.getStatus(), "Approved")) {
-//                this.eventsListByOrganizer.remove(event);
-//                event.removeEvent(event);
-//                System.out.println("The event " + event.getTitle() + " is successfully deleted by " + name);
-//            }else if(Objects.equals(event.getStatus(), "Pending")) {
-//                System.out.println("The approval is pending!");
-//            }
-//            else {
-//                System.out.println("This event is not approved!");
-//            }
-//        }else {
-//            System.out.println("The event " + event.getTitle() + " is not found in the list");
-//        }
-
-
-//   }
-
+	public List<Organizer> removeOrganizer(Integer id) {
+		organizers.removeIf(organizer -> organizer.getId() == id);
+		return organizers;
+	}
+	
+	// Update Organizer details
+	
+	public Organizer updateOrganizer(Integer id, String afmUpdated, String nameUpdated, String surnameUpdated, String descriptionUpdated) {
+		for(Organizer organizer : organizers) {
+			if(organizer.getId() == id) {
+				if(afmUpdated != null)
+					organizer.setAfm(afmUpdated);
+			    if(nameUpdated != null)
+			        organizer.setName(nameUpdated);
+				if(surnameUpdated != null)
+				    organizer.setName(surnameUpdated);
+			    if(descriptionUpdated != null)
+				    organizer.setName(descriptionUpdated);
+			    return organizer;
+			}	   
+		}
+		throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Organizer with id " + id + " doesn't exist"); // In case the organizer not found
+	}
 	
 }
