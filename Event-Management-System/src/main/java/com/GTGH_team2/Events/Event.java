@@ -1,10 +1,6 @@
 package com.GTGH_team2.Events;
 
-import  com.GTGH_team2.*;
 import com.GTGH_team2.Organizers.Organizer;
-import com.GTGH_team2.Visitors.Visitor;
-
-import java.util.ArrayList;
 
 public class Event {
 	private static int nextId = 1; // Initializing the counter for auto-uncrementing IDs
@@ -22,8 +18,6 @@ public class Event {
     private String duration;
     private Organizer organizer;
     private String status;
-    private static final ArrayList<Event> allEvents = new ArrayList<>();
-    private ArrayList<Visitor> participants = new ArrayList<>();
 
     public Event(String title, String theme, String description, String location, int maxCapacity, String day, String month, String year, int hour, int minutes, String duration,Organizer organizer, String status) {
         this.title = title;
@@ -155,18 +149,6 @@ public class Event {
 
 	public void setStatus(String status) {
 		this.status = status;
-	}
-
-	public ArrayList<Visitor> getParticipants() {
-		return participants;
-	}
-
-	public void setParticipants(ArrayList<Visitor> participants) {
-		this.participants = participants;
-	}
-
-	public static ArrayList<Event> getAllevents() {
-		return allEvents;
 	}
 
     @Override
