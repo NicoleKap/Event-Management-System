@@ -6,29 +6,38 @@ import java.util.List;
 import com.GTGH_team2.ApprovalRequests.ApprovalRequest;
 import com.GTGH_team2.ApprovalRequests.ApprovalRequestServices;
 
+//The EmployeeServices class handles the employees.It adds,deletes and updates the employee.
+//
 public class EmployeeServices {
 	
-	ApprovalRequestServices approvalRequestServices;
+	// List to store all the Employees
 	private List<Employee> employees = new ArrayList<Employee>();
+	
+	
+	ApprovalRequestServices approvalRequestServices;
 	
 	public EmployeeServices(ApprovalRequestServices approvalRequestServices) {
 		this.approvalRequestServices = approvalRequestServices;
 	}
-
+	
+	// This method adds an Employee to the employees list
 	public List<Employee> addEmployee(Employee employee) {
 		employees.add(employee);
 		return employees;
 	}
 	
+	// This method returns the employees list
 	public List<Employee> getAllEmployees() {
 		return employees;
 	}
 	
+	// This method removes an Employee to the employees list
 	public List<Employee> removeEmployee(Integer id) {
 		employees.removeIf(employee -> employee.getId() == id);
 		return employees;
 	}
 	
+	// This method updates the params of an Employee
 	public List<Employee> updateEmployee(Integer id, String newName, String newSurname, String newEmail) {
 		for (Employee employee : employees) {
 			if (id == employee.getId()) {
@@ -57,9 +66,7 @@ public class EmployeeServices {
 		return employees;
 	}
 	
-	public List<ApprovalRequest> getAllRequests(Employee employee) {
-		return employee.getAllRequests();
-	}
+	
 	
 	//Method to implement in event
 //	public List<event> deleteEvent(Integer idEvent, Integer idEmployee) {
