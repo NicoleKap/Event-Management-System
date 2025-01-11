@@ -71,7 +71,7 @@ public class EventServices {
 
 	// Update an Event
 
-	public void updateEvent(Integer id, String newTitle, String newTheme, String newDescription, String newLocation,
+	public List<Event> updateEvent(Integer id, String newTitle, String newTheme, String newDescription, String newLocation,
 			int newMaxCapacity, String newDay, String newMonth, int newYear, int newHour, int newMinute,
 			String newDuration) {
 		for (Event event : allEvents) {
@@ -99,8 +99,20 @@ public class EventServices {
 				event.setDuration(newDuration);
 			}
 		}
+		return allEvents;
 	}
 
+	// Update specific attributes of an event
+	
+	public List<Event> updateLocation(String newLocation) {
+		for(Event event : allEvents) {
+			if(newLocation != null)
+				event.setLocation(newLocation);
+		}
+		return allEvents;
+		
+	}
+	
 	public void bookingAnEvent(Integer id) {
 		for (Event event : allEvents) { // Check if the id is part of the event list
 			if (event.getId() == id) {
