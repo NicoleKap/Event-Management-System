@@ -29,6 +29,7 @@ import org.springframework.stereotype.Service;
 		
 	    public List<Visitor> removeVisitor(int id) {
 	    	visitors.removeIf(visitor -> visitor.getId() == id);
+	    	//remove reservations of visitor
 	        return visitors;
 	    }
 	  
