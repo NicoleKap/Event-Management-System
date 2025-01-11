@@ -113,6 +113,24 @@ public class EventServices {
 		
 	}
 	
+	// Searching for an event in the existing events list
+	
+	public List<Event> searchingAnEvent(String day, String month, String year, String theme) {
+		List<Event> eventByCriteria = new ArrayList<>();
+		for(Event event : allEvents) {
+			if(event.getDay() == day)
+				eventByCriteria.add(event);
+			if(event.getMonth() == month)
+				eventByCriteria.add(event);
+			if(event.getYear() == year)
+				eventByCriteria.add(event);
+			if(event.getTheme() == theme)
+				eventByCriteria.add(event);		
+		}
+		return eventByCriteria;
+		
+	}
+	
 	public void bookingAnEvent(Integer id) {
 		for (Event event : allEvents) { // Check if the id is part of the event list
 			if (event.getId() == id) {
@@ -125,6 +143,7 @@ public class EventServices {
 	}
 
 	//This method allows the Employee to delete an Event
+	
 	public List<Event> deleteEvent(Integer idEvent, Integer idEmployee) {
 		for (Employee employee : employeeServices.getAllEmployees()) {
 			if (idEmployee == employee.getId()) {
