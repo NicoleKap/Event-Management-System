@@ -123,6 +123,7 @@ public class ApprovalRequestServices {
 				for (Organizer organizer : organizerServices.getOrganizers()) {
 					if (idOrganizer == organizer.getId()) {
 						addApprovalRequest("Delete", event, organizer, null, comments);
+						eventServices.removeEvent(idEvent); //deletes the event 
 					}
 				}
 			}
@@ -141,6 +142,7 @@ public class ApprovalRequestServices {
 						updateApprovalRequest(idApprovalRequest, null, null, null, null, "Approved", null, "timeClosed",
 								null);
 						employee.getAllRequests().add(approvalRequest);
+						eventServices.addEvent(approvalRequest.getEvent()); //add the event
 					}
 				}
 			}
