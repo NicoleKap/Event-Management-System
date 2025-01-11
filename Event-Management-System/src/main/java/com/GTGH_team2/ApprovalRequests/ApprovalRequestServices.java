@@ -123,7 +123,7 @@ public class ApprovalRequestServices {
 				for (Organizer organizer : organizerServices.getOrganizers()) {
 					if (idOrganizer == organizer.getId()) {
 						addApprovalRequest("Delete", event, organizer, null, comments);
-						eventServices.removeEvent(idEvent); //deletes the event 
+						eventServices.removeEvent(idEvent); // deletes the event
 					}
 				}
 			}
@@ -142,7 +142,7 @@ public class ApprovalRequestServices {
 						updateApprovalRequest(idApprovalRequest, null, null, null, null, "Approved", null, "timeClosed",
 								null);
 						employee.getAllRequests().add(approvalRequest);
-						eventServices.addEvent(approvalRequest.getEvent()); //add the event
+						eventServices.addEvent(approvalRequest.getEvent()); // add the event
 					}
 				}
 			}
@@ -183,6 +183,20 @@ public class ApprovalRequestServices {
 			}
 		}
 		return approvalRequests;
+	}
+
+	// Method to add each request that the employee handled
+	public List<Employee> addRequestForEmployee(int idEmployee, int idRequest) {
+		for (Employee employee : employeeServices.getAllEmployees()) {
+			if (idEmployee == employee.getId()) {
+				for (ApprovalRequest approvalRequest : approvalRequests) {
+					if (approvalRequest.getId() == idRequest) {
+						employee.addRequest(approvalRequest);
+					}
+				}
+			}
+		}
+		return employeeServices.getAllEmployees();
 	}
 
 }
