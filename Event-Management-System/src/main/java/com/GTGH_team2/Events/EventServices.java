@@ -51,20 +51,22 @@ public class EventServices {
 
 	// Remove an Event from the list
 
-	public void removeEvent(Integer id) {
-		Event eventToBeRemoved = null;
-		for (Event event : allEvents) {
-			if (event.getId() == id) {
-				eventToBeRemoved = event;
-				break;
-			}
-		}
-		if (eventToBeRemoved != null) {
-			allEvents.remove(eventToBeRemoved);
-			System.out.println("The event " + eventToBeRemoved.getTitle() + " is removed successfully!");
-		} else {
-			System.out.println("The event does not exists in the list!");
-		}
+	public List<Event> removeEvent(Integer id) {
+//		Event eventToBeRemoved = null;
+//		for (Event event : allEvents) {
+//			if (event.getId() == id) {
+//				eventToBeRemoved = event;
+//				break;
+//			}
+//		}
+//		if (eventToBeRemoved != null) {
+//			allEvents.remove(eventToBeRemoved);
+//			System.out.println("The event " + eventToBeRemoved.getTitle() + " is removed successfully!");
+//		} else {
+//			System.out.println("The event does not exists in the list!");
+//		}
+		allEvents.removeIf(event -> event.getId() == id);
+		return allEvents;
 	}
 
 	// Update an Event
