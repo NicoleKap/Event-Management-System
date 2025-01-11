@@ -6,7 +6,7 @@ import com.GTGH_team2.Events.Event;
 import com.GTGH_team2.Reservations.Reservation;
 
 public class Visitor {
-	private int id;
+	private Integer id;
 	private String name;
     private String surname;
     private String email;
@@ -21,11 +21,11 @@ public class Visitor {
         
     }
     
-    public int getId() {
+    public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -58,20 +58,6 @@ public class Visitor {
         return "Visitor{" +  "id='" + id + '\'' + ", name='" + name + '\'' +  ", surname='" + surname + '\'' +
                 ", email='" + email + '\'' +  '}';
     }
-    
-    
-//    //Searching for events 
-//    public ArrayList<Event> EventsSearching(ArrayList<Event> events, String day, String location, String theme) {
-//    	ArrayList<Event> specificEvents = new ArrayList<>(); //events that meet the criteria
-//        for (Event event : events) {
-//            if ((day == null || event.getDay().equals(day)) &&
-//                (location == null || event.getLocation().equals(location)) &&
-//                (theme == null || event.getTheme().equals(theme))) {
-//                specificEvents.add(event);
-//               
-//            }
-//        } 
-//        return specificEvents; auth h methodos sto eventServices
-//    }
+  
 }
     
