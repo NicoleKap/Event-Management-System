@@ -116,7 +116,7 @@ public class EventServices {
 	// Searching for an event in the existing events list
 	
 	public List<Event> searchingAnEvent(String day, String month, String year, String theme) {
-		List<Event> eventByCriteria = new ArrayList<>();
+		List<Event> eventByCriteria = new ArrayList<>(); // The events which are found is stored in this list
 		for(Event event : allEvents) {
 			if(event.getDay() == day)
 				eventByCriteria.add(event);
