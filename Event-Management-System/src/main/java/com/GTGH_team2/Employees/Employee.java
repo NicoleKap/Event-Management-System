@@ -10,7 +10,7 @@ public class Employee {
 	private String name; //name of the employee
 	private String surname; //surname of the employee
 	private String email; //email of the employee
-	private List<ApprovalRequest> allRequests; //list of all the previous requests that the employee had
+	private ArrayList<ApprovalRequest> allRequests; //list of all the previous requests that the employee had
 
 	// Constructor
 	public Employee(Integer id,String name, String surname, String email) {
