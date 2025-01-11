@@ -83,7 +83,7 @@ public class Event {
 		return maxCapacity;
 	}
 
-	public void setMaxCapacity(int maxCapacity) {
+	public void setMaxCapacity(Integer maxCapacity) {
 		this.maxCapacity = maxCapacity;
 	}
 
@@ -115,7 +115,7 @@ public class Event {
 		return hour;
 	}
 
-	public void setHour(int hour) {
+	public void setHour(Integer hour) {
 		this.hour = hour;
 	}
 
@@ -123,7 +123,7 @@ public class Event {
 		return minutes;
 	}
 
-	public void setMinutes(int minutes) {
+	public void setMinutes(Integer minutes) {
 		this.minutes = minutes;
 	}
 
