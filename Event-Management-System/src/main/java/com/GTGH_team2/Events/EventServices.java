@@ -3,12 +3,10 @@ package com.GTGH_team2.Events;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.GTGH_team2.Visitors.Visitor;
 
 public class EventServices {
 
 	private List<Event> allEvents = new ArrayList<>();
-	private List<Visitor> participants = new ArrayList<>();
 	
 	public List<Event> getAllEvents() {
 		return allEvents;
@@ -17,25 +15,30 @@ public class EventServices {
 	public void setAllEvents(ArrayList<Event> allEvents) {
 		this.allEvents = allEvents;
 	}
-
-	public void setParticipants(ArrayList<Visitor> participants) {
-		this.participants = participants;
-	}
-
-	 public List<Visitor> getParticipants() {
-			return participants;
-		}
 	    
+	public void viewEvents() {
+	    System.out.println("------------------------------------------------------------------------");
+	    System.out.println("Events");
+	    for( Event event : allEvents) {
+	        System.out.println(event +" ");
+	  }
+	    System.out.println("------------------------------------------------------------------------");
+	}
+	
 	// Add an Event to the list
-	 
+	  
     public void addEvent(Event event) {
-        allEvents.add(event);
-        System.out.println("The event " + event.getTitle() + " is added!");
-    }
+    	if(!allEvents.contains(event)) {
+	        allEvents.add(event);
+	        System.out.println("The event " + event.getTitle() + " is added!");
+    	}else {
+    		System.out.println("This event already exists in the list");
+    	}
+    }	
 
     // Remove an Event from the list
     
-    public void removeEvent(int id) {
+    public void removeEvent(Integer id) {
     	Event eventToBeRemoved = null;
     	for(Event event : allEvents) {
     		if(event.getId() == id) {
@@ -81,30 +84,17 @@ public class EventServices {
     	}
     }
     
-    // Add a participant to the list
-    
-	public void addParticipant(Visitor visitor) {
-        if (!participants.contains(visitor)) {
-            participants.add(visitor);
-        }
+    public void bookingAnEvent(Integer id) {
+    	for(Event event : allEvents) { // Check if the id is part of the event list
+    		if(event.getId() == id) {
+    			System.out.println("The event " + event.getTitle() + " has been booked successfully");
+    			return; // To stop the rest of the loop
+    		}else {
+    			System.out.println("This event does not exist");
+    		}
+    	}
     }
-	
-	// Update a participant in the list
-	
-	public void updateParticipant(String newName, String newSurname, String newEmail) {
-		for(Visitor participant : participants) {
-			if(newName!= null)
-				participant.setName(newName);
-			if(newSurname!= null)
-				participant.setSurname(newSurname);
-			if(newEmail!= null)
-				participant.setEmail(newEmail);
-		}
-	}
+    
 
-	@Override
-	public String toString() {
-		return "EventServices [allEvents=" + allEvents + "]";
-	}
 	
 }
