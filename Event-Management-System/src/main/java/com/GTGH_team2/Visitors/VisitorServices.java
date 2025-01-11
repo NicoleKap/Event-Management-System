@@ -6,9 +6,13 @@ package com.GTGH_team2.Visitors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.GTGH_team2.Reservations.ReservationServices;
+
 	@Service
 	public class VisitorServices {
 		
+		@Autowired
+		private ReservationServices reservationServices;
 	    private List<Visitor> visitors = new ArrayList<Visitor>();
 
 	    public List<Visitor> getVisitors() {
@@ -24,12 +28,13 @@ import org.springframework.stereotype.Service;
 	        return visitors;
 	    }
 	    
+	    
 	    //teleutaios visiotr ths listas kai pairnw to od, auksanw, enas visitor diagrafetai diagrafontai kai ta reservations
 	    //2 methods delete reservations by visitor id delete reservations by event id
 		
 	    public List<Visitor> removeVisitor(int id) {
 	    	visitors.removeIf(visitor -> visitor.getId() == id);
-	    	//remove reservations of visitor
+	    	reservationServices.deleteReservationsByVisitorId(id);//remove reservations of visitor
 	        return visitors;
 	    }
 	  
