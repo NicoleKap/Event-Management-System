@@ -56,7 +56,7 @@ public class EventServices {
     
     // Update an Event
     
-    public void updateEvent(int id, String newTitle, String newTheme, String newDescription, String newLocation, int newMaxCapacity, String newDay, String newMonth, int newYear, int newHour, int newMinute, String newDuration) {
+    public void updateEvent(Integer id, String newTitle, String newTheme, String newDescription, String newLocation, int newMaxCapacity, String newDay, String newMonth, int newYear, int newHour, int newMinute, String newDuration) {
     	for(Event event : allEvents) {
     		if(newTitle != null)
     			event.setTitle(newTitle);
