@@ -36,7 +36,7 @@ public class EventServices {
 	// Add an Event to the list
 
 	public void addEvent(Event event) {
-		if (!allEvents.contains(event)) {
+		if (!allEvents.contains(event)) { // It checks if the list contains the event given and if not the event is added 
 			allEvents.add(event);
 			System.out.println("The event " + event.getTitle() + " is added!");
 		} else {
