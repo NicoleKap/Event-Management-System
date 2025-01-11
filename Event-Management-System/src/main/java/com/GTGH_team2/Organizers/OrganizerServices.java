@@ -13,8 +13,17 @@ public class OrganizerServices {
 
 	private List<Organizer> organizers = new ArrayList<>(); // The organizers are stored here
 	
+	
 	// Add an organizer to the list
 	
+	public List<Organizer> getOrganizers() {
+		return organizers;
+	}
+
+	public void setOrganizers(List<Organizer> organizers) {
+		this.organizers = organizers;
+	}
+
 	public List<Organizer> addOrganizer(Organizer organizer) {
 		organizers.add(organizer);
 		return organizers;
