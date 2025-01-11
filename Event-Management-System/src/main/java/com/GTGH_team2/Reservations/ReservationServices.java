@@ -9,7 +9,6 @@ import com.GTGH_team2.Events.Event;
 import com.GTGH_team2.Events.EventServices;
 import com.GTGH_team2.Visitors.Visitor;
 import com.GTGH_team2.Visitors.VisitorServices;
-import com.example.demo.books.Book;
 
 public class ReservationServices {
 
