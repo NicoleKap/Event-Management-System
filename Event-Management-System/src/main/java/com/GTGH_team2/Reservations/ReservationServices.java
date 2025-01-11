@@ -20,6 +20,19 @@ public class ReservationServices {
     public List<Reservation> getReservations() {
 		return reservations;
 	}
+    
+    // Deletes all reservations with a specific visitor id
+    public void deleteReservationsByVisitorId(Integer visitorId) {
+        reservations.removeIf(reservation -> reservation.getVisitor().getId() == visitorId); //Remove reservations where the visitor matches the id
+        System.out.println("All reservations for visitor with id number " + visitorId + " have been deleted!");
+    }
+
+    // Deletes all reservations with a specific event id.
+    public void deleteReservationsByEventId(int eventId) {
+        reservations.removeIf(reservation -> reservation.getEvent().getId() == eventId); //Remove reservations where the event matches the id
+        System.out.println("All reservations for event with id number " + eventId + " have been deleted!");
+    }
+
 	
 	//Booking an Event
    // This method allows a visitor to book an event by their IDs , it checks if the reservation already exists and creates a new one if not.
