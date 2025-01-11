@@ -26,10 +26,15 @@ public class EventServices {
 
 	public void viewEvents() {
 		System.out.println("------------------------------------------------------------------------");
-		System.out.println("Events");
-		for (Event event : allEvents) {
-			System.out.println(event + " ");
+		if(allEvents.isEmpty() ) {
+			System.out.println("There are no events");
+		}else {
+			System.out.println("Events");
+			for (Event event : allEvents) {
+				System.out.println(event + " ");
+			}
 		}
+		
 		System.out.println("------------------------------------------------------------------------");
 	}
 
