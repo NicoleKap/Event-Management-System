@@ -16,6 +16,15 @@ public class EventServices {
 		this.allEvents = allEvents;
 	}
 	    
+	public void viewEvents() {
+	    System.out.println("------------------------------------------------------------------------");
+	    System.out.println("Events");
+	    for( Event event : allEvents) {
+	        System.out.println(event +" ");
+	  }
+	    System.out.println("------------------------------------------------------------------------");
+	}
+	
 	// Add an Event to the list
 	  
     public void addEvent(Event event) {
@@ -86,9 +95,6 @@ public class EventServices {
     	}
     }
     
-	@Override
-	public String toString() {
-		return "EventServices [allEvents=" + allEvents + "]";
-	}
+
 	
 }

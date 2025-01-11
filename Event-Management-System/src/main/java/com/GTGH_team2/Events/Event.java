@@ -171,7 +171,8 @@ public class Event {
 
     @Override
     public String toString() {
-        return  "Event title: " + title  +
+        return  "Id: " + id +
+        		"Event title: " + title  +
                 "\nTheme: " + theme +
                 "\nDescription: " + description  +
                 "\nLocation: " + location +
