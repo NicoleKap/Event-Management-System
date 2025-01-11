@@ -66,21 +66,6 @@ public class EmployeeServices {
 		return employees;
 	}
 	
-	
-	
-	//Method to implement in event
-//	public List<event> deleteEvent(Integer idEvent, Integer idEmployee) {
-//		for (Employee employee : employees) {
-//			if (idEmployee == employee.getId()) {
-//				for (Event event : events) {
-//					if (event.getId() == idEvent) {
-//						removeEvent(idEvent);
-//					}
-//				}
-//			}
-//		}
-//		return events;
-//	}
 
 
 }
