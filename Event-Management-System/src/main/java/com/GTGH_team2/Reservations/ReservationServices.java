@@ -8,14 +8,33 @@ import com.GTGH_team2.Visitors.Visitor;
 
 public class ReservationServices {
 
-	private List<Reservation> reservations = new ArrayList<>();
+	private List<Reservation> reservations = new ArrayList<Reservation>();
+	private List<Visitor> visitors = new ArrayList<Visitor>();
+	private List<Event> events = new ArrayList<Event>();
 	
     public List<Reservation> getReservations() {
 		return reservations;
 	}
 	
 	//Booking an Event
-	public boolean bookingAnEvent(Visitor visitor, Event event) {
+   // This method allows a visitor to book an event by their IDs , it checks if the reservation already exists and creates a new one if not.
+	public boolean bookingAnEvent(int visitorId, int eventId) {
+		Visitor visitor = null;
+		Event event = null;
+		for (Visitor v : visitors) {
+	        if (v.getId() == visitorId) 
+	            visitor = v;
+	            break;
+	    }
+		for (Event e : events) {
+	        if (e.getId() == eventId) 
+	            event = e;
+	            break;
+	    }
+		if (visitor == null || event == null) {
+		        System.out.println("Visitor or Event not found!");
+		        return false;
+		}
         for (Reservation res : reservations) {
             if (res.getEvent().equals(event) && res.getVisitor().equals(visitor)) {
                 System.out.println("You have already booked this event: " + event.getTitle());
@@ -29,7 +48,24 @@ public class ReservationServices {
     }
 
 	// Canceling an Event
-    public boolean ReservationCanceling(Visitor visitor, Event event) {
+	// This method allows a visitor to cancel a booking for a specific event by their IDs, it checks if the reservation exists and removes it if found
+    public boolean ReservationCanceling(int visitorId, int eventId) {
+		Visitor visitor = null;
+		Event event = null;
+		for (Visitor v : visitors) {
+	        if (v.getId() == visitorId) 
+	            visitor = v;
+	            break;
+	    }
+		for (Event e : events) {
+	        if (e.getId() == eventId) 
+	            event = e;
+	            break;
+	    }
+		if (visitor == null || event == null) {
+		        System.out.println("Visitor or Event not found!");
+		        return false;
+		}
         for (Reservation res : reservations) {
             if (res.getEvent().equals(event) && res.getVisitor().equals(visitor)) {
                 reservations.remove(res);
