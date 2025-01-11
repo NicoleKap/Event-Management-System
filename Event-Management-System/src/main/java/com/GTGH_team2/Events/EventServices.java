@@ -3,12 +3,10 @@ package com.GTGH_team2.Events;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.GTGH_team2.Visitors.Visitor;
 
 public class EventServices {
 
 	private List<Event> allEvents = new ArrayList<>();
-	private List<Visitor> participants = new ArrayList<>();
 	
 	public List<Event> getAllEvents() {
 		return allEvents;
@@ -17,14 +15,6 @@ public class EventServices {
 	public void setAllEvents(ArrayList<Event> allEvents) {
 		this.allEvents = allEvents;
 	}
-
-	public void setParticipants(ArrayList<Visitor> participants) {
-		this.participants = participants;
-	}
-
-	 public List<Visitor> getParticipants() {
-			return participants;
-		}
 	    
 	// Add an Event to the list
 	  
