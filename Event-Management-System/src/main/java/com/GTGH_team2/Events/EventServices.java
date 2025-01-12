@@ -2,8 +2,6 @@ package com.GTGH_team2.Events;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Stream;
-
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.GTGH_team2.Employees.Employee;
@@ -79,7 +77,7 @@ public class EventServices {
 	// Update an Event
 
 	public List<Event> updateEvent(Integer id, String newTitle, String newTheme, String newDescription, String newLocation,
-			int newMaxCapacity, String newDay, String newMonth, int newYear, int newHour, int newMinute,
+			Integer newMaxCapacity, String newDay, String newMonth, Integer newYear, Integer newHour, Integer newMinute,
 			String newDuration) {
 		for (Event event : allEvents) {
 			if (newTitle != null)
@@ -90,44 +88,82 @@ public class EventServices {
 				event.setDescription(newDescription);
 			if (newLocation != null)
 				event.setTitle(newLocation);
-			if (newMaxCapacity != 0)
+			if (newMaxCapacity != null)
 				event.setMaxCapacity(newMaxCapacity);
 			if (newDay != null)
 				event.setDay(newDay);
 			if (newMonth != null)
-				event.setTheme(newTheme);
-			if (newYear != 0)
-				event.setDescription(newDescription);
-			if (newHour != 0)
-				event.setTitle(newLocation);
-			if (newMinute != 0)
+				event.setMonth(newMonth);
+			if (newYear != null)
+				event.setYear(newYear);
+			if (newHour != null)
+				event.setHour(newHour);
+			if (newMinute != null)
 				event.setMinutes(newMinute);
-			if (newDuration != null) {
+			if (newDuration != null)
 				event.setDuration(newDuration);
-			}
 		}
 		return allEvents;
 	}
 
 	// Update specific attributes of an event
 	
-	public List<Event> updateLocation(String newLocation) {
+	public List<Event> updateLocation(Integer idEvent, String newLocation) {
 		for(Event event : allEvents) {
-			if(newLocation != null)
-				event.setLocation(newLocation);
+			if(event.getId() == idEvent) {
+				if(newLocation != null)
+					event.setLocation(newLocation);
+			}	
 		}
 		return allEvents;
 		
 	}
 	
+	// Update Description for a specific event
+	
+	public List<Event> updateDescription(Integer idEvent, String newDescription) {
+		for(Event event : allEvents) {
+			if(event.getId() == idEvent) {
+				if(newDescription != null)
+					event.setLocation(newDescription);
+			}	
+		}
+		return allEvents;
+	}
+	
+	public List<Event> updateDateOfEvent(Integer idEvent, String newDay, String newMonth, Integer newYear){
+		for(Event event : allEvents) {
+			if (newDay != null)
+				event.setDay(newDay);
+			if (newMonth != null)
+				event.setMonth(newMonth);
+			if (newYear != null)
+				event.setYear(newYear);
+		}
+		return allEvents;
+	}
+	
+	// Update Event Status
+	
+	public List<Event> updateEventStatus(Integer idEvent, String newStatus) {
+		for(Event event : allEvents) {
+			if(event.getId() == idEvent)
+				if(newStatus!=null)
+					event.setStatus(newStatus);
+		}
+		return allEvents;
+	}
+	
 	// Searching for an event in the existing events list
 	
-	public List<Event> searchingAnEvent(String day, String month, String year, String theme) {
+	public List<Event> searchingAnEvent(String day, String month, Integer year, String theme) {
 		List<Event> eventByCriteria = new ArrayList<>(); // The events which are found is stored in this list
 		for(Event event : allEvents) {
 			if(event.getDay() == day)
 				eventByCriteria.add(event);
-			if(event.getMonth() == month)
+			if(event.getMonth() == month) {
+				
+			}
 				eventByCriteria.add(event);
 			if(event.getYear() == year)
 				eventByCriteria.add(event);

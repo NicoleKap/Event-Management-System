@@ -12,14 +12,14 @@ public class Event {
     private Integer maxCapacity;
     private String day;
     private String month;
-    private String year;
+    private Integer year;
     private Integer hour;
     private Integer minutes;
     private String duration;
     private Organizer organizer;
     private String status;
 
-    public Event(String title, String theme, String description, String location, Integer maxCapacity, String day, String month, String year, Integer hour, Integer minutes, String duration,Organizer organizer, String status) {
+    public Event(String title, String theme, String description, String location, Integer maxCapacity, String day, String month, Integer year, Integer hour, Integer minutes, String duration,Organizer organizer) {
         this.title = title;
         this.theme = theme;
         this.description = description;
@@ -32,7 +32,7 @@ public class Event {
         this.minutes = minutes;
         this.duration = duration;
         this.organizer = organizer;
-        this.status = status;
+        this.status = "Pending";
         this.id = nextId;
         
     }
@@ -103,12 +103,12 @@ public class Event {
 		this.month = month;
 	}
 
-	public String getYear() {
+	public Integer getYear() {
 		return year;
 	}
 
-	public void setYear(String year) {
-		this.year = year;
+	public void setYear(Integer newYear) {
+		this.year = newYear;
 	}
 
 	public Integer getHour() {

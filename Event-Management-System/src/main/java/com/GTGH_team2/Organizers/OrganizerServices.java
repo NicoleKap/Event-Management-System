@@ -2,12 +2,9 @@ package com.GTGH_team2.Organizers;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.server.ResponseStatusException;
-
-import com.GTGH_team2.Events.Event;
 
 public class OrganizerServices {
 
