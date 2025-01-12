@@ -42,9 +42,8 @@ public class ApprovalRequestServices {
 	}
 
 	// This method creates and adds an Approval Request to the approvalRequests list
-	public List<ApprovalRequest> addApprovalRequest(String type, Event event, Organizer organizer, Employee employee,
-			String comments) {
-		approvalRequests.add(new ApprovalRequest(1, type, event, organizer, null, null, employee, null, comments));
+	public List<ApprovalRequest> addApprovalRequest(String type, Event event, Organizer organizer,String comments) {
+		approvalRequests.add(new ApprovalRequest(type, event, organizer, comments));
 		return approvalRequests;
 	}
 
@@ -142,7 +141,7 @@ public class ApprovalRequestServices {
 			if (event.getId() == idEvent) {
 				for (Organizer organizer : organizerServices.getOrganizers()) {
 					if (idOrganizer == organizer.getId()) {
-						addApprovalRequest(type, event, organizer, null, comments);
+						addApprovalRequest(type, event, organizer, comments);
 					}
 				}
 			}
