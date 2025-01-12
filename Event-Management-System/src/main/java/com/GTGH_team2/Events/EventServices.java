@@ -3,13 +3,19 @@ package com.GTGH_team2.Events;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import com.GTGH_team2.Employees.Employee;
 import com.GTGH_team2.Employees.EmployeeServices;
+import com.GTGH_team2.Reservations.ReservationServices;
 
 public class EventServices {
 
 	private List<Event> allEvents = new ArrayList<>();
 
+	@Autowired
+	ReservationServices reservationServices;
+	@Autowired
 	EmployeeServices employeeServices;
 
 	public EventServices(EmployeeServices employeeServices) {
@@ -131,12 +137,17 @@ public class EventServices {
 		
 	}
 	
-	public void bookingAnEvent(Integer id) {
+	// Book an event 
+	
+	public void boοκAnEvent(Integer id) {
 		for (Event event : allEvents) { // Check if the id is part of the event list
-			if (event.getId() == id) {
+			if (event.getId() == id && reservationServices.getReservations().size() < event.getMaxCapacity()) {
 				System.out.println("The event " + event.getTitle() + " has been booked successfully");
 				return; // To stop the rest of the loop
-			} else {
+			}else if(event.getId() == id && reservationServices.getReservations().size() >= event.getMaxCapacity()) {
+				System.out.println("This event is fully booked! No more reservations avalable");
+				return;
+			}else {
 				System.out.println("This event does not exist");
 			}
 		}

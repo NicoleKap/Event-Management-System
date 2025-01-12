@@ -59,19 +59,5 @@ public class Visitor {
                 ", email='" + email + '\'' +  '}';
     }
     
-    
-//    //Searching for events 
-//    public ArrayList<Event> EventsSearching(ArrayList<Event> events, String day, String location, String theme) {
-//    	ArrayList<Event> specificEvents = new ArrayList<>(); //events that meet the criteria
-//        for (Event event : events) {
-//            if ((day == null || event.getDay().equals(day)) &&
-//                (location == null || event.getLocation().equals(location)) &&
-//                (theme == null || event.getTheme().equals(theme))) {
-//                specificEvents.add(event);
-//               
-//            }
-//        } 
-//        return specificEvents; auth h methodos sto eventServices
-//    }
 }
     
