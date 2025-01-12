@@ -29,18 +29,21 @@ public class EventServices {
 		this.allEvents = allEvents;
 	}
 
-	public void viewEvents() {
+	public List<Event> viewApprovedEvents() {
+		List<Event> approvedEvents = new ArrayList<>();
 		System.out.println("------------------------------------------------------------------------");
 		if(allEvents.isEmpty() ) {
 			System.out.println("There are no events");
 		}else {
-			System.out.println("Events");
+			System.out.println("Approved Events");
 			for (Event event : allEvents) {
-				System.out.println(event + " ");
+				if(event.getStatus() == "Approved")
+					approvedEvents.add(event);
+					System.out.println(event + " ");
 			}
 		}
-		
 		System.out.println("------------------------------------------------------------------------");
+		return approvedEvents;
 	}
 
 	// Add an Event to the list
