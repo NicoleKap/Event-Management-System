@@ -1,8 +1,12 @@
 package com.GTGH_team2.ApprovalRequests;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.GTGH_team2.Employees.Employee;
 import com.GTGH_team2.Employees.EmployeeServices;
@@ -15,16 +19,21 @@ import com.GTGH_team2.Organizers.OrganizerServices;
 //that an organizer makes for the events. The organizer makes a request
 //to add or delete an event. This request has to be approved or rejected by the 
 //employee
+@Service
 public class ApprovalRequestServices {
 
 	// List to store all the ApprovalRequests
 	private List<ApprovalRequest> approvalRequests = new ArrayList<ApprovalRequest>();
-
+	@Autowired
 	OrganizerServices organizerServices;
+	@Autowired
 	EmployeeServices employeeServices;
+	@Autowired
 	EventServices eventServices;
-	LocalDateTime time;
 
+	DateTimeFormatter formatter= DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss a");
+
+    
 	public ApprovalRequestServices(OrganizerServices organizerServices, EmployeeServices employeeServices,
 			EventServices eventServices) {
 		this.organizerServices = organizerServices;
@@ -60,7 +69,7 @@ public class ApprovalRequestServices {
 		return pendingRequests;
 	}
 
-	// This method updates the params of Approval Request
+	// This method updates the parameters of Approval Request
 	public List<ApprovalRequest> updateApprovalRequest(Integer id, String newType, Event newEvent,
 			Organizer newOrganizer, String newCreatedAt, String newStatus, Employee newEmployee, String newClosedAt,
 			String newComments) {
@@ -114,8 +123,7 @@ public class ApprovalRequestServices {
 		return approvalRequests;
 	}
 
-	// This method updates the time that Approval Request is closed at. ClosedAt
-	// later will be Date Time
+	// This method updates the time and date that Approval Request is closed at.
 	public List<ApprovalRequest> updateApprovalRequestClosedAt(int idApprovalRequest, String newClosedAt) {
 		for (ApprovalRequest approvalRequest : approvalRequests) {
 			if (idApprovalRequest == approvalRequest.getId()) {
@@ -153,7 +161,12 @@ public class ApprovalRequestServices {
 				employee.getAllRequests().add(approvalRequest);
 				assignApprovalRequestEmployee(idApprovalRequest, idEmployee);
 				updateApprovalRequestStatus(idApprovalRequest, updatedStatus);
-				updateApprovalRequestClosedAt(idApprovalRequest, "timeClosed");
+				// Creating an object of LocalDateTime class
+			    // and getting local date and time using now() method
+				LocalDateTime time = LocalDateTime.now();
+			    // Formatting LocalDateTime to string
+				String timeClosed = time.format(formatter);
+				updateApprovalRequestClosedAt(idApprovalRequest, timeClosed);
 				if (updatedStatus == "Accepted")
 					eventServices.updateEventStatus(getEventID(idApprovalRequest), updatedStatus);
 			}
@@ -172,7 +185,12 @@ public class ApprovalRequestServices {
 					if (idEmployee == employee.getId()) {
 						assignApprovalRequestEmployee(idApprovalRequest, idEmployee);// maybe not needed QUESTION
 						updateApprovalRequestStatus(idApprovalRequest, updatedStatus);
-						updateApprovalRequestClosedAt(idApprovalRequest, "timeClosed");
+						// Creating an object of LocalDateTime class
+					    // and getting local date and time using now() method
+						LocalDateTime time = LocalDateTime.now();
+					    // Formatting LocalDateTime to string
+						String timeClosed = time.format(formatter);
+						updateApprovalRequestClosedAt(idApprovalRequest, timeClosed);
 						employee.getAllRequests().add(approvalRequest);
 						if (updatedStatus == "Accepted")
 							eventServices.updateEventStatus(getEventID(idApprovalRequest), updatedStatus);
