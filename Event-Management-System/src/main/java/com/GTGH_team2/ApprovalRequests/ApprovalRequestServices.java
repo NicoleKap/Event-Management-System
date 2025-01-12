@@ -156,8 +156,7 @@ public class ApprovalRequestServices {
 						updateApprovalRequestClosedAt(idApprovalRequest, "timeClosed");
 						employee.getAllRequests().add(approvalRequest);
 						if (updatedStatus == "Accepted")
-							//eventServices.updateEventStatus(approvalRequest.getEvent().getId(), updatedStatus);
-							eventServices.addEvent(approvalRequest.getEvent());
+							eventServices.updateEventStatus(approvalRequest.getEvent().getId(), updatedStatus);
 					}
 				}
 			}
