@@ -1,5 +1,6 @@
 package com.GTGH_team2.ApprovalRequests;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,6 +10,7 @@ import com.GTGH_team2.Events.Event;
 import com.GTGH_team2.Events.EventServices;
 import com.GTGH_team2.Organizers.Organizer;
 import com.GTGH_team2.Organizers.OrganizerServices;
+
 
 //The ApprovalRequestServices class handles the requests 
 //that an organizer makes for the events. The organizer makes a request
@@ -22,6 +24,7 @@ public class ApprovalRequestServices {
 	OrganizerServices organizerServices;
 	EmployeeServices employeeServices;
 	EventServices eventServices;
+	LocalDateTime time;
 
 	public ApprovalRequestServices(OrganizerServices organizerServices, EmployeeServices employeeServices,
 			EventServices eventServices) {
@@ -85,8 +88,9 @@ public class ApprovalRequestServices {
 		return approvalRequests;
 	}
 
-	// This method updates the Employee that handles the Approval Request
-	public List<ApprovalRequest> updateApprovalRequestEmployee(int idApprovalRequest, int idEmployee) {
+	
+	// This method assigns the Employee that handles the Approval Request
+	public List<ApprovalRequest> assignApprovalRequestEmployee(int idApprovalRequest, int idEmployee) {
 		for (ApprovalRequest approvalRequest : approvalRequests) {
 			if (idApprovalRequest == approvalRequest.getId()) {
 				for (Employee employeee : employeeServices.getAllEmployees()) {
@@ -99,10 +103,31 @@ public class ApprovalRequestServices {
 		}
 		return approvalRequests;
 	}
+	
+	// This method updates the status of the Approval Request. status is "Accepted" or "Rejected"
+		public List<ApprovalRequest> updateApprovalRequestStatus(int idApprovalRequest, String newStatus) {
+			for (ApprovalRequest approvalRequest : approvalRequests) {
+				if (idApprovalRequest == approvalRequest.getId()) {
+					if (newStatus != null)
+						approvalRequest.setStatus(newStatus);
+				}
+			}
+			return approvalRequests;
+		}
 
+		// This method updates the time that Approval Request is closed at. ClosedAt later will be Date Time
+				public List<ApprovalRequest> updateApprovalRequestClosedAt(int idApprovalRequest, String newClosedAt) {
+					for (ApprovalRequest approvalRequest : approvalRequests) {
+						if (idApprovalRequest == approvalRequest.getId()) {
+							if (newClosedAt != null)
+								approvalRequest.setClosedAt(newClosedAt);
+						}
+					}
+					return approvalRequests;
+				}
+				
 	// This method allows the Organizer to make a request to add or delete an Event
-	// with
-	// comments. type is "Add" or "Delete"
+	// with comments. type is "Add" or "Delete"
 	public List<ApprovalRequest> makeRequestToAddorDelete(Integer idEvent, Integer idOrganizer, String comments,
 			String type) {
 		for (Event event : eventServices.getAllEvents()) {
@@ -124,14 +149,15 @@ public class ApprovalRequestServices {
 			String updatedStatus) {
 		for (ApprovalRequest approvalRequest : getApprovalRequest()) {
 			if (approvalRequest.getId() == idApprovalRequest) {
-				for (Employee employee : employeeServices.getAllEmployees()) {
+				for (Employee employee : employeeServices.getAllEmployees()) {//get employee by id sthn employee services
 					if (idEmployee == employee.getId()) {
-						updateApprovalRequestEmployee(idApprovalRequest, idEmployee);// maybe not needed QUESTION
-						updateApprovalRequest(idApprovalRequest, null, null, null, null, updatedStatus, null,
-								"timeClosed", null);
-						if (updatedStatus == "Accepted")
-							employee.getAllRequests().add(approvalRequest);
+						assignApprovalRequestEmployee(idApprovalRequest, idEmployee);// maybe not needed QUESTION
+						updateApprovalRequestStatus(idApprovalRequest, updatedStatus);
+						updateApprovalRequestClosedAt(idApprovalRequest, "timeClosed");
 						employee.getAllRequests().add(approvalRequest);
+						if (updatedStatus == "Accepted")
+							//eventServices.updateEventStatus(approvalRequest.getEvent().getId(), updatedStatus);
+							eventServices.addEvent(approvalRequest.getEvent());
 					}
 				}
 			}
@@ -147,13 +173,13 @@ public class ApprovalRequestServices {
 			if (approvalRequest.getId() == idApprovalRequest) {
 				for (Employee employee : employeeServices.getAllEmployees()) {
 					if (idEmployee == employee.getId()) {
-						updateApprovalRequestEmployee(idApprovalRequest, idEmployee);// maybe not needed QUESTION
-						updateApprovalRequest(idApprovalRequest, null, null, null, null, updatedStatus, null,
-								"timeClosed", null);
+						assignApprovalRequestEmployee(idApprovalRequest, idEmployee);// maybe not needed QUESTION
+						updateApprovalRequestStatus(idApprovalRequest, updatedStatus);
+						updateApprovalRequestClosedAt(idApprovalRequest, "timeClosed");
 						employee.getAllRequests().add(approvalRequest);
 						if (updatedStatus == "Accepted")
 							eventServices.removeEvent(approvalRequest.getEvent().getId()); // deletes the event
-						employee.getAllRequests().add(approvalRequest);
+						
 					}
 				}
 			}
