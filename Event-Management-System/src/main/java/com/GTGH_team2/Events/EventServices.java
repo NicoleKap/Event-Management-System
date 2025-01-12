@@ -2,6 +2,7 @@ package com.GTGH_team2.Events;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Stream;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -137,14 +138,24 @@ public class EventServices {
 		
 	}
 	
-	// Book an event 
+	// Find an event by its Id
 	
-	public void boοκAnEvent(Integer id) {
+	public String findEventById(Integer id) {
+		for(Event event : allEvents) {
+			if(event.getId().equals(id));
+				return "The event with id " + id + " is found with titele " + event.getTitle();
+		}
+		return "The event with id " + id + " is not found";
+	}
+	
+	// Book an event - This class is for reservation
+	
+	public void boοκAnEvent(Integer idEvent) {
 		for (Event event : allEvents) { // Check if the id is part of the event list
-			if (event.getId() == id && reservationServices.getReservations().size() < event.getMaxCapacity()) {
+			if (event.getId() == idEvent && reservationServices.getReservations().size() < event.getMaxCapacity()) {
 				System.out.println("The event " + event.getTitle() + " has been booked successfully");
 				return; // To stop the rest of the loop
-			}else if(event.getId() == id && reservationServices.getReservations().size() >= event.getMaxCapacity()) {
+			}else if(event.getId() == idEvent && reservationServices.getReservations().size() >= event.getMaxCapacity()) {
 				System.out.println("This event is fully booked! No more reservations avalable");
 				return;
 			}else {
@@ -152,7 +163,22 @@ public class EventServices {
 			}
 		}
 	}
+	
+	// Cancel a booking
+	
+	public void cancelEventBooking(Integer idEvent) { // This class is for reservation
+//		for(Event event : allEvents) {
+//			if (event.getId() == idEvent)
+//				reservationServices.getReservations().remove(event);
+//		}
+		allEvents.stream();
+		
+	}
 
+	public void eventCancellation(Integer idEvent) {
+		
+	}
+	
 	//This method allows the Employee to delete an Event
 	
 	public List<Event> deleteEvent(Integer idEvent, Integer idEmployee) {
