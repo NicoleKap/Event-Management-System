@@ -46,8 +46,13 @@ public class EmployeeServices {
 		return employees;
 	}
 	
-	
-	
-
+	// This returns the employee by his id
+	public Employee getEmployeeById(Integer employeeId) {
+		for (Employee employee : employees) {
+			if (employeeId == employee.getId()) 
+				return employee;
+		}
+		return null; 
+	}
 
 }
