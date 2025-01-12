@@ -118,8 +118,5 @@ public class EventServices {
 		}
 		return allEvents;
 	}
-	
-//	public List<Event> addEventOrganizer(Integer idEvent, Integer idOrganizer) {
-//	}
-	
+
 }

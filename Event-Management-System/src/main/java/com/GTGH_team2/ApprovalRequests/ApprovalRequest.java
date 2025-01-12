@@ -1,4 +1,4 @@
-package com.GTGH_team2.ApprovalRequests;
+package src.main.java.com.GTGH_team2.ApprovalRequests;
 
 import java.util.Date;
 import java.util.List;

@@ -34,7 +34,10 @@ import com.GTGH_team2.Reservations.ReservationServices;
 		
 	    public List<Visitor> removeVisitor(int id) {
 	    	visitors.removeIf(visitor -> visitor.getId() == id);
+<<<<<<< HEAD
 	    	reservationServices.deleteReservationsByVisitorId(id);//remove reservations of visitor
+=======
+>>>>>>> parent of d9adde4 (Small changes and comments for changes after call)
 	        return visitors;
 	    }
 	  

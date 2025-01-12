@@ -1,6 +1,5 @@
 package com.GTGH_team2.ApprovalRequests;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,7 +9,6 @@ import com.GTGH_team2.Events.Event;
 import com.GTGH_team2.Events.EventServices;
 import com.GTGH_team2.Organizers.Organizer;
 import com.GTGH_team2.Organizers.OrganizerServices;
-
 
 //The ApprovalRequestServices class handles the requests 
 //that an organizer makes for the events. The organizer makes a request
@@ -24,7 +22,6 @@ public class ApprovalRequestServices {
 	OrganizerServices organizerServices;
 	EmployeeServices employeeServices;
 	EventServices eventServices;
-	LocalDateTime time;
 
 	public ApprovalRequestServices(OrganizerServices organizerServices, EmployeeServices employeeServices,
 			EventServices eventServices) {
@@ -127,13 +124,14 @@ public class ApprovalRequestServices {
 			String updatedStatus) {
 		for (ApprovalRequest approvalRequest : getApprovalRequest()) {
 			if (approvalRequest.getId() == idApprovalRequest) {
-				for (Employee employee : employeeServices.getAllEmployees()) {//get employee by id sthn employee services
+				for (Employee employee : employeeServices.getAllEmployees()) {
 					if (idEmployee == employee.getId()) {
 						updateApprovalRequestEmployee(idApprovalRequest, idEmployee);// maybe not needed QUESTION
 						updateApprovalRequest(idApprovalRequest, null, null, null, null, updatedStatus, null,
-								"timeClosed", null); //kainourgies 3 methodoi gia ayta pou allazoun :(
+								"timeClosed", null);
 						if (updatedStatus == "Accepted")
 							employee.getAllRequests().add(approvalRequest);
+						employee.getAllRequests().add(approvalRequest);
 					}
 				}
 			}
