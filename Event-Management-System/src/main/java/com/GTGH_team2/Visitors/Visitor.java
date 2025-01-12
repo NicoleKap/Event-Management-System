@@ -6,7 +6,7 @@ import com.GTGH_team2.Events.Event;
 import com.GTGH_team2.Reservations.Reservation;
 
 public class Visitor {
-	private Integer id;
+	private int id;
 	private String name;
     private String surname;
     private String email;
@@ -21,11 +21,11 @@ public class Visitor {
         
     }
     
-    public Integer getId() {
+    public int getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
@@ -58,6 +58,6 @@ public class Visitor {
         return "Visitor{" +  "id='" + id + '\'' + ", name='" + name + '\'' +  ", surname='" + surname + '\'' +
                 ", email='" + email + '\'' +  '}';
     }
-  
+    
 }
     

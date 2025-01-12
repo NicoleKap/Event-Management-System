@@ -4,22 +4,22 @@ import com.GTGH_team2.Organizers.Organizer;
 
 public class Event {
 	private static int nextId = 1; // Initializing the counter for auto-uncrementing IDs
-	private int id;
+	private Integer id;
     private String title;
     private String theme;
     private String description;
     private String location;
-    private int maxCapacity;
+    private Integer maxCapacity;
     private String day;
     private String month;
     private String year;
-    private int hour;
-    private int minutes;
+    private Integer hour;
+    private Integer minutes;
     private String duration;
     private Organizer organizer;
     private String status;
 
-    public Event(String title, String theme, String description, String location, int maxCapacity, String day, String month, String year, int hour, int minutes, String duration,Organizer organizer, String status) {
+    public Event(String title, String theme, String description, String location, Integer maxCapacity, String day, String month, String year, Integer hour, Integer minutes, String duration,Organizer organizer, String status) {
         this.title = title;
         this.theme = theme;
         this.description = description;
@@ -39,7 +39,7 @@ public class Event {
    
     // Setters & Getters
 
-    public int getId() {
+    public Integer getId() {
 		return id;
 	}
     
@@ -79,11 +79,11 @@ public class Event {
 		this.location = location;
 	}
 
-	public int getMaxCapacity() {
+	public Integer getMaxCapacity() {
 		return maxCapacity;
 	}
 
-	public void setMaxCapacity(int maxCapacity) {
+	public void setMaxCapacity(Integer maxCapacity) {
 		this.maxCapacity = maxCapacity;
 	}
 
@@ -111,19 +111,19 @@ public class Event {
 		this.year = year;
 	}
 
-	public int getHour() {
+	public Integer getHour() {
 		return hour;
 	}
 
-	public void setHour(int hour) {
+	public void setHour(Integer hour) {
 		this.hour = hour;
 	}
 
-	public int getMinutes() {
+	public Integer getMinutes() {
 		return minutes;
 	}
 
-	public void setMinutes(int minutes) {
+	public void setMinutes(Integer minutes) {
 		this.minutes = minutes;
 	}
 
