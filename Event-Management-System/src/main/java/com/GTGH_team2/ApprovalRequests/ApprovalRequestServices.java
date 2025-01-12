@@ -11,7 +11,6 @@ import com.GTGH_team2.Events.EventServices;
 import com.GTGH_team2.Organizers.Organizer;
 import com.GTGH_team2.Organizers.OrganizerServices;
 
-
 //The ApprovalRequestServices class handles the requests 
 //that an organizer makes for the events. The organizer makes a request
 //to add or delete an event. This request has to be approved or rejected by the 
@@ -88,7 +87,6 @@ public class ApprovalRequestServices {
 		return approvalRequests;
 	}
 
-	
 	// This method assigns the Employee that handles the Approval Request
 	public List<ApprovalRequest> assignApprovalRequestEmployee(int idApprovalRequest, int idEmployee) {
 		for (ApprovalRequest approvalRequest : approvalRequests) {
@@ -103,29 +101,31 @@ public class ApprovalRequestServices {
 		}
 		return approvalRequests;
 	}
-	
-	// This method updates the status of the Approval Request. status is "Accepted" or "Rejected"
-		public List<ApprovalRequest> updateApprovalRequestStatus(int idApprovalRequest, String newStatus) {
-			for (ApprovalRequest approvalRequest : approvalRequests) {
-				if (idApprovalRequest == approvalRequest.getId()) {
-					if (newStatus != null)
-						approvalRequest.setStatus(newStatus);
-				}
-			}
-			return approvalRequests;
-		}
 
-		// This method updates the time that Approval Request is closed at. ClosedAt later will be Date Time
-				public List<ApprovalRequest> updateApprovalRequestClosedAt(int idApprovalRequest, String newClosedAt) {
-					for (ApprovalRequest approvalRequest : approvalRequests) {
-						if (idApprovalRequest == approvalRequest.getId()) {
-							if (newClosedAt != null)
-								approvalRequest.setClosedAt(newClosedAt);
-						}
-					}
-					return approvalRequests;
-				}
-				
+	// This method updates the status of the Approval Request. status is "Accepted"
+	// or "Rejected"
+	public List<ApprovalRequest> updateApprovalRequestStatus(int idApprovalRequest, String newStatus) {
+		for (ApprovalRequest approvalRequest : approvalRequests) {
+			if (idApprovalRequest == approvalRequest.getId()) {
+				if (newStatus != null)
+					approvalRequest.setStatus(newStatus);
+			}
+		}
+		return approvalRequests;
+	}
+
+	// This method updates the time that Approval Request is closed at. ClosedAt
+	// later will be Date Time
+	public List<ApprovalRequest> updateApprovalRequestClosedAt(int idApprovalRequest, String newClosedAt) {
+		for (ApprovalRequest approvalRequest : approvalRequests) {
+			if (idApprovalRequest == approvalRequest.getId()) {
+				if (newClosedAt != null)
+					approvalRequest.setClosedAt(newClosedAt);
+			}
+		}
+		return approvalRequests;
+	}
+
 	// This method allows the Organizer to make a request to add or delete an Event
 	// with comments. type is "Add" or "Delete"
 	public List<ApprovalRequest> makeRequestToAddorDelete(Integer idEvent, Integer idOrganizer, String comments,
@@ -149,17 +149,15 @@ public class ApprovalRequestServices {
 			String updatedStatus) {
 		for (ApprovalRequest approvalRequest : getApprovalRequest()) {
 			if (approvalRequest.getId() == idApprovalRequest) {
-				for (Employee employee : employeeServices.getAllEmployees()) {//get employee by id sthn employee services
-					if (idEmployee == employee.getId()) {
-						assignApprovalRequestEmployee(idApprovalRequest, idEmployee);// maybe not needed QUESTION
-						updateApprovalRequestStatus(idApprovalRequest, updatedStatus);
-						updateApprovalRequestClosedAt(idApprovalRequest, "timeClosed");
-						employee.getAllRequests().add(approvalRequest);
-						if (updatedStatus == "Accepted")
-							eventServices.updateEventStatus(approvalRequest.getEvent().getId(), updatedStatus);
-					}
-				}
+				Employee employee = employeeServices.getEmployeeById(idEmployee);
+				employee.getAllRequests().add(approvalRequest);
+				assignApprovalRequestEmployee(idApprovalRequest, idEmployee);
+				updateApprovalRequestStatus(idApprovalRequest, updatedStatus);
+				updateApprovalRequestClosedAt(idApprovalRequest, "timeClosed");
+				if (updatedStatus == "Accepted")
+					eventServices.updateEventStatus(getEventID(idApprovalRequest), updatedStatus);
 			}
+
 		}
 		return approvalRequests;
 	}
@@ -177,8 +175,8 @@ public class ApprovalRequestServices {
 						updateApprovalRequestClosedAt(idApprovalRequest, "timeClosed");
 						employee.getAllRequests().add(approvalRequest);
 						if (updatedStatus == "Accepted")
-							eventServices.removeEvent(approvalRequest.getEvent().getId()); // deletes the event
-						
+							eventServices.updateEventStatus(getEventID(idApprovalRequest), updatedStatus);
+
 					}
 				}
 			}
@@ -188,7 +186,7 @@ public class ApprovalRequestServices {
 
 	// Method to add each request that the employee handled to the employee's
 	// allRequests list
-	public List<Employee> addRequestForEmployee(int idEmployee, int idRequest) {
+	public List<Employee> addRequestForEmployee(Integer idEmployee, Integer idRequest) {
 		for (Employee employee : employeeServices.getAllEmployees()) {
 			if (idEmployee == employee.getId()) {
 				for (ApprovalRequest approvalRequest : approvalRequests) {
@@ -200,5 +198,15 @@ public class ApprovalRequestServices {
 		}
 		return employeeServices.getAllEmployees();
 	}
-
+	
+	//This method returns the ID of the event that is in the request
+	public Integer getEventID (Integer idApprovalRequest) {
+		for (ApprovalRequest approvalRequest : getApprovalRequest()) {
+			if (approvalRequest.getId() == idApprovalRequest) 
+				return approvalRequest.getEvent().getId();
+			}
+		return null;
+	}
+	
+	
 }
