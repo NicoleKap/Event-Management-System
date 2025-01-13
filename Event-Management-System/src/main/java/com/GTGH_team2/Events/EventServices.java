@@ -1,5 +1,6 @@
 package com.GTGH_team2.Events;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,7 @@ public class EventServices {
 	ReservationServices reservationServices;
 	@Autowired
 	EmployeeServices employeeServices;
+	
 
 	public EventServices(EmployeeServices employeeServices) {
 		this.employeeServices = employeeServices;
@@ -29,19 +31,17 @@ public class EventServices {
 		this.allEvents = allEvents;
 	}
 	
-	public Boolean isValidDay(String day) {
-		switch(day) {
-		case "Monday":
-		case "Tuesday":
-		case "Wednesday":
-		case "Thursday" :
-		case "Friday" :
-		case "Saturday":
-		case "Sunday":
+	public Boolean isValidDay(Integer day) {
+		if(day >=1 && day <= 31)
 			return true;
-		default:
+		return false;
+	}
+	
+	
+	public Boolean isValidYear(Integer year) {
+		if(Event.getDate().getYear() < year)
 			return false;
-		}
+		return true;
 	}
 
 	public List<Event> viewApprovedEvents() {

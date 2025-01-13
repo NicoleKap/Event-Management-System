@@ -1,5 +1,7 @@
 package com.GTGH_team2.Events;
 
+import java.time.LocalDate;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.GTGH_team2.Organizers.Organizer;
@@ -17,16 +19,18 @@ public class Event {
     private String description;
     private String location;
     private int maxCapacity;
-    private String day;
-    private String month;
+    private Integer day;
+    private Integer month;
     private Integer year;
     private int hour;
     private int minutes;
     private String duration;
     private Organizer organizer;
     private String status;
+    
+    private static LocalDate date = LocalDate.of(year,month,day);
 
-    public Event(String title, String theme, String description, String location, int maxCapacity, String day, String month, Integer year, Integer hour, int minutes, String duration,Integer idOrganizer, String status) {
+    public Event(String title, String theme, String description, String location, int maxCapacity, Integer day, Integer month, Integer year, Integer hour, int minutes, String duration,Integer idOrganizer, String status) {
         this.title = title;
         this.theme = theme;
         this.description = description;
@@ -46,7 +50,7 @@ public class Event {
    
     // Setters & Getters
 
-    public int getId() {
+    public Integer getId() {
 		return id;
 	}
     
@@ -94,31 +98,20 @@ public class Event {
 		this.maxCapacity = maxCapacity;
 	}
 
-	public String getDay() {
+	public Integer getDay() {
 		return day;
 	}
 
-	public void setDay(String day) {
-		switch(day) {
-		case "Monday":
-		case "Tuesday":
-		case "Wednesday":
-		case "Thursday" :
-		case "Friday" :
-		case "Saturday":
-		case "Sunday":
-			this.day = day;
-		default:
-			System.out.println("No valid day");
-		}
+	public void setDay(Integer day) {
+		this.day = day;
 		
 	}
 
-	public String getMonth() {
+	public Integer getMonth() {
 		return month;
 	}
 
-	public void setMonth(String month) {
+	public void setMonth(Integer month) {
 		this.month = month;
 	}
 
@@ -171,8 +164,15 @@ public class Event {
 	}
 
 	
-	
-    @Override
+    public static LocalDate getDate() {
+		return date;
+	}
+
+	public void setDate(LocalDate date) {
+		Event.date = date;
+	}
+
+	@Override
     public String toString() {
         return  "Id: " + id +
         		"Event title: " + title  +
