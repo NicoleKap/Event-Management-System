@@ -13,13 +13,15 @@ public class Visitor {
     private ArrayList<Reservation> reservations = new ArrayList<>();
     
     
-    public Visitor(int id,String name, String surname, String email) {
+    public Visitor(Integer id,String name, String surname, String email) {
     	this.id = id;
         this.name = name;
         this.surname = surname;
         this.email = email;
         
     }
+    
+    
     
     public Integer getId() {
 		return id;
@@ -53,7 +55,15 @@ public class Visitor {
         this.email = email;
     }
     
-    @Override
+    public ArrayList<Reservation> getReservations() {
+		return reservations;
+	}
+
+	public void setReservations(ArrayList<Reservation> reservations) {
+		this.reservations = reservations;
+	}
+
+	@Override
     public String toString() {
         return "Visitor{" +  "id='" + id + '\'' + ", name='" + name + '\'' +  ", surname='" + surname + '\'' +
                 ", email='" + email + '\'' +  '}';
