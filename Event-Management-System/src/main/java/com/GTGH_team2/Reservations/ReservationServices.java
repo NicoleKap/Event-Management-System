@@ -99,23 +99,6 @@ public class ReservationServices {
 		}
 	}
 	
-	public List<Visitor> participantsInEvent(Integer idOrganizer) {
-    	List<Visitor> listParticipants = new ArrayList<Visitor>();
-    	for(Organizer organizer : organizers) {
-    		if(organizer.getId() == idOrganizer) {
-    			for(Event event : organizer.getEvents()) {
-    				
-    				
-    				
-    				for(Visitor visitor : visitors) {
-    					listParticipants.add(visitor);
-    				}
-    			}
-    		}
-    	}
-    	return listParticipants;
-    }
-	
 	//Checking whether a visitor is a participant (has made a reservation)
 	public boolean visitorIsParticipant(Visitor visitor, Event event) {
 		for(Reservation res: reservations) {
