@@ -8,12 +8,13 @@ public class Reservation {
     private Event event;
     private Integer id;
     
-	public Reservation(Integer id, Visitor visitor, Event event) {
-		this.id = id;
+	public Reservation(Visitor visitor, Event event) {
+		this.id = 1;
 		this.visitor = visitor;
 		this.event = event;
 	}
 	
+
 	public Integer getId() {
 		return id;
 	}

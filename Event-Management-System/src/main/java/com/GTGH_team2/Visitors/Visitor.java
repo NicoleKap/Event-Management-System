@@ -10,19 +10,16 @@ public class Visitor {
 	private String name;
     private String surname;
     private String email;
-    private ArrayList<Reservation> reservations = new ArrayList<>();
+   // private ArrayList<Reservation> reservations = new ArrayList<>();
     
     
-    public Visitor(Integer id,String name, String surname, String email) {
-    	this.id = id;
+    public Visitor(String name, String surname, String email) {
+    	this.id = 1;
         this.name = name;
         this.surname = surname;
         this.email = email;
-        
     }
-    
-    
-    
+      
     public Integer getId() {
 		return id;
 	}
@@ -54,14 +51,6 @@ public class Visitor {
     public void setEmail(String email) {
         this.email = email;
     }
-    
-    public ArrayList<Reservation> getReservations() {
-		return reservations;
-	}
-
-	public void setReservations(ArrayList<Reservation> reservations) {
-		this.reservations = reservations;
-	}
 
 	@Override
     public String toString() {
