@@ -7,6 +7,8 @@ import com.GTGH_team2.Employees.Employee;
 import com.GTGH_team2.Events.Event;
 import com.GTGH_team2.Organizers.Organizer;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class ApprovalRequest {
@@ -20,17 +22,19 @@ public class ApprovalRequest {
     private String closedAt; // Date when the request was closed
     private String comments; 
 
+    DateTimeFormatter formatter= DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss a");
     
     // Constructor
-	public ApprovalRequest(Integer id,String type, Event event, Organizer submittedBy, String createdAt, String status,Employee handledBy, String closedAt, String comments) {
-	    this.id = id;
+	public ApprovalRequest(String type, Event event, Organizer submittedBy, String comments) {
+	    this.id = 1;
 		this.type = type;
 		this.event = event;
 		this.submittedBy = submittedBy;
-		this.createdAt = createdAt;
-		this.status = status;
-		this.handledBy = handledBy;
-		this.closedAt = closedAt;
+		LocalDateTime time = LocalDateTime.now();
+		this.createdAt = time.format(formatter);
+		this.status = "Pending";
+		this.handledBy = null;
+		this.closedAt = null;
 		this.comments = comments;
 	}
 	
