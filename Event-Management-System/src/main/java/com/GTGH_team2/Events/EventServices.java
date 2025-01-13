@@ -182,41 +182,17 @@ public class EventServices {
 	
 	// Find an event by its Id
 	
-	public String findEventById(Integer id) {
+	public Event findEventById(Integer id) {
 		for(Event event : allEvents) {
 			if(event.getId().equals(id));
-				return "The event with id " + id + " is found with titele " + event.getTitle();
+				return event;
 		}
-		return "The event with id " + id + " is not found";
+		return null;
 	}
-	
-	// Book an event - This class is for reservation
-	
-//	public void boοκAnEvent(Integer idEvent) {
-//		for (Event event : allEvents) { // Check if the id is part of the event list
-//			if (event.getId() == idEvent && reservationServices.getReservations().size() < event.getMaxCapacity()) {
-//				System.out.println("The event " + event.getTitle() + " has been booked successfully");
-//				return; // To stop the rest of the loop
-//			}else if(event.getId() == idEvent && reservationServices.getReservations().size() >= event.getMaxCapacity()) {
-//				System.out.println("This event is fully booked! No more reservations avalable");
-//				return;
-//			}else {
-//				System.out.println("This event does not exist");
-//			}
-//		}
-//	}
-	
-	// Cancel a booking
-	
-//	public void cancelEventBooking(Integer idEvent) { // This class is for reservation
-////		for(Event event : allEvents) {
-////			if (event.getId() == idEvent)
-////				reservationServices.getReservations().remove(event);
-////		}
-//		allEvents.stream();
-//		
-//	}
 
+
+	// Cancel an Event and the relative reservations 
+	
 	public List<Event> eventCancellation(Integer idEvent) {
 		for(Event event : allEvents) {
 			if(event.getId() == idEvent) {
@@ -243,7 +219,15 @@ public class EventServices {
 		return allEvents;
 	}
 	
-	// A method for searching only the avalable events (< max capacity)
+	// A method for searching only the available events (< max capacity)
+	
+	public void searchingAvailableEvents(Integer idReservation, Integer maxCapacity) {
+		List<Event> availableEvents = new ArrayList<>();
+		for(Event event : allEvents) {
+			if(reservationServices.reservationsByEvent(idReservation) < maxCapacity) 
+				availableEvents.add(event);
+		}
+	}
 
 	// Partcipants of a specific event
 }

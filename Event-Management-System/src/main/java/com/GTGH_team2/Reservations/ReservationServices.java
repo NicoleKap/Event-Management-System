@@ -21,6 +21,20 @@ public class ReservationServices {
 		return reservations;
 	}
     
+    // Get Event Id for a reservation
+    
+    public Integer reservationsByEvent(Integer idReservation) {
+    	Integer counter = 0;
+        for (Reservation reservation : reservations) {
+            if (reservation.getId().equals(idReservation)) {
+            	counter++;
+               
+            }
+        }
+        return  counter; 
+    }
+
+   
     // Deletes all reservations with a specific visitor id
     public void deleteReservationsByVisitorId(Integer visitorId) {
         reservations.removeIf(reservation -> reservation.getVisitor().getId() == visitorId); //Remove reservations where the visitor matches the id
