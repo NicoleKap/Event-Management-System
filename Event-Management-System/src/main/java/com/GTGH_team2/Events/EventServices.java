@@ -1,7 +1,6 @@
 package com.GTGH_team2.Events;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -28,6 +27,21 @@ public class EventServices {
 
 	public void setAllEvents(ArrayList<Event> allEvents) {
 		this.allEvents = allEvents;
+	}
+	
+	public Boolean isValidDay(String day) {
+		switch(day) {
+		case "Monday":
+		case "Tuesday":
+		case "Wednesday":
+		case "Thursday" :
+		case "Friday" :
+		case "Saturday":
+		case "Sunday":
+			return true;
+		default:
+			return false;
+		}
 	}
 
 	public List<Event> viewApprovedEvents() {
@@ -95,7 +109,10 @@ public class EventServices {
 			if (newMaxCapacity != null)
 				event.setMaxCapacity(newMaxCapacity);
 			if (newDay != null)
-				event.setDay(newDay);
+				do {
+					if(isValidDay(newDay))
+						event.setDay(newDay);
+				}while (!isValidDay(newDay));
 			if (newMonth != null)
 				event.setMonth(newMonth);
 			if (newYear != null)
