@@ -57,7 +57,7 @@ public class EventServices {
 		}
 	}
 
-	// Remove an Event from the list
+	// Remove an Event from the list - If it is approved
 
 	public List<Event> removeEvent(Integer id) {
 //		Event eventToBeRemoved = null;
@@ -146,6 +146,8 @@ public class EventServices {
 		return allEvents;
 	}
 	
+	// Update Hour & Minutes Method
+	
 	// Update Event Status
 	
 	public List<Event> updateEventStatus(Integer idEvent, String newStatus) {
@@ -157,7 +159,7 @@ public class EventServices {
 		return allEvents;
 	}
 	
-	// Searching for an event in the existing events list
+	// Searching for an event in the existing events list - filter : multiple methods 
 	
 	public List<Event> searchingAnEvent(String day, String month, Integer year, String theme) {
 		List<Event> eventByCriteria = new ArrayList<>(); // The events which are found is stored in this list
@@ -189,30 +191,30 @@ public class EventServices {
 	
 	// Book an event - This class is for reservation
 	
-	public void boοκAnEvent(Integer idEvent) {
-		for (Event event : allEvents) { // Check if the id is part of the event list
-			if (event.getId() == idEvent && reservationServices.getReservations().size() < event.getMaxCapacity()) {
-				System.out.println("The event " + event.getTitle() + " has been booked successfully");
-				return; // To stop the rest of the loop
-			}else if(event.getId() == idEvent && reservationServices.getReservations().size() >= event.getMaxCapacity()) {
-				System.out.println("This event is fully booked! No more reservations avalable");
-				return;
-			}else {
-				System.out.println("This event does not exist");
-			}
-		}
-	}
+//	public void boοκAnEvent(Integer idEvent) {
+//		for (Event event : allEvents) { // Check if the id is part of the event list
+//			if (event.getId() == idEvent && reservationServices.getReservations().size() < event.getMaxCapacity()) {
+//				System.out.println("The event " + event.getTitle() + " has been booked successfully");
+//				return; // To stop the rest of the loop
+//			}else if(event.getId() == idEvent && reservationServices.getReservations().size() >= event.getMaxCapacity()) {
+//				System.out.println("This event is fully booked! No more reservations avalable");
+//				return;
+//			}else {
+//				System.out.println("This event does not exist");
+//			}
+//		}
+//	}
 	
 	// Cancel a booking
 	
-	public void cancelEventBooking(Integer idEvent) { // This class is for reservation
-//		for(Event event : allEvents) {
-//			if (event.getId() == idEvent)
-//				reservationServices.getReservations().remove(event);
-//		}
-		allEvents.stream();
-		
-	}
+//	public void cancelEventBooking(Integer idEvent) { // This class is for reservation
+////		for(Event event : allEvents) {
+////			if (event.getId() == idEvent)
+////				reservationServices.getReservations().remove(event);
+////		}
+//		allEvents.stream();
+//		
+//	}
 
 	public void eventCancellation(Integer idEvent) {
 		
@@ -232,5 +234,8 @@ public class EventServices {
 		}
 		return allEvents;
 	}
+	
+	// A method for searching only the avalable events (< max capacity)
 
+	// Partcipants of a specific event
 }

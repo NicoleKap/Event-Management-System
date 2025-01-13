@@ -18,7 +18,8 @@ public class ReservationServices {
 	
 	//Booking an Event
    // This method allows a visitor to book an event by their IDs , it checks if the reservation already exists and creates a new one if not.
-	public boolean bookingAnEvent(int visitorId, int eventId) {
+	// With title
+    public boolean bookingAnEvent(int visitorId, int eventId) {
 		Visitor visitor = null;
 		Event event = null;
 		for (Visitor v : visitors) {

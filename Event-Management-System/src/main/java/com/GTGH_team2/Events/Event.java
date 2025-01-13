@@ -168,6 +168,7 @@ public class Event {
                 "\nOrganizer: " + organizer +
                 "\nStatus: " + status;
     }
+    
 	
 }
 
