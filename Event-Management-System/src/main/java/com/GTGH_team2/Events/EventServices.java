@@ -1,6 +1,7 @@
 package com.GTGH_team2.Events;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -216,8 +217,15 @@ public class EventServices {
 //		
 //	}
 
-	public void eventCancellation(Integer idEvent) {
-		
+	public List<Event> eventCancellation(Integer idEvent) {
+		for(Event event : allEvents) {
+			if(event.getId() == idEvent) {
+				reservationServices.deleteReservationsByEventId(idEvent);
+			}
+			removeEvent(idEvent);
+			break;
+		}
+		return allEvents;
 	}
 	
 	//This method allows the Employee to delete an Event

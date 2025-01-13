@@ -2,9 +2,12 @@ package com.GTGH_team2.Organizers;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.server.ResponseStatusException;
+
+import com.GTGH_team2.Events.Event;
 
 public class OrganizerServices {
 
@@ -25,6 +28,16 @@ public class OrganizerServices {
 		organizers.add(organizer);
 		return organizers;
 		
+	}
+	
+	// Find the organizer by Id
+	
+	public Organizer findOrganizerById(Integer idOrganizer) {
+		for(Organizer organizer : organizers) {
+			if(organizer.getId() == idOrganizer)
+				return organizer;
+		}
+		return null;
 	}
 	
 	// Remove an organizer from the list

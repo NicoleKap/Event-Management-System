@@ -28,7 +28,7 @@ public class ReservationServices {
     }
 
     // Deletes all reservations with a specific event id.
-    public void deleteReservationsByEventId(int eventId) {
+    public void deleteReservationsByEventId(Integer eventId) {
         reservations.removeIf(reservation -> reservation.getEvent().getId() == eventId); //Remove reservations where the event matches the id
         System.out.println("All reservations for event with id number " + eventId + " have been deleted!");
     }
