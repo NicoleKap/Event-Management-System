@@ -50,6 +50,19 @@ public class ReservationServices {
 		System.out.println("All reservations for event with id number " + eventId + " have been deleted!");
 	}
 
+// Get Event Id for a reservation
+    
+    public Integer reservationsByEvent(Integer idReservation) {
+    	Integer counter = 0;
+        for (Reservation reservation : reservations) {
+            if (reservation.getId().equals(idReservation)) {
+            	counter++;
+               
+            }
+        }
+        return  counter; 
+    }
+    
 	// Booking an Event
 	// This method allows a visitor to book an event by their IDs , it checks if the
 	// reservation already exists and creates a new one if not.
