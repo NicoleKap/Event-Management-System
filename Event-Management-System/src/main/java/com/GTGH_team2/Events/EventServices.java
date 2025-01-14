@@ -19,12 +19,9 @@ public class EventServices {
 	ReservationServices reservationServices;
 	@Autowired
 	EmployeeServices employeeServices;
-<<<<<<< Updated upstream
-	
-=======
+
 	@Autowired
 	OrganizerServices organizerServices;
->>>>>>> Stashed changes
 
 	public EventServices(EmployeeServices employeeServices) {
 		this.employeeServices = employeeServices;
@@ -275,11 +272,11 @@ public class EventServices {
 
 	// Partcipants of a specific event
 	
-	public void makeEvent(Integer idOrganizer, String title, ) {
-			for(Organizer organizer : organizers) {
-				if(idOrganizer == organizer.getId()) {
-					addEvent)
-				}
-			}
-	}
+//	public void makeEvent(Integer idOrganizer, String title, ) {
+//			for(Organizer organizer : organizers) {
+//				if(idOrganizer == organizer.getId()) {
+//					addEvent)
+//				}
+//			}
+//	}
 }
