@@ -22,14 +22,14 @@ public class EventManagementSystemApplication {
 		
 		VisitorServices visitorServices = new VisitorServices();
         EmployeeServices employeeServices = new EmployeeServices();
-        ReservationServices reservationServices = new ReservationServices();
-        OrganizerServices organizerServices = new OrganizerServices();
         EventServices eventServices = new EventServices(employeeServices);
+        ReservationServices reservationServices = new ReservationServices(visitorServices, eventServices);
+        OrganizerServices organizerServices = new OrganizerServices();
         ApprovalRequestServices approvalRequestServices = new ApprovalRequestServices(organizerServices,  employeeServices, eventServices);
         
-        visitorServices.addVisitor(new Visitor(1, "John", "A", "johnA@gmail.com"));
-        visitorServices.addVisitor(new Visitor(2, "Jim", "B", "jimB@gmail.com"));
-        visitorServices.addVisitor(new Visitor(3, "Mary", "C", "maryC@gmail.com"));
+        visitorServices.addVisitor(new Visitor( "John", "A", "johnA@gmail.com"));
+        visitorServices.addVisitor(new Visitor( "Jim", "B", "jimB@gmail.com"));
+        visitorServices.addVisitor(new Visitor( "Mary", "C", "maryC@gmail.com"));
 
         visitorServices.getAllVisitors();
           	
