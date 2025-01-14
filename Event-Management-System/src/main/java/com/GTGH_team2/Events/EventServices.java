@@ -201,7 +201,7 @@ public class EventServices {
 	
 	// Searching for an event in the existing events list - filter : multiple methods 
 	
-	public List<Event> searchingAnEvent(String day, String month, Integer year, String theme) {
+	public List<Event> searchingAnEvent(Integer day, Integer month, Integer year, String theme) {
 		List<Event> eventByCriteria = new ArrayList<>(); // The events which are found is stored in this list
 		for(Event event : allEvents) {
 			if(event.getDay() == day)
