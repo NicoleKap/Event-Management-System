@@ -114,9 +114,9 @@ public class ReservationServices {
 	}
 
 	// Checking whether a visitor is a participant (has made a reservation)
-	public boolean visitorIsParticipant(Visitor visitor, Event event) {
+	public boolean visitorIsParticipant(Integer visitorID, Integer eventID) {
 		for (Reservation res : reservations) {
-			if (res.getVisitor() == visitor && res.getEvent() == event) {
+			if(res.getVisitor().getId()==visitorID && res.getEvent().getId()==eventID) {
 				return true;
 			}
 		}
