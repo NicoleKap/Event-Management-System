@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.GTGH_team2.Employees.Employee;
 import com.GTGH_team2.Employees.EmployeeServices;
-import com.GTGH_team2.Organizers.Organizer;
 import com.GTGH_team2.Organizers.OrganizerServices;
 import com.GTGH_team2.Reservations.ReservationServices;
 import com.GTGH_team2.Visitors.Visitor;
