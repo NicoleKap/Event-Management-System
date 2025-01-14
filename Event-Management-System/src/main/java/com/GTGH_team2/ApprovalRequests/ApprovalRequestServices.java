@@ -1,8 +1,12 @@
 package com.GTGH_team2.ApprovalRequests;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.GTGH_team2.Employees.Employee;
 import com.GTGH_team2.Employees.EmployeeServices;
@@ -11,21 +15,25 @@ import com.GTGH_team2.Events.EventServices;
 import com.GTGH_team2.Organizers.Organizer;
 import com.GTGH_team2.Organizers.OrganizerServices;
 
-
 //The ApprovalRequestServices class handles the requests 
 //that an organizer makes for the events. The organizer makes a request
 //to add or delete an event. This request has to be approved or rejected by the 
 //employee
+@Service
 public class ApprovalRequestServices {
 
 	// List to store all the ApprovalRequests
 	private List<ApprovalRequest> approvalRequests = new ArrayList<ApprovalRequest>();
-
+	@Autowired
 	OrganizerServices organizerServices;
+	@Autowired
 	EmployeeServices employeeServices;
+	@Autowired
 	EventServices eventServices;
-	LocalDateTime time;
 
+	DateTimeFormatter formatter= DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss a");
+
+    
 	public ApprovalRequestServices(OrganizerServices organizerServices, EmployeeServices employeeServices,
 			EventServices eventServices) {
 		this.organizerServices = organizerServices;
@@ -34,9 +42,8 @@ public class ApprovalRequestServices {
 	}
 
 	// This method creates and adds an Approval Request to the approvalRequests list
-	public List<ApprovalRequest> addApprovalRequest(String type, Event event, Organizer organizer, Employee employee,
-			String comments) {
-		approvalRequests.add(new ApprovalRequest(1, type, event, organizer, null, null, employee, null, comments));
+	public List<ApprovalRequest> addApprovalRequest(String type, Event event, Organizer organizer,String comments) {
+		approvalRequests.add(new ApprovalRequest(type, event, organizer, comments));
 		return approvalRequests;
 	}
 
@@ -61,7 +68,7 @@ public class ApprovalRequestServices {
 		return pendingRequests;
 	}
 
-	// This method updates the params of Approval Request
+	// This method updates the parameters of Approval Request
 	public List<ApprovalRequest> updateApprovalRequest(Integer id, String newType, Event newEvent,
 			Organizer newOrganizer, String newCreatedAt, String newStatus, Employee newEmployee, String newClosedAt,
 			String newComments) {
@@ -88,8 +95,8 @@ public class ApprovalRequestServices {
 		return approvalRequests;
 	}
 
-	// This method updates the Employee that handles the Approval Request
-	public List<ApprovalRequest> updateApprovalRequestEmployee(int idApprovalRequest, int idEmployee) {
+	// This method assigns the Employee that handles the Approval Request
+	public List<ApprovalRequest> assignApprovalRequestEmployee(int idApprovalRequest, int idEmployee) {
 		for (ApprovalRequest approvalRequest : approvalRequests) {
 			if (idApprovalRequest == approvalRequest.getId()) {
 				for (Employee employeee : employeeServices.getAllEmployees()) {
@@ -103,16 +110,38 @@ public class ApprovalRequestServices {
 		return approvalRequests;
 	}
 
+	// This method updates the status of the Approval Request. status is "Accepted"
+	// or "Rejected"
+	public List<ApprovalRequest> updateApprovalRequestStatus(int idApprovalRequest, String newStatus) {
+		for (ApprovalRequest approvalRequest : approvalRequests) {
+			if (idApprovalRequest == approvalRequest.getId()) {
+				if (newStatus != null)
+					approvalRequest.setStatus(newStatus);
+			}
+		}
+		return approvalRequests;
+	}
+
+	// This method updates the time and date that Approval Request is closed at.
+	public List<ApprovalRequest> updateApprovalRequestClosedAt(int idApprovalRequest, String newClosedAt) {
+		for (ApprovalRequest approvalRequest : approvalRequests) {
+			if (idApprovalRequest == approvalRequest.getId()) {
+				if (newClosedAt != null)
+					approvalRequest.setClosedAt(newClosedAt);
+			}
+		}
+		return approvalRequests;
+	}
+
 	// This method allows the Organizer to make a request to add or delete an Event
-	// with
-	// comments. type is "Add" or "Delete"
+	// with comments. type is "Add" or "Delete"
 	public List<ApprovalRequest> makeRequestToAddorDelete(Integer idEvent, Integer idOrganizer, String comments,
 			String type) {
 		for (Event event : eventServices.getAllEvents()) {
 			if (event.getId() == idEvent) {
 				for (Organizer organizer : organizerServices.getOrganizers()) {
 					if (idOrganizer == organizer.getId()) {
-						addApprovalRequest(type, event, organizer, null, comments);
+						addApprovalRequest(type, event, organizer, comments);
 					}
 				}
 			}
@@ -127,16 +156,20 @@ public class ApprovalRequestServices {
 			String updatedStatus) {
 		for (ApprovalRequest approvalRequest : getApprovalRequest()) {
 			if (approvalRequest.getId() == idApprovalRequest) {
-				for (Employee employee : employeeServices.getAllEmployees()) {//get employee by id sthn employee services
-					if (idEmployee == employee.getId()) {
-						updateApprovalRequestEmployee(idApprovalRequest, idEmployee);// maybe not needed QUESTION
-						updateApprovalRequest(idApprovalRequest, null, null, null, null, updatedStatus, null,
-								"timeClosed", null); //kainourgies 3 methodoi gia ayta pou allazoun :(
-						if (updatedStatus == "Accepted")
-							employee.getAllRequests().add(approvalRequest);
-					}
-				}
+				Employee employee = employeeServices.getEmployeeById(idEmployee);
+				employee.getAllRequests().add(approvalRequest);
+				assignApprovalRequestEmployee(idApprovalRequest, idEmployee);
+				updateApprovalRequestStatus(idApprovalRequest, updatedStatus);
+				// Creating an object of LocalDateTime class
+			    // and getting local date and time using now() method
+				LocalDateTime time = LocalDateTime.now();
+			    // Formatting LocalDateTime to string
+				String timeClosed = time.format(formatter);
+				updateApprovalRequestClosedAt(idApprovalRequest, timeClosed);
+				if (updatedStatus == "Accepted")
+					eventServices.updateEventStatus(getEventID(idApprovalRequest), updatedStatus);
 			}
+
 		}
 		return approvalRequests;
 	}
@@ -149,13 +182,18 @@ public class ApprovalRequestServices {
 			if (approvalRequest.getId() == idApprovalRequest) {
 				for (Employee employee : employeeServices.getAllEmployees()) {
 					if (idEmployee == employee.getId()) {
-						updateApprovalRequestEmployee(idApprovalRequest, idEmployee);// maybe not needed QUESTION
-						updateApprovalRequest(idApprovalRequest, null, null, null, null, updatedStatus, null,
-								"timeClosed", null);
+						assignApprovalRequestEmployee(idApprovalRequest, idEmployee);// maybe not needed QUESTION
+						updateApprovalRequestStatus(idApprovalRequest, updatedStatus);
+						// Creating an object of LocalDateTime class
+					    // and getting local date and time using now() method
+						LocalDateTime time = LocalDateTime.now();
+					    // Formatting LocalDateTime to string
+						String timeClosed = time.format(formatter);
+						updateApprovalRequestClosedAt(idApprovalRequest, timeClosed);
 						employee.getAllRequests().add(approvalRequest);
 						if (updatedStatus == "Accepted")
-							eventServices.removeEvent(approvalRequest.getEvent().getId()); // deletes the event
-						employee.getAllRequests().add(approvalRequest);
+							eventServices.updateEventStatus(getEventID(idApprovalRequest), updatedStatus);
+
 					}
 				}
 			}
@@ -165,7 +203,7 @@ public class ApprovalRequestServices {
 
 	// Method to add each request that the employee handled to the employee's
 	// allRequests list
-	public List<Employee> addRequestForEmployee(int idEmployee, int idRequest) {
+	public List<Employee> addRequestForEmployee(Integer idEmployee, Integer idRequest) {
 		for (Employee employee : employeeServices.getAllEmployees()) {
 			if (idEmployee == employee.getId()) {
 				for (ApprovalRequest approvalRequest : approvalRequests) {
@@ -177,5 +215,15 @@ public class ApprovalRequestServices {
 		}
 		return employeeServices.getAllEmployees();
 	}
-
+	
+	//This method returns the ID of the event that is in the request
+	public Integer getEventID (Integer idApprovalRequest) {
+		for (ApprovalRequest approvalRequest : getApprovalRequest()) {
+			if (approvalRequest.getId() == idApprovalRequest) 
+				return approvalRequest.getEvent().getId();
+			}
+		return null;
+	}
+	
+	
 }

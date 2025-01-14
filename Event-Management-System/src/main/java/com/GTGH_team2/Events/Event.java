@@ -1,25 +1,36 @@
 package com.GTGH_team2.Events;
 
+import java.time.LocalDate;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
 import com.GTGH_team2.Organizers.Organizer;
+import com.GTGH_team2.Organizers.OrganizerServices;
 
 public class Event {
+	
+	@Autowired
+	OrganizerServices organizerServices;
+	
 	private static int nextId = 1; // Initializing the counter for auto-uncrementing IDs
-	private Integer id;
+	private int id;
     private String title;
     private String theme;
     private String description;
     private String location;
     private Integer maxCapacity;
-    private String day;
-    private String month;
-    private String year;
-    private Integer hour;
-    private Integer minutes;
+    private static Integer day;
+    private static Integer month;
+    private static Integer year;
+    private int hour;
+    private int minutes;
     private String duration;
     private Organizer organizer;
     private String status;
+    
+    private static LocalDate date = LocalDate.of(year,month,day);
 
-    public Event(String title, String theme, String description, String location, Integer maxCapacity, String day, String month, String year, Integer hour, Integer minutes, String duration,Organizer organizer, String status) {
+    public Event(String title, String theme, String description, String location, Integer maxCapacity, Integer day, Integer month, Integer year, Integer hour, Integer minutes, String duration,Integer idOrganizer, String status) {
         this.title = title;
         this.theme = theme;
         this.description = description;
@@ -31,7 +42,7 @@ public class Event {
         this.hour = hour;
         this.minutes = minutes;
         this.duration = duration;
-        this.organizer = organizer;
+        this.organizer = organizerServices.findOrganizerById(idOrganizer);
         this.status = status;
         this.id = nextId;
         
@@ -79,51 +90,52 @@ public class Event {
 		this.location = location;
 	}
 
-	public Integer getMaxCapacity() {
+	public int getMaxCapacity() {
 		return maxCapacity;
 	}
 
-	public void setMaxCapacity(Integer maxCapacity) {
+	public void setMaxCapacity(int maxCapacity) {
 		this.maxCapacity = maxCapacity;
 	}
 
-	public String getDay() {
+	public Integer getDay() {
 		return day;
 	}
 
-	public void setDay(String day) {
+	public void setDay(Integer day) {
 		this.day = day;
+		
 	}
 
-	public String getMonth() {
+	public Integer getMonth() {
 		return month;
 	}
 
-	public void setMonth(String month) {
+	public void setMonth(Integer month) {
 		this.month = month;
 	}
 
-	public String getYear() {
+	public Integer getYear() {
 		return year;
 	}
 
-	public void setYear(String year) {
-		this.year = year;
+	public void setYear(Integer newYear) {
+		this.year = newYear;
 	}
 
-	public Integer getHour() {
+	public int getHour() {
 		return hour;
 	}
 
-	public void setHour(Integer hour) {
+	public void setHour(int hour) {
 		this.hour = hour;
 	}
 
-	public Integer getMinutes() {
+	public int getMinutes() {
 		return minutes;
 	}
 
-	public void setMinutes(Integer minutes) {
+	public void setMinutes(int minutes) {
 		this.minutes = minutes;
 	}
 
@@ -151,7 +163,16 @@ public class Event {
 		this.status = status;
 	}
 
-    @Override
+	
+    public static LocalDate getDate() {
+		return date;
+	}
+
+	public void setDate(LocalDate date) {
+		Event.date = date;
+	}
+
+	@Override
     public String toString() {
         return  "Id: " + id +
         		"Event title: " + title  +
@@ -168,6 +189,7 @@ public class Event {
                 "\nOrganizer: " + organizer +
                 "\nStatus: " + status;
     }
+    
 	
 }
 

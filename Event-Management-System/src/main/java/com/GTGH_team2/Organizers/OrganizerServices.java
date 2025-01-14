@@ -30,6 +30,16 @@ public class OrganizerServices {
 		
 	}
 	
+	// Find the organizer by Id
+	
+	public Organizer findOrganizerById(Integer idOrganizer) {
+		for(Organizer organizer : organizers) {
+			if(organizer.getId() == idOrganizer)
+				return organizer;
+		}
+		return null;
+	}
+	
 	// Remove an organizer from the list
 
 	public List<Organizer> removeOrganizer(Integer id) {

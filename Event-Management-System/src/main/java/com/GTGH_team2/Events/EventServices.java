@@ -2,13 +2,15 @@ package com.GTGH_team2.Events;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Stream;
-
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.GTGH_team2.Employees.Employee;
 import com.GTGH_team2.Employees.EmployeeServices;
+import com.GTGH_team2.Organizers.OrganizerServices;
 import com.GTGH_team2.Reservations.ReservationServices;
+import com.GTGH_team2.Visitors.Visitor;
+import com.GTGH_team2.Visitors.VisitorServices;
+
 
 public class EventServices {
 
@@ -18,6 +20,11 @@ public class EventServices {
 	ReservationServices reservationServices;
 	@Autowired
 	EmployeeServices employeeServices;
+	@Autowired
+	OrganizerServices organizerServices;
+	@Autowired
+	VisitorServices visitorServices;
+
 
 	public EventServices(EmployeeServices employeeServices) {
 		this.employeeServices = employeeServices;
@@ -30,19 +37,40 @@ public class EventServices {
 	public void setAllEvents(ArrayList<Event> allEvents) {
 		this.allEvents = allEvents;
 	}
+	
+	public Boolean isValidMonth(Integer month) {
+		if((month >=1 && month <= 12))
+			return true;
+		return false;
+	}
+	
+	public Boolean isValidDay(Integer day) {
+		if(day >=1 && day <= 31)
+			return true;
+		return false;
+	}
+	
+	public Boolean isValidYear(Integer year) {
+		if(Event.getDate().getYear() < year)
+			return false;
+		return true;
+	}
 
-	public void viewEvents() {
+	public List<Event> viewApprovedEvents() {
+		List<Event> approvedEvents = new ArrayList<>();
 		System.out.println("------------------------------------------------------------------------");
 		if(allEvents.isEmpty() ) {
 			System.out.println("There are no events");
 		}else {
-			System.out.println("Events");
+			System.out.println("Approved Events");
 			for (Event event : allEvents) {
-				System.out.println(event + " ");
+				if(event.getStatus() == "Approved")
+					approvedEvents.add(event);
+					System.out.println(event + " ");
 			}
 		}
-		
 		System.out.println("------------------------------------------------------------------------");
+		return approvedEvents;
 	}
 
 	// Add an Event to the list
@@ -56,7 +84,7 @@ public class EventServices {
 		}
 	}
 
-	// Remove an Event from the list
+	// Remove an Event from the list - If it is approved
 
 	public List<Event> removeEvent(Integer id) {
 //		Event eventToBeRemoved = null;
@@ -79,7 +107,7 @@ public class EventServices {
 	// Update an Event
 
 	public List<Event> updateEvent(Integer id, String newTitle, String newTheme, String newDescription, String newLocation,
-			int newMaxCapacity, String newDay, String newMonth, int newYear, int newHour, int newMinute,
+			Integer newMaxCapacity, Integer newDay, Integer newMonth, Integer newYear, Integer newHour, Integer newMinute,
 			String newDuration) {
 		for (Event event : allEvents) {
 			if (newTitle != null)
@@ -90,44 +118,104 @@ public class EventServices {
 				event.setDescription(newDescription);
 			if (newLocation != null)
 				event.setTitle(newLocation);
-			if (newMaxCapacity != 0)
+			if (newMaxCapacity != null)
 				event.setMaxCapacity(newMaxCapacity);
 			if (newDay != null)
-				event.setDay(newDay);
+				do {
+					if(isValidDay(newDay))
+						event.setDay(newDay);
+				}while (!isValidDay(newDay));
 			if (newMonth != null)
-				event.setTheme(newTheme);
-			if (newYear != 0)
-				event.setDescription(newDescription);
-			if (newHour != 0)
-				event.setTitle(newLocation);
-			if (newMinute != 0)
+				do {
+					if(isValidDay(newMonth))
+						event.setMonth(newMonth);
+				}while (!isValidMonth(newMonth));
+			do {
+				if(isValidYear(newYear)) {
+					event.setYear(newYear);
+				}
+			}while(!isValidYear(newYear));
+			if (newYear != null)
+				event.setYear(newYear);
+			if (newHour != null)
+				event.setHour(newHour);
+			if (newMinute != null)
 				event.setMinutes(newMinute);
-			if (newDuration != null) {
+			if (newDuration != null)
 				event.setDuration(newDuration);
-			}
 		}
 		return allEvents;
 	}
 
 	// Update specific attributes of an event
 	
-	public List<Event> updateLocation(String newLocation) {
+	public List<Event> updateLocation(Integer idEvent, String newLocation) {
 		for(Event event : allEvents) {
-			if(newLocation != null)
-				event.setLocation(newLocation);
+			if(event.getId() == idEvent) {
+				if(newLocation != null)
+					event.setLocation(newLocation);
+			}	
 		}
 		return allEvents;
 		
 	}
 	
-	// Searching for an event in the existing events list
+	// Update Description for a specific event
 	
-	public List<Event> searchingAnEvent(String day, String month, String year, String theme) {
+	public List<Event> updateDescription(Integer idEvent, String newDescription) {
+		for(Event event : allEvents) {
+			if(event.getId() == idEvent) {
+				if(newDescription != null)
+					event.setLocation(newDescription);
+			}	
+		}
+		return allEvents;
+	}
+	
+	public List<Event> updateDateOfEvent(Integer idEvent, Integer newDay, Integer newMonth, Integer newYear){
+		for(Event event : allEvents) {
+			if (newDay != null)
+				do {
+					if(isValidDay(newDay))
+						event.setDay(newDay);
+				}while (!isValidDay(newDay));
+			if (newMonth != null)
+				do {
+					if(isValidDay(newMonth))
+						event.setMonth(newMonth);
+				}while (!isValidMonth(newMonth));
+			do {
+				if(isValidYear(newYear)) {
+					event.setYear(newYear);
+				}
+			}while(!isValidYear(newYear));
+		}
+		return allEvents;
+	}
+	
+	// Update Hour & Minutes Method
+	
+	// Update Event Status
+	
+	public List<Event> updateEventStatus(Integer idEvent, String newStatus) {
+		for(Event event : allEvents) {
+			if(event.getId() == idEvent)
+				if(newStatus!=null)
+					event.setStatus(newStatus);
+		}
+		return allEvents;
+	}
+	
+	// Searching for an event in the existing events list - filter : multiple methods 
+	
+	public List<Event> searchingAnEvent(Integer day, Integer month, Integer year, String theme) {
 		List<Event> eventByCriteria = new ArrayList<>(); // The events which are found is stored in this list
 		for(Event event : allEvents) {
 			if(event.getDay() == day)
 				eventByCriteria.add(event);
-			if(event.getMonth() == month)
+			if(event.getMonth() == month) {
+				
+			}
 				eventByCriteria.add(event);
 			if(event.getYear() == year)
 				eventByCriteria.add(event);
@@ -135,48 +223,29 @@ public class EventServices {
 				eventByCriteria.add(event);		
 		}
 		return eventByCriteria;
-		
 	}
 	
 	// Find an event by its Id
 	
-	public String findEventById(Integer id) {
+	public Event findEventById(Integer id) {
 		for(Event event : allEvents) {
 			if(event.getId().equals(id));
-				return "The event with id " + id + " is found with titele " + event.getTitle();
+				return event;
 		}
-		return "The event with id " + id + " is not found";
-	}
-	
-	// Book an event - This class is for reservation
-	
-	public void boοκAnEvent(Integer idEvent) {
-		for (Event event : allEvents) { // Check if the id is part of the event list
-			if (event.getId() == idEvent && reservationServices.getReservations().size() < event.getMaxCapacity()) {
-				System.out.println("The event " + event.getTitle() + " has been booked successfully");
-				return; // To stop the rest of the loop
-			}else if(event.getId() == idEvent && reservationServices.getReservations().size() >= event.getMaxCapacity()) {
-				System.out.println("This event is fully booked! No more reservations avalable");
-				return;
-			}else {
-				System.out.println("This event does not exist");
-			}
-		}
-	}
-	
-	// Cancel a booking
-	
-	public void cancelEventBooking(Integer idEvent) { // This class is for reservation
-//		for(Event event : allEvents) {
-//			if (event.getId() == idEvent)
-//				reservationServices.getReservations().remove(event);
-//		}
-		allEvents.stream();
-		
+		return null;
 	}
 
-	public void eventCancellation(Integer idEvent) {
-		
+	// Cancel an Event and the relative reservations 
+	
+	public List<Event> eventCancellation(Integer idEvent) {
+		for(Event event : allEvents) {
+			if(event.getId() == idEvent) {
+				reservationServices.deleteReservationsByEventId(idEvent);
+			}
+			removeEvent(idEvent);
+			break;
+		}
+		return allEvents;
 	}
 	
 	//This method allows the Employee to delete an Event
@@ -193,5 +262,27 @@ public class EventServices {
 		}
 		return allEvents;
 	}
+	
+	// A method for searching only the available events (< max capacity)
+	
+	public void searchingAvailableEvents(Integer idReservation, Integer maxCapacity) {
+		List<Event> availableEvents = new ArrayList<>();
+		for(Event event : allEvents) {
+			if(reservationServices.reservationsByEvent(idReservation) < maxCapacity) 
+				availableEvents.add(event);
+		}
+	}
 
+	// Partcipants of a specific event
+	
+	public List<Visitor> participantsOfAnEvent(Integer idVisitor, Event event) {
+		List<Visitor> participants = new ArrayList<>();
+		for(Visitor visitor : visitorServices.getVisitors()) {
+			if(visitor.getId() == idVisitor) {
+				if(reservationServices.visitorIsParticipant(visitor, event))
+					participants.add(visitor);
+			}			
+		}
+		return participants;	
+	}
 }
