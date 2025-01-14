@@ -13,12 +13,12 @@ public class Event {
 	OrganizerServices organizerServices;
 	
 	private static int nextId = 1; // Initializing the counter for auto-uncrementing IDs
-	private int id;
+	private final int id;
     private String title;
     private String theme;
     private String description;
     private String location;
-    private int maxCapacity;
+    private Integer maxCapacity;
     private static Integer day;
     private static Integer month;
     private static Integer year;
