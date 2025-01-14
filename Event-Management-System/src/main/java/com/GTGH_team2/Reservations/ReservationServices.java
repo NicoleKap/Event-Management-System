@@ -35,7 +35,7 @@ public class ReservationServices {
 		return reservations;
 	}
 
-	// Deletes all reservations with a specific visitor id
+	// Deletes all reservations with a specific visitor id, when a visitor is deleted, his reservations are deleted too
 	public void deleteReservationsByVisitorId(Integer visitorId) {
 		reservations.removeIf(reservation -> reservation.getVisitor().getId() == visitorId); // Remove reservations
 																								// where the visitor
