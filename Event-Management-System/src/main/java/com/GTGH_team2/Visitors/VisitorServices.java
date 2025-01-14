@@ -1,53 +1,65 @@
 package com.GTGH_team2.Visitors;
 
-import java.util.ArrayList;
-import java.util.List;
+	import java.util.ArrayList;
+	import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.GTGH_team2.Events.Event;
 import com.GTGH_team2.Reservations.ReservationServices;
 
-@Service
-public class VisitorServices {
+	@Service
+	public class VisitorServices {
+		
+		@Autowired
+		private ReservationServices reservationServices;
+	    private List<Visitor> visitors = new ArrayList<Visitor>();
 
-	@Autowired
-	private ReservationServices reservationServices;
-	private List<Visitor> visitors = new ArrayList<Visitor>();
-
-	public List<Visitor> getVisitors() {
-		return visitors;
-	}
-
-	public List<Visitor> getAllVisitors() {
-		return visitors;
-	}
-
-	public List<Visitor> addVisitor(Visitor visitor) {
-		visitors.add(visitor);
-		return visitors;
-	}
-
-	// TODO teleutaios visitor ths listas kai pairnw to id, auksanw
-
-	public List<Visitor> removeVisitor(Integer id) {
-		visitors.removeIf(visitor -> visitor.getId() == id);
-		reservationServices.deleteReservationsByVisitorId(id);// remove reservations of visitor
-		return visitors;
-	}
-
-	public List<Visitor> updateVisitor(Integer id, String newName, String newSurname, String newEmail) {
-		for (Visitor visitor : visitors) {
-			if (id == visitor.getId()) {
-				if (newName != null)
-					visitor.setName(newName);
-				if (newSurname != null)
-					visitor.setSurname(newSurname);
-				if (newEmail != null)
-					visitor.setEmail(newEmail);
-			}
+	    public List<Visitor> getVisitors() {
+			return visitors;
 		}
-		return visitors;
-	}
 
-}
+		public List<Visitor> getAllVisitors() {
+	        return visitors;
+	    }
+
+	    public List<Visitor> addVisitor(Visitor visitor) {
+	        visitors.add(visitor);
+	        return visitors;
+	    }
+	    
+	    
+	    //teleutaios visiotr ths listas kai pairnw to od, auksanw, enas visitor diagrafetai diagrafontai kai ta reservations
+	    //2 methods delete reservations by visitor id delete reservations by event id
+		
+		
+		public Visitor findVisitorById(Integer id) {
+			for(Visitor visitor: visitors) {
+				if(visitor.getId().equals(id));
+					return visitor;
+			}
+			return null;
+		}
+	    public List<Visitor> removeVisitor(Integer id) {
+	    	visitors.removeIf(visitor -> visitor.getId() == id);
+	    	reservationServices.deleteReservationsByVisitorId(id);//remove reservations of visitor
+	        return visitors;
+	    }
+	  
+	    public List<Visitor> updateVisitor(Integer id, String newName, String newSurname, String newEmail) {
+	        for (Visitor visitor : visitors) {
+	            if (id == visitor.getId()) {
+	                if (newName != null)
+	                	visitor.setName(newName);
+	                if (newSurname != null) 
+	                	visitor.setSurname(newSurname);
+	                if (newEmail != null)
+	                	visitor.setEmail(newEmail);
+	            }
+	        }
+	        return visitors;
+	    }
+	    
+	    	    
+	}
