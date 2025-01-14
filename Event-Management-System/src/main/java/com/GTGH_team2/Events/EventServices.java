@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.GTGH_team2.Employees.Employee;
 import com.GTGH_team2.Employees.EmployeeServices;
+import com.GTGH_team2.Organizers.Organizer;
+import com.GTGH_team2.Organizers.OrganizerServices;
 import com.GTGH_team2.Reservations.ReservationServices;
 
 
@@ -17,7 +19,12 @@ public class EventServices {
 	ReservationServices reservationServices;
 	@Autowired
 	EmployeeServices employeeServices;
+<<<<<<< Updated upstream
 	
+=======
+	@Autowired
+	OrganizerServices organizerServices;
+>>>>>>> Stashed changes
 
 	public EventServices(EmployeeServices employeeServices) {
 		this.employeeServices = employeeServices;
@@ -216,7 +223,6 @@ public class EventServices {
 				eventByCriteria.add(event);		
 		}
 		return eventByCriteria;
-		
 	}
 	
 	// Find an event by its Id
@@ -268,4 +274,12 @@ public class EventServices {
 	}
 
 	// Partcipants of a specific event
+	
+	public void makeEvent(Integer idOrganizer, String title, ) {
+			for(Organizer organizer : organizers) {
+				if(idOrganizer == organizer.getId()) {
+					addEvent)
+				}
+			}
+	}
 }
