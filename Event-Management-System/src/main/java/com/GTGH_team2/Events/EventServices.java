@@ -9,6 +9,8 @@ import com.GTGH_team2.Employees.EmployeeServices;
 import com.GTGH_team2.Organizers.Organizer;
 import com.GTGH_team2.Organizers.OrganizerServices;
 import com.GTGH_team2.Reservations.ReservationServices;
+import com.GTGH_team2.Visitors.Visitor;
+import com.GTGH_team2.Visitors.VisitorServices;
 
 
 public class EventServices {
@@ -19,12 +21,11 @@ public class EventServices {
 	ReservationServices reservationServices;
 	@Autowired
 	EmployeeServices employeeServices;
-<<<<<<< Updated upstream
-	
-=======
 	@Autowired
 	OrganizerServices organizerServices;
->>>>>>> Stashed changes
+	@Autowired
+	VisitorServices visitorServices;
+
 
 	public EventServices(EmployeeServices employeeServices) {
 		this.employeeServices = employeeServices;
@@ -275,11 +276,14 @@ public class EventServices {
 
 	// Partcipants of a specific event
 	
-	public void makeEvent(Integer idOrganizer, String title, ) {
-			for(Organizer organizer : organizers) {
-				if(idOrganizer == organizer.getId()) {
-					addEvent)
-				}
-			}
+	public List<Visitor> participantsOfAnEvent(Integer idVisitor, Event event) {
+		List<Visitor> participants = new ArrayList<>();
+		for(Visitor visitor : visitorServices.getVisitors()) {
+			if(visitor.getId() == idVisitor) {
+				if(reservationServices.visitorIsParticipant(visitor, event))
+					participants.add(visitor);
+			}			
+		}
+		return participants;	
 	}
 }
