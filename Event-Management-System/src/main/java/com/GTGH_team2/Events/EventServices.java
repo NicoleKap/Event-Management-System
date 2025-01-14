@@ -6,7 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.GTGH_team2.Employees.Employee;
 import com.GTGH_team2.Employees.EmployeeServices;
+import com.GTGH_team2.Organizers.OrganizerServices;
 import com.GTGH_team2.Reservations.ReservationServices;
+import com.GTGH_team2.Visitors.Visitor;
+import com.GTGH_team2.Visitors.VisitorServices;
 
 
 public class EventServices {
@@ -17,7 +20,11 @@ public class EventServices {
 	ReservationServices reservationServices;
 	@Autowired
 	EmployeeServices employeeServices;
-	
+	@Autowired
+	OrganizerServices organizerServices;
+	@Autowired
+	VisitorServices visitorServices;
+
 
 	public EventServices(EmployeeServices employeeServices) {
 		this.employeeServices = employeeServices;
@@ -216,7 +223,6 @@ public class EventServices {
 				eventByCriteria.add(event);		
 		}
 		return eventByCriteria;
-		
 	}
 	
 	// Find an event by its Id
@@ -268,4 +274,15 @@ public class EventServices {
 	}
 
 	// Partcipants of a specific event
+	
+	public List<Visitor> participantsOfAnEvent(Integer idVisitor, Event event) {
+		List<Visitor> participants = new ArrayList<>();
+		for(Visitor visitor : visitorServices.getVisitors()) {
+			if(visitor.getId() == idVisitor) {
+				if(reservationServices.visitorIsParticipant(visitor, event))
+					participants.add(visitor);
+			}			
+		}
+		return participants;	
+	}
 }

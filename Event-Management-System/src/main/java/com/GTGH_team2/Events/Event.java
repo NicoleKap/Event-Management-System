@@ -18,7 +18,7 @@ public class Event {
     private String theme;
     private String description;
     private String location;
-    private int maxCapacity;
+    private Integer maxCapacity;
     private static Integer day;
     private static Integer month;
     private static Integer year;
@@ -30,7 +30,7 @@ public class Event {
     
     private static LocalDate date = LocalDate.of(year,month,day);
 
-    public Event(String title, String theme, String description, String location, int maxCapacity, Integer day, Integer month, Integer year, Integer hour, int minutes, String duration,Integer idOrganizer, String status) {
+    public Event(String title, String theme, String description, String location, Integer maxCapacity, Integer day, Integer month, Integer year, Integer hour, Integer minutes, String duration,Integer idOrganizer, String status) {
         this.title = title;
         this.theme = theme;
         this.description = description;
