@@ -1,5 +1,8 @@
 package com.GTGH_team2.Reservations;
 
+import java.io.IOException;
+import java.nio.file.FileSystems;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,6 +12,11 @@ import com.GTGH_team2.Events.Event;
 import com.GTGH_team2.Events.EventServices;
 import com.GTGH_team2.Visitors.Visitor;
 import com.GTGH_team2.Visitors.VisitorServices;
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.WriterException;
+import com.google.zxing.client.j2se.MatrixToImageWriter;
+import com.google.zxing.common.BitMatrix;
+import com.google.zxing.qrcode.QRCodeWriter;
 
 public class ReservationServices {
 
@@ -120,5 +128,18 @@ public class ReservationServices {
 			}
 		}
 	}
+    
+    // QR code generator
+    
+    // Create QR code image
+    
+    public void qrCodeImage(String text,int width, int height,String filePath) throws WriterException, IOException{
+    	QRCodeWriter qrCodeWriter = new QRCodeWriter();
+        BitMatrix bitMatrix = qrCodeWriter.encode(text, BarcodeFormat.QR_CODE, width, height); // Matrix creation for pixels
+        Path path = FileSystems.getDefault().getPath(filePath); // The path for QR code image
+        MatrixToImageWriter.writeToPath(bitMatrix, "PNG", path);
+    }
+      
+    
 	
 }

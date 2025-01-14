@@ -19,9 +19,9 @@ public class Event {
     private String description;
     private String location;
     private int maxCapacity;
-    private Integer day;
-    private Integer month;
-    private Integer year;
+    private static Integer day;
+    private static Integer month;
+    private static Integer year;
     private int hour;
     private int minutes;
     private String duration;

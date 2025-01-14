@@ -1,15 +1,11 @@
 package com.GTGH_team2.ApprovalRequests;
 
-import java.util.Date;
-import java.util.List;
-
 import com.GTGH_team2.Employees.Employee;
 import com.GTGH_team2.Events.Event;
 import com.GTGH_team2.Organizers.Organizer;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 
 public class ApprovalRequest {
 	private Integer id;
