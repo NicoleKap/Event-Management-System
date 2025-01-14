@@ -3,8 +3,10 @@ package com.GTGH_team2.Organizers;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+@Service
 public class OrganizerServices {
 
 	private List<Organizer> organizers = new ArrayList<>(); // The organizers are stored here

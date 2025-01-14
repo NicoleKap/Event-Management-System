@@ -3,17 +3,17 @@ package com.GTGH_team2.Employees;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.GTGH_team2.Events.Event;
+import org.springframework.stereotype.Service;
 
 
 //The EmployeeServices class handles the employees.It adds,deletes and updates the employee.
 //
+@Service
 public class EmployeeServices {
 	
 	// List to store all the Employees
 	private List<Employee> employees = new ArrayList<Employee>();
 	
-	private List<Event> deletedEvents = new ArrayList<Event>();
 	
 
 	// This method adds an Employee to the employees list
@@ -57,26 +57,5 @@ public class EmployeeServices {
 		}
 		return null; 
 	}
-	
-	// This method adds a deleted event to the deleted events list
-		public List<Event> addDelEvent(Event event) {
-			deletedEvents.add(event);
-			return deletedEvents;
-		}
-	
-	// This method returns the deleted events list
-		public List<Event> getDeletedEvents() {
-			return deletedEvents;
-		}
-		
-		// This method returns the list of the Employee's deleted events
-		public List<Event> DeletedEventsByEmployee(Integer idEmployee) {
-			for (Employee employee : getAllEmployees()) {
-				if (idEmployee == employee.getId()) {
-					return getDeletedEvents();
-				}
-			}
-			return null;
-		}
 
 }
