@@ -4,6 +4,7 @@ import java.io.FileOutputStream;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.ComponentScan;
 
 import com.GTGH_team2.Employees.Employee;
 import com.GTGH_team2.Employees.EmployeeServices;
@@ -17,13 +18,14 @@ import com.GTGH_team2.Visitors.VisitorServices;
 import com.GTGH_team2.ApprovalRequests.ApprovalRequestServices;
 
 @SpringBootApplication
+@ComponentScan("com.GTGH_team2")
 public class EventManagementSystemApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(EventManagementSystemApplication.class, args);
 		
 //		VisitorServices visitorServices = new VisitorServices();
-//        EmployeeServices employeeServices = new EmployeeServices();
+        EmployeeServices employeeServices = new EmployeeServices();
 //        ReservationServices reservationServices = new ReservationServices(visitorServices, null);
 //        OrganizerServices organizerServices = new OrganizerServices();
 //        EventServices eventServices = new EventServices(employeeServices);
@@ -40,7 +42,7 @@ public class EventManagementSystemApplication {
 //		employeeServices.addEmployee(new Employee(2,"Henry","Oakley", "oakleyhenry@nomail.com"));
 //		employeeServices.addEmployee(new Employee(3,"Shannon","Ramirez", "shanramirez@nomail.com"));
 //		
-//		Organizer org1 = new Organizer("111654321","Nikki","Ioannou","Computer Scientist");
+		Organizer org1 = new Organizer("111654321","Nikki","Ioannou","Computer Scientist");
 //		organizerServices.addOrganizer(org1);
 //		Organizer org2 = new Organizer("111654321","Maria","Papadopoulou","Computer Scientist");
 //		organizerServices.addOrganizer(org2);
@@ -59,6 +61,8 @@ public class EventManagementSystemApplication {
 //		eventServices.addEvent(new Event("Christmas Bazaar","Christmas Event","You can either sell objects or buy objects for charity","Athens",500,"Friday","December","2025",5,30,"5:30",org1,"Approved"));
 //	    
 //	
+		EventServices eventServices = new EventServices(employeeServices);
+		eventServices.addEvent(new Event("Christmas Bazaar","Christmas Event","You can either sell objects or buy objects for charity","Athens",500,22,12,2025,5,30,"5:30",org1.getId()));
 		
 	}
 

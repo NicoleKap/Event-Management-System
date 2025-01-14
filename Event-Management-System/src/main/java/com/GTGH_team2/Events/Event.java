@@ -1,6 +1,7 @@
 package com.GTGH_team2.Events;
 
 import java.time.LocalDate;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -12,8 +13,8 @@ public class Event {
 	@Autowired
 	OrganizerServices organizerServices;
 	
-	private static int nextId = 1; // Initializing the counter for auto-uncrementing IDs
-	private int id;
+	private static AtomicInteger id_generator = new AtomicInteger(1);
+	private Integer id;
     private String title;
     private String theme;
     private String description;
@@ -30,7 +31,7 @@ public class Event {
     
     private static LocalDate date = LocalDate.of(year,month,day);
 
-    public Event(String title, String theme, String description, String location, Integer maxCapacity, Integer day, Integer month, Integer year, Integer hour, Integer minutes, String duration,Integer idOrganizer, String status) {
+    public Event(String title, String theme, String description, String location, Integer maxCapacity, Integer day, Integer month, Integer year, Integer hour, Integer minutes, String duration,Integer idOrganizer) {
         this.title = title;
         this.theme = theme;
         this.description = description;
@@ -43,8 +44,8 @@ public class Event {
         this.minutes = minutes;
         this.duration = duration;
         this.organizer = organizerServices.findOrganizerById(idOrganizer);
-        this.status = status;
-        this.id = nextId;
+        this.status = "Pending";
+        this.id = id_generator.getAndIncrement();
         
     }
    

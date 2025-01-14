@@ -3,6 +3,7 @@ package com.GTGH_team2.Events;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.GTGH_team2.Employees.Employee;
 import com.GTGH_team2.Employees.EmployeeServices;
@@ -11,7 +12,7 @@ import com.GTGH_team2.Reservations.ReservationServices;
 import com.GTGH_team2.Visitors.Visitor;
 import com.GTGH_team2.Visitors.VisitorServices;
 
-
+@Service
 public class EventServices {
 
 	private List<Event> allEvents = new ArrayList<>();
