@@ -35,13 +35,7 @@ public class ApprovalRequestServices {
 
 	DateTimeFormatter formatter= DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss a");
 
-    
-	public ApprovalRequestServices(OrganizerServices organizerServices, EmployeeServices employeeServices,
-			EventServices eventServices) {
-		this.organizerServices = organizerServices;
-		this.employeeServices = employeeServices;
-		this.eventServices = eventServices;
-	}
+
 
 	// This method creates and adds an Approval Request to the approvalRequests list
 	public List<ApprovalRequest> addApprovalRequest(String type, Event event, Organizer organizer,String comments) {

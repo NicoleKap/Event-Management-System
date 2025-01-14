@@ -15,6 +15,9 @@ import com.GTGH_team2.Organizers.OrganizerServices;
 import com.GTGH_team2.Reservations.ReservationServices;
 import com.GTGH_team2.Visitors.Visitor;
 import com.GTGH_team2.Visitors.VisitorServices;
+
+import ch.qos.logback.classic.net.LoggingEventPreSerializationTransformer;
+
 import com.GTGH_team2.ApprovalRequests.ApprovalRequestServices;
 
 @SpringBootApplication
@@ -27,7 +30,7 @@ public class EventManagementSystemApplication {
 //		VisitorServices visitorServices = new VisitorServices();
         EmployeeServices employeeServices = new EmployeeServices();
 //        ReservationServices reservationServices = new ReservationServices(visitorServices, null);
-//        OrganizerServices organizerServices = new OrganizerServices();
+        OrganizerServices organizerServices = new OrganizerServices();
 //        EventServices eventServices = new EventServices(employeeServices);
 //        ApprovalRequestServices approvalRequestServices = new ApprovalRequestServices(organizerServices,  employeeServices, eventServices);
         
@@ -43,7 +46,9 @@ public class EventManagementSystemApplication {
 //		employeeServices.addEmployee(new Employee(3,"Shannon","Ramirez", "shanramirez@nomail.com"));
 //		
 		Organizer org1 = new Organizer("111654321","Nikki","Ioannou","Computer Scientist");
-//		organizerServices.addOrganizer(org1);
+	
+		organizerServices.addOrganizer(org1);
+		System.out.println(organizerServices.getOrganizers());
 //		Organizer org2 = new Organizer("111654321","Maria","Papadopoulou","Computer Scientist");
 //		organizerServices.addOrganizer(org2);
 //		Organizer org3 = new Organizer("111654321","Nikki","Ioannou","Computer Scientist");
@@ -60,10 +65,10 @@ public class EventManagementSystemApplication {
 //		eventServices.addEvent(new Event("Christmas Bazaar","Christmas Event","You can either sell objects or buy objects for charity","Athens",500,"Friday","December","2025",5,30,"5:30",org1,"Approved"));
 //		eventServices.addEvent(new Event("Christmas Bazaar","Christmas Event","You can either sell objects or buy objects for charity","Athens",500,"Friday","December","2025",5,30,"5:30",org1,"Approved"));
 //	    
-//	
-		EventServices eventServices = new EventServices(employeeServices);
-		eventServices.addEvent(new Event("Christmas Bazaar","Christmas Event","You can either sell objects or buy objects for charity","Athens",500,22,12,2025,5,30,"5:30",org1.getId()));
 		
+    	EventServices eventServices = new EventServices();
+		eventServices.addEvent("Christmas Bazaar","Christmas Event","You can either sell objects or buy objects for charity","Athens",500,22,12,2025,5,30,"5:30",org1.getId());
+//		System.out.println(eventServices.getAllEvents());
 	}
 
 }

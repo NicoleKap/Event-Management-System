@@ -23,7 +23,7 @@ public class Organizer {
     }
 
     public Integer getId() {
-		return id;
+		return 1;
 	}
 
 	public void setId(int id) {
