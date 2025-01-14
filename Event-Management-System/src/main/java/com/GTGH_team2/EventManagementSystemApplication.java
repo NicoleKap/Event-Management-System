@@ -22,18 +22,18 @@ public class EventManagementSystemApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(EventManagementSystemApplication.class, args);
 		
-//		VisitorServices visitorServices = new VisitorServices();
+	VisitorServices visitorServices = new VisitorServices();
 //        EmployeeServices employeeServices = new EmployeeServices();
 //        ReservationServices reservationServices = new ReservationServices(visitorServices, null);
 //        OrganizerServices organizerServices = new OrganizerServices();
 //        EventServices eventServices = new EventServices(employeeServices);
 //        ApprovalRequestServices approvalRequestServices = new ApprovalRequestServices(organizerServices,  employeeServices, eventServices);
         
-//        visitorServices.addVisitor(new Visitor(1, "John", "A", "johnA@gmail.com"));
-//        visitorServices.addVisitor(new Visitor(2, "Jim", "B", "jimB@gmail.com"));
-//        visitorServices.addVisitor(new Visitor(3, "Mary", "C", "maryC@gmail.com"));
+        visitorServices.addVisitor(new Visitor("John", "A", "johnA@gmail.com"));
+        visitorServices.addVisitor(new Visitor( "Jim", "B", "jimB@gmail.com"));
+        visitorServices.addVisitor(new Visitor( "Mary", "C", "maryC@gmail.com"));
 
-//        visitorServices.getAllVisitors();
+       visitorServices.getAllVisitors();
 //          	
 //
 //		employeeServices.addEmployee(new Employee(1,"Daniela","Fischer", "danielafisher@nomail.com"));
