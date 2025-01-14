@@ -6,6 +6,7 @@ package com.GTGH_team2.Visitors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.GTGH_team2.Events.Event;
 import com.GTGH_team2.Reservations.ReservationServices;
 
 	@Service
@@ -32,6 +33,14 @@ import com.GTGH_team2.Reservations.ReservationServices;
 	    //teleutaios visiotr ths listas kai pairnw to od, auksanw, enas visitor diagrafetai diagrafontai kai ta reservations
 	    //2 methods delete reservations by visitor id delete reservations by event id
 		
+		
+		public Visitor findVisitorById(Integer id) {
+			for(Visitor visitor: visitors) {
+				if(visitor.getId().equals(id));
+					return visitor;
+			}
+			return null;
+		}
 	    public List<Visitor> removeVisitor(Integer id) {
 	    	visitors.removeIf(visitor -> visitor.getId() == id);
 	    	reservationServices.deleteReservationsByVisitorId(id);//remove reservations of visitor
