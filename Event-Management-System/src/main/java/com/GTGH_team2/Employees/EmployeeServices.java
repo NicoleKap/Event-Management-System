@@ -3,6 +3,8 @@ package com.GTGH_team2.Employees;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.GTGH_team2.Events.Event;
+
 
 //The EmployeeServices class handles the employees.It adds,deletes and updates the employee.
 //
@@ -11,6 +13,7 @@ public class EmployeeServices {
 	// List to store all the Employees
 	private List<Employee> employees = new ArrayList<Employee>();
 	
+	private List<Event> deletedEvents = new ArrayList<Event>();
 	
 
 	// This method adds an Employee to the employees list
@@ -53,5 +56,16 @@ public class EmployeeServices {
 		}
 		return null; 
 	}
+	
+	// This method adds a deleted event to the deleted events list
+		public List<Event> addDelEvent(Event event) {
+			deletedEvents.add(event);
+			return deletedEvents;
+		}
+	
+	// This method returns the deleted events list
+		public List<Event> getDeletedEvents() {
+			return deletedEvents;
+		}
 
 }
