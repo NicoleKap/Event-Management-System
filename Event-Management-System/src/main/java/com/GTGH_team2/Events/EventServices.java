@@ -31,12 +31,17 @@ public class EventServices {
 		this.allEvents = allEvents;
 	}
 	
+	public Boolean isValidMonth(Integer month) {
+		if((month >=1 && month <= 12))
+			return true;
+		return false;
+	}
+	
 	public Boolean isValidDay(Integer day) {
 		if(day >=1 && day <= 31)
 			return true;
 		return false;
 	}
-	
 	
 	public Boolean isValidYear(Integer year) {
 		if(Event.getDate().getYear() < year)
@@ -95,7 +100,7 @@ public class EventServices {
 	// Update an Event
 
 	public List<Event> updateEvent(Integer id, String newTitle, String newTheme, String newDescription, String newLocation,
-			Integer newMaxCapacity, String newDay, String newMonth, Integer newYear, Integer newHour, Integer newMinute,
+			Integer newMaxCapacity, Integer newDay, Integer newMonth, Integer newYear, Integer newHour, Integer newMinute,
 			String newDuration) {
 		for (Event event : allEvents) {
 			if (newTitle != null)
@@ -114,7 +119,15 @@ public class EventServices {
 						event.setDay(newDay);
 				}while (!isValidDay(newDay));
 			if (newMonth != null)
-				event.setMonth(newMonth);
+				do {
+					if(isValidDay(newMonth))
+						event.setMonth(newMonth);
+				}while (!isValidMonth(newMonth));
+			do {
+				if(isValidYear(newYear)) {
+					event.setYear(newYear);
+				}
+			}while(!isValidYear(newYear));
 			if (newYear != null)
 				event.setYear(newYear);
 			if (newHour != null)
@@ -152,14 +165,23 @@ public class EventServices {
 		return allEvents;
 	}
 	
-	public List<Event> updateDateOfEvent(Integer idEvent, String newDay, String newMonth, Integer newYear){
+	public List<Event> updateDateOfEvent(Integer idEvent, Integer newDay, Integer newMonth, Integer newYear){
 		for(Event event : allEvents) {
 			if (newDay != null)
-				event.setDay(newDay);
+				do {
+					if(isValidDay(newDay))
+						event.setDay(newDay);
+				}while (!isValidDay(newDay));
 			if (newMonth != null)
-				event.setMonth(newMonth);
-			if (newYear != null)
-				event.setYear(newYear);
+				do {
+					if(isValidDay(newMonth))
+						event.setMonth(newMonth);
+				}while (!isValidMonth(newMonth));
+			do {
+				if(isValidYear(newYear)) {
+					event.setYear(newYear);
+				}
+			}while(!isValidYear(newYear));
 		}
 		return allEvents;
 	}
