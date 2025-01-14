@@ -30,7 +30,7 @@ public class Event {
     
     private static LocalDate date = LocalDate.of(year,month,day);
 
-    public Event(String title, String theme, String description, String location, int maxCapacity, Integer day, Integer month, Integer year, Integer hour, int minutes, String duration,Integer idOrganizer, String status) {
+    public Event(String title, String theme, String description, String location, Integer maxCapacity, Integer day, Integer month, Integer year, Integer hour, Integer minutes, String duration,Integer idOrganizer, String status) {
         this.title = title;
         this.theme = theme;
         this.description = description;
