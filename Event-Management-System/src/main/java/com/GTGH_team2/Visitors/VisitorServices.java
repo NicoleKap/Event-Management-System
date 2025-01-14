@@ -29,16 +29,16 @@ import com.GTGH_team2.Reservations.ReservationServices;
 	    }
 	    
 	    
-	    //teleutaios visiotr ths listas kai pairnw to od, auksanw, enas visitor diagrafetai diagrafontai kai ta reservations
-	    //2 methods delete reservations by visitor id delete reservations by event id
+	    //TODO teleutaios visitor ths listas kai pairnw to id, auksanw 
 		
-	    public List<Visitor> removeVisitor(int id) {
+	   
+	    public List<Visitor> removeVisitor(Integer id) {
 	    	visitors.removeIf(visitor -> visitor.getId() == id);
 	    	reservationServices.deleteReservationsByVisitorId(id);//remove reservations of visitor
 	        return visitors;
 	    }
 	  
-	    public List<Visitor> updateVisitor(int id, String newName, String newSurname, String newEmail) {
+	    public List<Visitor> updateVisitor(Integer id, String newName, String newSurname, String newEmail) {
 	        for (Visitor visitor : visitors) {
 	            if (id == visitor.getId()) {
 	                if (newName != null)
@@ -52,4 +52,5 @@ import com.GTGH_team2.Reservations.ReservationServices;
 	        return visitors;
 	    }
 	    
+	    	    
 	}
