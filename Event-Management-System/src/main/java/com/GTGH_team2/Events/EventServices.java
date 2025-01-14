@@ -3,14 +3,18 @@ package com.GTGH_team2.Events;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.GTGH_team2.Employees.Employee;
 import com.GTGH_team2.Employees.EmployeeServices;
 import com.GTGH_team2.Organizers.Organizer;
 import com.GTGH_team2.Organizers.OrganizerServices;
+import com.GTGH_team2.Reservations.Reservation;
 import com.GTGH_team2.Reservations.ReservationServices;
+import com.GTGH_team2.Visitors.Visitor;
+import com.GTGH_team2.Visitors.VisitorServices;
 
-
+@Service
 public class EventServices {
 
 	private List<Event> allEvents = new ArrayList<>();
@@ -19,13 +23,11 @@ public class EventServices {
 	ReservationServices reservationServices;
 	@Autowired
 	EmployeeServices employeeServices;
-
 	@Autowired
 	OrganizerServices organizerServices;
+	@Autowired
+	VisitorServices visitorServices;
 
-	public EventServices(EmployeeServices employeeServices) {
-		this.employeeServices = employeeServices;
-	}
 
 	public List<Event> getAllEvents() {
 		return allEvents;
@@ -47,11 +49,11 @@ public class EventServices {
 		return false;
 	}
 	
-	public Boolean isValidYear(Integer year) {
-		if(Event.getDate().getYear() < year)
-			return false;
-		return true;
-	}
+//	public Boolean isValidYear(Integer year) {
+//		if(Event.getDate().getYear() < year)
+//			return false;
+//		return true;
+//	}
 
 	public List<Event> viewApprovedEvents() {
 		List<Event> approvedEvents = new ArrayList<>();
@@ -72,15 +74,21 @@ public class EventServices {
 
 	// Add an Event to the list
 
-	public void addEvent(Event event) {
-		if (!allEvents.contains(event)) { // It checks if the list contains the event given and if not the event is added 
-			allEvents.add(event);
-			System.out.println("The event " + event.getTitle() + " is added!");
-		} else {
-			System.out.println("This event already exists in the list");
+	public void addEvent(String title, String theme, String description, String location, int maxCapacity,
+			int day, int month, int year, int hour, int minutes, String duration, int organizerID) {
+		for(Organizer organizer : organizerServices.getOrganizers()) {
+			if(organizerID == organizer.getId())
+				allEvents.add(new Event(title, theme, description,location, maxCapacity, day, month, year, hour, minutes, duration, organizer));
 		}
+//		if (!allEvents.contains(event)) { // It checks if the list contains the event given and if not the event is added 
+//			allEvents.add(event);
+//			System.out.println("The event " + event.getTitle() + " is added!");
+//		} else {
+//			System.out.println("This event already exists in the list");
+//		}
 	}
 
+	
 	// Remove an Event from the list - If it is approved
 
 	public List<Event> removeEvent(Integer id) {
@@ -127,11 +135,11 @@ public class EventServices {
 					if(isValidDay(newMonth))
 						event.setMonth(newMonth);
 				}while (!isValidMonth(newMonth));
-			do {
-				if(isValidYear(newYear)) {
-					event.setYear(newYear);
-				}
-			}while(!isValidYear(newYear));
+//			do {
+////				if(isValidYear(newYear)) {
+////					event.setYear(newYear);
+////				}
+//			}while(!isValidYear(newYear));
 			if (newYear != null)
 				event.setYear(newYear);
 			if (newHour != null)
@@ -181,11 +189,11 @@ public class EventServices {
 					if(isValidDay(newMonth))
 						event.setMonth(newMonth);
 				}while (!isValidMonth(newMonth));
-			do {
-				if(isValidYear(newYear)) {
-					event.setYear(newYear);
-				}
-			}while(!isValidYear(newYear));
+//			do {
+//				if(isValidYear(newYear)) {
+//					event.setYear(newYear);
+//				}
+//			}while(!isValidYear(newYear));
 		}
 		return allEvents;
 	}
@@ -270,13 +278,32 @@ public class EventServices {
 		}
 	}
 
-	// Partcipants of a specific event
+	// Participants of a specific event
 	
-//	public void makeEvent(Integer idOrganizer, String title, ) {
-//			for(Organizer organizer : organizers) {
-//				if(idOrganizer == organizer.getId()) {
-//					addEvent)
-//				}
-//			}
-//	}
+	public List<Visitor> participantsOfAnEvent(Integer idVisitor, Event event) {
+		List<Visitor> participants = new ArrayList<>();
+		for(Visitor visitor : visitorServices.getVisitors()) {
+			if(visitor.getId() == idVisitor) {
+				if(reservationServices.visitorIsParticipant(visitor, event))
+					participants.add(visitor);
+			}			
+		}
+		return participants;	
+	}
+	
+    
+	// Booking an Event
+	// This method allows a visitor to book an event by their IDs , it checks if the
+	// reservation already exists and creates a new one if not.
+	public List<Reservation> bookingAnEvent(Integer visitorId, Integer eventId) {
+		for (Visitor visitor : visitorServices.getAllVisitors()) {
+			if (visitor.getId() == visitorId)
+				for (Event event : allEvents) {
+					if (event.getId() == eventId && reservationServices.visitorHasMadeARes(visitor,event)) {
+						reservationServices.addReservation(visitor, event);
+					}
+				}
+		}
+		return reservationServices.getReservations();
+	}
 }

@@ -1,6 +1,7 @@
 package com.GTGH_team2.Events;
 
 import java.time.LocalDate;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -12,25 +13,25 @@ public class Event {
 	@Autowired
 	OrganizerServices organizerServices;
 	
-	private static int nextId = 1; // Initializing the counter for auto-uncrementing IDs
-	private int id;
+	private static AtomicInteger id_generator = new AtomicInteger(1);
+	private Integer id;
     private String title;
     private String theme;
     private String description;
     private String location;
     private Integer maxCapacity;
-    private static Integer day;
-    private static Integer month;
-    private static Integer year;
+    private static int day;
+    private static int month;
+    private static int year;
     private int hour;
     private int minutes;
     private String duration;
     private Organizer organizer;
     private String status;
     
-    private static LocalDate date = LocalDate.of(year,month,day);
+//    private LocalDate date = LocalDate.of(year,month,day);
 
-    public Event(String title, String theme, String description, String location, Integer maxCapacity, Integer day, Integer month, Integer year, Integer hour, Integer minutes, String duration,Integer idOrganizer, String status) {
+    public Event(String title, String theme, String description, String location, Integer maxCapacity, int day, int month, int year, int hour, int minutes, String duration, Organizer organizer) {
         this.title = title;
         this.theme = theme;
         this.description = description;
@@ -42,9 +43,9 @@ public class Event {
         this.hour = hour;
         this.minutes = minutes;
         this.duration = duration;
-        this.organizer = organizerServices.findOrganizerById(idOrganizer);
-        this.status = status;
-        this.id = nextId;
+        this.organizer = organizer;
+        this.status = "Pending";
+        this.id = id_generator.getAndIncrement();
         
     }
    
@@ -164,13 +165,13 @@ public class Event {
 	}
 
 	
-    public static LocalDate getDate() {
-		return date;
-	}
+//    public static LocalDate getDate() {
+//		return date;
+//	}
 
-	public void setDate(LocalDate date) {
-		Event.date = date;
-	}
+//	public void setDate(LocalDate date) {
+//		Event.date = date;
+//	}
 
 	@Override
     public String toString() {
