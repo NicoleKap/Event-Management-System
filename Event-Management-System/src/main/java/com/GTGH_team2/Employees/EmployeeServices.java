@@ -68,5 +68,15 @@ public class EmployeeServices {
 		public List<Event> getDeletedEvents() {
 			return deletedEvents;
 		}
+		
+		// This method returns the list of the Employee's deleted events
+		public List<Event> DeletedEventsByEmployee(Integer idEmployee) {
+			for (Employee employee : getAllEmployees()) {
+				if (idEmployee == employee.getId()) {
+					return getDeletedEvents();
+				}
+			}
+			return null;
+		}
 
 }
