@@ -1,25 +1,36 @@
 package com.GTGH_team2.Events;
 
+import java.time.LocalDate;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
 import com.GTGH_team2.Organizers.Organizer;
+import com.GTGH_team2.Organizers.OrganizerServices;
 
 public class Event {
+	
+	@Autowired
+	OrganizerServices organizerServices;
+	
 	private static int nextId = 1; // Initializing the counter for auto-uncrementing IDs
-	private int id;
+	private final int id;
     private String title;
     private String theme;
     private String description;
     private String location;
-    private int maxCapacity;
-    private String day;
-    private String month;
-    private String year;
+    private Integer maxCapacity;
+    private static Integer day;
+    private static Integer month;
+    private static Integer year;
     private int hour;
     private int minutes;
     private String duration;
     private Organizer organizer;
     private String status;
+    
+    private static LocalDate date = LocalDate.of(year,month,day);
 
-    public Event(String title, String theme, String description, String location, int maxCapacity, String day, String month, String year, int hour, int minutes, String duration, String status) {
+    public Event(String title, String theme, String description, String location, Integer maxCapacity, Integer day, Integer month, Integer year, Integer hour, Integer minutes, String duration,Integer idOrganizer, String status) {
         this.title = title;
         this.theme = theme;
         this.description = description;
@@ -31,7 +42,7 @@ public class Event {
         this.hour = hour;
         this.minutes = minutes;
         this.duration = duration;
-        this.organizer = null;
+        this.organizer = organizerServices.findOrganizerById(idOrganizer);
         this.status = status;
         this.id = nextId;
         
@@ -39,7 +50,7 @@ public class Event {
    
     // Setters & Getters
 
-    public int getId() {
+    public Integer getId() {
 		return id;
 	}
     
@@ -87,28 +98,29 @@ public class Event {
 		this.maxCapacity = maxCapacity;
 	}
 
-	public String getDay() {
+	public Integer getDay() {
 		return day;
 	}
 
-	public void setDay(String day) {
+	public void setDay(Integer day) {
 		this.day = day;
+		
 	}
 
-	public String getMonth() {
+	public Integer getMonth() {
 		return month;
 	}
 
-	public void setMonth(String month) {
+	public void setMonth(Integer month) {
 		this.month = month;
 	}
 
-	public String getYear() {
+	public Integer getYear() {
 		return year;
 	}
 
-	public void setYear(String year) {
-		this.year = year;
+	public void setYear(Integer newYear) {
+		this.year = newYear;
 	}
 
 	public int getHour() {
@@ -151,7 +163,16 @@ public class Event {
 		this.status = status;
 	}
 
-    @Override
+	
+    public static LocalDate getDate() {
+		return date;
+	}
+
+	public void setDate(LocalDate date) {
+		Event.date = date;
+	}
+
+	@Override
     public String toString() {
         return  "Id: " + id +
         		"Event title: " + title  +
@@ -168,6 +189,7 @@ public class Event {
                 "\nOrganizer: " + organizer +
                 "\nStatus: " + status;
     }
+    
 	
 }
 

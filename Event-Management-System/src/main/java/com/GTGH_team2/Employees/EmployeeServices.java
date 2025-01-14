@@ -15,7 +15,8 @@ public class EmployeeServices {
 
 	// This method adds an Employee to the employees list
 	public List<Employee> addEmployee(Employee employee) {
-		employees.add(employee);
+		if(!employees.contains(employee))
+			employees.add(employee);
 		return employees;
 	}
 	
@@ -30,7 +31,7 @@ public class EmployeeServices {
 		return employees;
 	}
 	
-	// This method updates the params of an Employee
+	// This method updates the parameters of an Employee
 	public List<Employee> updateEmployee(Integer id, String newName, String newSurname, String newEmail) {
 		for (Employee employee : employees) {
 			if (id == employee.getId()) {
@@ -45,8 +46,13 @@ public class EmployeeServices {
 		return employees;
 	}
 	
-	
-	
-
+	// This returns the employee by his id
+	public Employee getEmployeeById(Integer employeeId) {
+		for (Employee employee : employees) {
+			if (employeeId == employee.getId()) 
+				return employee;
+		}
+		return null; 
+	}
 
 }
