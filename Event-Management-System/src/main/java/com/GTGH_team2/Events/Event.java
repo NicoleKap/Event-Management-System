@@ -20,18 +20,18 @@ public class Event {
     private String description;
     private String location;
     private Integer maxCapacity;
-    private static Integer day;
-    private static Integer month;
-    private static Integer year;
+    private static int day;
+    private static int month;
+    private static int year;
     private int hour;
     private int minutes;
     private String duration;
     private Organizer organizer;
     private String status;
     
-    private static LocalDate date = LocalDate.of(year,month,day);
+//    private LocalDate date = LocalDate.of(year,month,day);
 
-    public Event(String title, String theme, String description, String location, Integer maxCapacity, Integer day, Integer month, Integer year, Integer hour, Integer minutes, String duration,Integer idOrganizer) {
+    public Event(String title, String theme, String description, String location, Integer maxCapacity, int day, int month, int year, int hour, int minutes, String duration, Organizer organizer) {
         this.title = title;
         this.theme = theme;
         this.description = description;
@@ -43,7 +43,7 @@ public class Event {
         this.hour = hour;
         this.minutes = minutes;
         this.duration = duration;
-        this.organizer = organizerServices.findOrganizerById(idOrganizer);
+        this.organizer = organizer;
         this.status = "Pending";
         this.id = id_generator.getAndIncrement();
         
@@ -165,13 +165,13 @@ public class Event {
 	}
 
 	
-    public static LocalDate getDate() {
-		return date;
-	}
+//    public static LocalDate getDate() {
+//		return date;
+//	}
 
-	public void setDate(LocalDate date) {
-		Event.date = date;
-	}
+//	public void setDate(LocalDate date) {
+//		Event.date = date;
+//	}
 
 	@Override
     public String toString() {
