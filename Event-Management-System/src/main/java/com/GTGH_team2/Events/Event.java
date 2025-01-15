@@ -1,7 +1,6 @@
 package com.GTGH_team2.Events;
 
-import java.time.LocalDate;
-import java.util.concurrent.atomic.AtomicInteger;
+//import java.time.LocalDate;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -13,25 +12,23 @@ public class Event {
 	@Autowired
 	OrganizerServices organizerServices;
 	
-	private static AtomicInteger id_generator = new AtomicInteger(1);
-	private Integer id;
     private String title;
     private String theme;
     private String description;
     private String location;
     private Integer maxCapacity;
-    private static int day;
-    private static int month;
-    private static int year;
+    private static Integer day;
+    private static Integer month;
+    private static Integer year;
     private int hour;
     private int minutes;
     private String duration;
     private Organizer organizer;
     private String status;
     
-//    private LocalDate date = LocalDate.of(year,month,day);
+ //   private static LocalDate date = LocalDate.of(year,month,day);
 
-    public Event(String title, String theme, String description, String location, Integer maxCapacity, int day, int month, int year, int hour, int minutes, String duration, Organizer organizer) {
+    public Event(String title, String theme, String description, String location, Integer maxCapacity, Integer day, Integer month, Integer year, Integer hour, Integer minutes, String duration,Organizer organizer) {
         this.title = title;
         this.theme = theme;
         this.description = description;
@@ -44,8 +41,8 @@ public class Event {
         this.minutes = minutes;
         this.duration = duration;
         this.organizer = organizer;
-        this.status = "Pending";
-        this.id = id_generator.getAndIncrement();
+        this.status = "pending";
+//        this.id = nextId;
         
     }
    
@@ -168,7 +165,7 @@ public class Event {
 //    public static LocalDate getDate() {
 //		return date;
 //	}
-
+//
 //	public void setDate(LocalDate date) {
 //		Event.date = date;
 //	}
@@ -176,7 +173,7 @@ public class Event {
 	@Override
     public String toString() {
         return  "Id: " + id +
-        		"Event title: " + title  +
+        		"\nEvent title: " + title  +
                 "\nTheme: " + theme +
                 "\nDescription: " + description  +
                 "\nLocation: " + location +

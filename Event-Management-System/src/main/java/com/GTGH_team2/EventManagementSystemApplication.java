@@ -1,7 +1,5 @@
 package com.GTGH_team2;
 
-import java.io.FileOutputStream;
-
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
@@ -15,24 +13,21 @@ import com.GTGH_team2.Organizers.OrganizerServices;
 import com.GTGH_team2.Reservations.ReservationServices;
 import com.GTGH_team2.Visitors.Visitor;
 import com.GTGH_team2.Visitors.VisitorServices;
-
-import ch.qos.logback.classic.net.LoggingEventPreSerializationTransformer;
-
 import com.GTGH_team2.ApprovalRequests.ApprovalRequestServices;
 
 @SpringBootApplication
-@ComponentScan("com.GTGH_team2")
+@ComponentScan("com")
 public class EventManagementSystemApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(EventManagementSystemApplication.class, args);
 		
-//		VisitorServices visitorServices = new VisitorServices();
-        EmployeeServices employeeServices = new EmployeeServices();
-//        ReservationServices reservationServices = new ReservationServices(visitorServices, null);
-        OrganizerServices organizerServices = new OrganizerServices();
-//        EventServices eventServices = new EventServices(employeeServices);
-//        ApprovalRequestServices approvalRequestServices = new ApprovalRequestServices(organizerServices,  employeeServices, eventServices);
+		  	VisitorServices visitorServices = new VisitorServices();
+		  	EmployeeServices employeeServices = new EmployeeServices();
+//		  	ReservationServices reservationServices = new ReservationServices();
+		  	OrganizerServices organizerServices = new OrganizerServices();
+		  	EventServices eventServices = new EventServices();
+//		  	ApprovalRequestServices approvalRequestServices = new ApprovalRequestServices(organizerServices,  employeeServices, eventServices);
         
 //        visitorServices.addVisitor(new Visitor(1, "John", "A", "johnA@gmail.com"));
 //        visitorServices.addVisitor(new Visitor(2, "Jim", "B", "jimB@gmail.com"));
@@ -46,16 +41,14 @@ public class EventManagementSystemApplication {
 //		employeeServices.addEmployee(new Employee(3,"Shannon","Ramirez", "shanramirez@nomail.com"));
 //		
 		Organizer org1 = new Organizer("111654321","Nikki","Ioannou","Computer Scientist");
-	
 		organizerServices.addOrganizer(org1);
-		System.out.println(organizerServices.getOrganizers());
-//		Organizer org2 = new Organizer("111654321","Maria","Papadopoulou","Computer Scientist");
-//		organizerServices.addOrganizer(org2);
-//		Organizer org3 = new Organizer("111654321","Nikki","Ioannou","Computer Scientist");
-//		organizerServices.addOrganizer(org3);
-//		Organizer org4 = new Organizer("111654321","Nikki","Ioannou","Computer Scientist");
-//		organizerServices.addOrganizer(org4);
-//		
+		Organizer org2 = new Organizer("111654321","Maria","Papadopoulou","Computer Scientist");
+		organizerServices.addOrganizer(org2);
+		Organizer org3 = new Organizer("111654321","Nikki","Ioannou","Computer Scientist");
+		organizerServices.addOrganizer(org3);
+		Organizer org4 = new Organizer("111654321","Nikki","Ioannou","Computer Scientist");
+		organizerServices.addOrganizer(org4);
+		
 //		eventServices.addEvent(new Event("Christmas Bazaar","Christmas Event","You can either sell objects or buy objects for charity","Athens",500,"Friday","December","2025",5,30,"5:30",org1,"Approved"));
 //		eventServices.addEvent(new Event("Cinema Festival","Cinema History","Come and enjoy movies of all time","Athens",500,"Thursday","May","2025",5,30,"5:30",org1,"Approved"));
 //		eventServices.addEvent( new Event("Spring Festival","Welcome Spring","Come and enjoy the beauty of the nature with us","Patra",350,"Saturday","March","2025",12,30,"12:30",org2,"Approved"));
@@ -64,11 +57,15 @@ public class EventManagementSystemApplication {
 //		eventServices.addEvent(new Event("Christmas Bazaar","Christmas Event","You can either sell objects or buy objects for charity","Athens",500,"Friday","December","2025",5,30,"5:30",org1,"Approved"));
 //		eventServices.addEvent(new Event("Christmas Bazaar","Christmas Event","You can either sell objects or buy objects for charity","Athens",500,"Friday","December","2025",5,30,"5:30",org1,"Approved"));
 //		eventServices.addEvent(new Event("Christmas Bazaar","Christmas Event","You can either sell objects or buy objects for charity","Athens",500,"Friday","December","2025",5,30,"5:30",org1,"Approved"));
-//	    
+	    
+		Event event = new Event("Christmas Bazaar","Christmas Event","You can either sell objects or buy objects for charity","Athens",500,20,12,2025,5,30,"5:30",org1);
+		Event event2 = new Event("Spring Festival","Welcome Spring","Come and enjoy the beauty of the nature with us","Patra",350,2,3,2025,12,30,"12:30",org2);
+		eventServices.addEvent(event);
+		eventServices.addEvent(event2);
+		System.out.println(event);
+		System.out.println(organizerServices.getOrganizers());
+		System.out.println(eventServices.getAllEvents());
 		
-    	EventServices eventServices = new EventServices();
-		eventServices.addEvent("Christmas Bazaar","Christmas Event","You can either sell objects or buy objects for charity","Athens",500,22,12,2025,5,30,"5:30",org1.getId());
-//		System.out.println(eventServices.getAllEvents());
 	}
 
 }

@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 //import com.GTGH_team2.ApprovalRequests.ApprovalRequest;
 //import com.GTGH_team2.Employees.Employee;
 import com.GTGH_team2.Events.Event;
-import com.GTGH_team2.Events.EventServices;
 //import com.GTGH_team2.Organizers.Organizer;
 import com.GTGH_team2.Visitors.Visitor;
 import com.GTGH_team2.Visitors.VisitorServices;
@@ -18,11 +17,8 @@ import com.GTGH_team2.Visitors.VisitorServices;
 public class ReservationServices {
 
 	private List<Reservation> reservations = new ArrayList<Reservation>();
-	
 	@Autowired
 	VisitorServices visitorServices;
-//	@Autowired
-//	EventServices eventsServices;
 
 
 	public List<Reservation> getReservations() {
@@ -61,6 +57,7 @@ public class ReservationServices {
         }
         return  counter; 
     }
+ 
 
 	//checking if the visitor has already made a reservation for the event
 	public boolean visitorHasMadeARes(Visitor visitor, Event event) {
