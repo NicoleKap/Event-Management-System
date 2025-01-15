@@ -12,15 +12,19 @@ public class Organizer {
 
     // Constructor
 
+    public Organizer () {
+    	
+    }
+    
     public Organizer(String afm, String name, String surname, String description) {
-        this.afm = afm;
+    	this.afm = afm;
         this.name = name;
         this.surname = surname;
         this.description = description;
     }
 
     public Integer getId() {
-		return 1;
+		return id;
 	}
 
 	public void setId(int id) {

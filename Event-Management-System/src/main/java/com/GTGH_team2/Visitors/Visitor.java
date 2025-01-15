@@ -2,9 +2,6 @@ package com.GTGH_team2.Visitors;
 
 //import java.util.ArrayList;
 
-import com.GTGH_team2.Events.Event;
-import com.GTGH_team2.Reservations.Reservation;
-
 public class Visitor {
 	private Integer id;
 	private String name;
@@ -13,7 +10,6 @@ public class Visitor {
 	// private ArrayList<Reservation> reservations = new ArrayList<>();
 
 	public Visitor(String name, String surname, String email) {
-		this.id = 1;
 		this.name = name;
 		this.surname = surname;
 		this.email = email;
