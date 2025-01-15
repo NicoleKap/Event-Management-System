@@ -18,10 +18,19 @@ import org.springframework.stereotype.Service;
 	        return visitors;
 	    }
 
-	    public List<Visitor> addVisitor(Visitor visitor) {
-	        visitors.add(visitor);
-	        return visitors;
-	    }
+		public List<Visitor> addVisitor(Visitor visitor) {
+			int newId = 1;
+			if (visitors.size() > 0) {
+
+				newId = visitors.get(visitors.size() - 1).getId() + 1;
+			}
+			if (!visitors.contains(visitor)) {
+
+				visitors.add(visitor);
+				visitor.setId(newId);
+			}
+			return visitors;
+		}
 	    
 	   
 	    public List<Visitor> removeVisitor(Integer id) {
