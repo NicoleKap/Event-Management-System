@@ -17,8 +17,15 @@ public class EmployeeServices {
 
 	// This method adds an Employee to the employees list
 	public List<Employee> addEmployee(Employee employee) {
-		if(!employees.contains(employee))
+		int newId = 1;
+		if(employees.size() > 0) {
+			newId = employees.get(employees.size() - 1).getId()+1;
+		}
+		if(!employees.contains(employee)) {
 			employees.add(employee);
+			employee.setId(newId);
+		}
+			
 		return employees;
 	}
 	

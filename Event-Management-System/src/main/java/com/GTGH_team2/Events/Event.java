@@ -10,8 +10,7 @@ import com.GTGH_team2.Organizers.OrganizerServices;
 public class Event {
 	
 	@Autowired
-	//private OrganizerServices organizerServices;
-	
+	OrganizerServices organizerServices;
 	private Integer id;
     private String title;
     private String theme;
