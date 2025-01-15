@@ -59,7 +59,7 @@ public class EventManagementSystemApplication {
 //		eventServices.addEvent(new Event("Christmas Bazaar","Christmas Event","You can either sell objects or buy objects for charity","Athens",500,"Friday","December","2025",5,30,"5:30",org1,"Approved"));
 	    
 		Event event = new Event("Christmas Bazaar","Christmas Event","You can either sell objects or buy objects for charity","Athens",500,20,12,2025,5,30,"5:30",org1);
-		Event event2 = new Event("Spring Festival","Welcome Spring","Come and enjoy the beauty of the nature with us","Patra",350,2,3,2025,12,30,"12:30",org2);
+		Event event2 = new Event("Spring Festival","Welcome Spring","Come and enjoy the beauty of the nature with us","Patra",350,2,3,2025,12,30,"5:30",org2);
 		eventServices.addEvent(event);
 		eventServices.addEvent(event2);
 		System.out.println(event);
