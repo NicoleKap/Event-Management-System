@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 
+
+
 @RestController
 @RequestMapping("employees")
 public class EmployeeControllers {
@@ -30,8 +32,15 @@ public class EmployeeControllers {
 		return employeeServices.addEmployee(employee);
 	}
  	
+ 	
+ 	@PostMapping("/addMany")
+	public List<Employee> addManyEmployee(@RequestBody List<Employee> employee) {
+		return employeeServices.addEmployees(employee);
+	}
+ 	
+ 	
  	@DeleteMapping("/delete")
-	public List<Employee> deleteEmployee(@RequestParam Integer id ) {
+	public List<Employee> deleteEmployee(@RequestParam Integer id) {
 		return employeeServices.removeEmployee(id);
 	}
  	

@@ -64,4 +64,12 @@ public class EmployeeServices {
 		return null; 
 	}
 
+	public List<Employee> addEmployees(List<Employee> employeeList) {
+		for(Employee employee : employeeList){
+ 			this.addEmployee(employee);
+ 		}
+		return employees;
+	}
+
+	
 }
