@@ -65,6 +65,8 @@ public class EventManagementSystemApplication {
 		System.out.println(event);
 		System.out.println(organizerServices.getOrganizers());
 		System.out.println(eventServices.getAllEvents());
+		eventServices.removeEvent(2);
+		System.out.println(eventServices.getAllEvents());
 		
 	}
 

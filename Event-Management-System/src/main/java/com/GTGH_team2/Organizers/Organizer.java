@@ -1,8 +1,5 @@
 package com.GTGH_team2.Organizers;
 
-import java.util.ArrayList;
-import java.util.Objects;
-
 import com.GTGH_team2.Events.Event;
 
 public class Organizer {
