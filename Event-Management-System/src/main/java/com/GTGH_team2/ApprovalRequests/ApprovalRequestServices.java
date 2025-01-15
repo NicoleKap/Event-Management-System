@@ -14,6 +14,7 @@ import com.GTGH_team2.Events.Event;
 import com.GTGH_team2.Events.EventServices;
 import com.GTGH_team2.Organizers.Organizer;
 import com.GTGH_team2.Organizers.OrganizerServices;
+import com.GTGH_team2.Reservations.Reservation;
 
 //The ApprovalRequestServices class handles the requests 
 //that an organizer makes for the events. The organizer makes a request
@@ -43,7 +44,7 @@ public class ApprovalRequestServices {
 		}
 
 		approvalRequests.add(new ApprovalRequest(newId, type, event, organizer, comments));
-		
+
 	}
 
 	// This method removes an Approval Request from the approvalRequests list
@@ -137,13 +138,12 @@ public class ApprovalRequestServices {
 				Event event = eventServices.createAnEvent(title, theme, description, location, maxCapacity, day, month,
 						year, hour, minutes, duration, organizer);
 				addApprovalRequest("Add", event, organizer, comments);
-				
+
 			}
 		}
 		return approvalRequests;
 	}
-	
-	
+
 	// This method allows the Organizer to make a request to delete an Event
 	// with comments.
 	public List<ApprovalRequest> makeRequestToDelete(Integer idEvent, Integer idOrganizer, String comments) {
@@ -159,7 +159,6 @@ public class ApprovalRequestServices {
 		return approvalRequests;
 	}
 
-
 	// This method allows the Employee to accept or reject a request to add an
 	// event. updatedStatus
 	// is "Accepted" or "Rejected"
@@ -168,7 +167,6 @@ public class ApprovalRequestServices {
 		for (ApprovalRequest approvalRequest : getApprovalRequest()) {
 			if (approvalRequest.getId() == idApprovalRequest) {
 				Employee employee = employeeServices.getEmployeeById(idEmployee);
-				employee.addRequest(approvalRequest);
 				assignApprovalRequestEmployee(idApprovalRequest, idEmployee);
 				updateApprovalRequestStatus(idApprovalRequest, updatedStatus);
 				LocalDateTime time = LocalDateTime.now();
@@ -176,7 +174,7 @@ public class ApprovalRequestServices {
 				updateApprovalRequestClosedAt(idApprovalRequest, timeClosed);
 				eventServices.updateEventStatus(getEventID(idApprovalRequest), updatedStatus);
 				if (updatedStatus.equals("Accepted"))
-					updateOrganizersEvent(approvalRequest.getSubmittedBy(),approvalRequest.getEvent());
+					updateOrganizersEvent(approvalRequest.getSubmittedBy(), approvalRequest.getEvent());
 			}
 
 		}
@@ -184,7 +182,7 @@ public class ApprovalRequestServices {
 	}
 
 	private void updateOrganizersEvent(Organizer organizer, Event event) {
-		organizer.setEvents(event);
+		// organizer.setEvents(event);
 	}
 
 	// This method allows the Employee to approve or reject a request to delete an
@@ -200,7 +198,6 @@ public class ApprovalRequestServices {
 						LocalDateTime time = LocalDateTime.now();
 						String timeClosed = time.format(formatter);
 						updateApprovalRequestClosedAt(idApprovalRequest, timeClosed);
-						employee.getAllRequests().add(approvalRequest);
 						if (updatedStatus.equals("Accepted"))
 							eventServices.updateEventStatus(getEventID(idApprovalRequest), "Deleted");
 
@@ -211,20 +208,17 @@ public class ApprovalRequestServices {
 		return approvalRequests;
 	}
 
-	// Method to add each request that the employee handled to the employee's
-	// allRequests list
-	public List<Employee> addRequestForEmployee(Integer idEmployee, Integer idRequest) {
-		for (Employee employee : employeeServices.getAllEmployees()) {
-			if (idEmployee == employee.getId()) {
-				for (ApprovalRequest approvalRequest : approvalRequests) {
-					if (approvalRequest.getId() == idRequest) {
-						employee.addRequest(approvalRequest);
-					}
-				}
+	// This method returs the request that an employee has handled
+	public List<ApprovalRequest> getRequestsOfEmployee(Integer employeeId) {
+		List<ApprovalRequest> tempList = new ArrayList<>();
+		for (ApprovalRequest approvalRequest : approvalRequests) {
+			if (approvalRequest.getHandledBy().getId() == employeeId) {
+				tempList.add(approvalRequest);
 			}
 		}
-		return employeeServices.getAllEmployees();
+		return tempList;
 	}
+
 
 	// This method returns the ID of the event that is in the request
 	public Integer getEventID(Integer idApprovalRequest) {
@@ -239,7 +233,5 @@ public class ApprovalRequestServices {
 	public String toString() {
 		return "ApprovalRequestServices [approvalRequests=" + approvalRequests + "]";
 	}
-	
-	
 
 }

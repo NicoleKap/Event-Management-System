@@ -3,21 +3,18 @@ package com.GTGH_team2.Employees;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.GTGH_team2.ApprovalRequests.ApprovalRequest;
 
 public class Employee {
 	private Integer id; //id of the employee
 	private String name; //name of the employee
 	private String surname; //surname of the employee
 	private String email; //email of the employee
-	private ArrayList<ApprovalRequest> allRequests; //list of all the previous requests that the employee had
-
+	
 	// Constructor
 	public Employee(String name, String surname, String email) {
 		this.name = name;
 		this.surname = surname;
 		this.email = email;
-		this.allRequests = new ArrayList<>();
 	}
 		
 	
@@ -56,14 +53,6 @@ public class Employee {
 	}
 	
 
-	public List<ApprovalRequest> getAllRequests() {
-		return allRequests;
-	}
-
-	public void addRequest(ApprovalRequest approvalRequest) {
-		allRequests.add(approvalRequest);
-		
-	}
 
 	
 

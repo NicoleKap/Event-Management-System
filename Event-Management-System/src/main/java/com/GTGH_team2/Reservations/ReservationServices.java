@@ -102,7 +102,6 @@ public class ReservationServices {
 			}			
 		}
 		return visitorsReservations;
-		
 	}
 	
 	//Checking whether a visitor is a participant (has made a reservation)
