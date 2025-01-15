@@ -43,6 +43,13 @@ import org.springframework.stereotype.Service;
 	        }
 	        return visitors;
 	    }
+
+		public List<Visitor> addVisitors(List<Visitor> visitorList) {
+			for(Visitor visitor : visitorList) {
+				this.addVisitor(visitor);
+			}
+			return visitors;
+		}
 	    
 	    	    
 	}

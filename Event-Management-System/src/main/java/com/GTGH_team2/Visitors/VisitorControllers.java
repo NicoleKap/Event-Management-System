@@ -27,8 +27,8 @@ public class VisitorControllers {
 		}
 	 	
 	 	@PostMapping("/add")
-		public List<Visitor> addVisitor(@RequestBody Visitor visitor) {
-	 		return visitorServices.addVisitor(visitor);
+		public List<Visitor> addVisitor(@RequestBody List<Visitor> visitors) {
+	 		return visitorServices.addVisitors(visitors);
 		}
 	 	
 	 	@DeleteMapping("/remove")
