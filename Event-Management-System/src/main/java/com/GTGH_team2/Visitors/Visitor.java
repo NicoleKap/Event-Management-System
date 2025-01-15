@@ -13,7 +13,7 @@ public class Visitor {
 	// private ArrayList<Reservation> reservations = new ArrayList<>();
 
 	public Visitor(String name, String surname, String email) {
-		this.id = 1;
+		this.id = id;
 		this.name = name;
 		this.surname = surname;
 		this.email = email;
