@@ -31,7 +31,7 @@ public class VisitorControllers {
 	 		return visitorServices.addVisitor(visitor);
 		}
 	 	
-	 	@DeleteMapping("/delete")
+	 	@DeleteMapping("/remove")
 		public List<Visitor> removeVisitor(@RequestParam Integer id ) {
 	 		return visitorServices.removeVisitor(id);
 		}
