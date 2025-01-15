@@ -60,9 +60,13 @@ public class OrganizerServices {
 	// Remove an organizer from the list
 
 	public List<Organizer> removeOrganizer(Integer id) {
-		System.out.print(id);
-		organizers.removeIf(organizer -> organizer.getId().equals(id));
-		System.out.print("Success");
+		try {
+			organizers.removeIf(organizer -> organizer.getId().equals(id));
+		}catch(Exception e) {
+			System.out.println(e.getMessage());
+		}
+			
+		
 		return organizers;
 	}
 	
