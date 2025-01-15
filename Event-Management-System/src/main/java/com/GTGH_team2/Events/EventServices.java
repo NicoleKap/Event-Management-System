@@ -79,7 +79,10 @@ public class EventServices {
 		for(Organizer organizer : organizerServices.getOrganizers()) {
 			if(organizerID == organizer.getId())
 				allEvents.add(new Event(title, theme, description,location, maxCapacity, day, month, year, hour, minutes, duration, organizer));
+		System.out.println("Success!");
+		return;
 		}
+		
 //		if (!allEvents.contains(event)) { // It checks if the list contains the event given and if not the event is added 
 //			allEvents.add(event);
 //			System.out.println("The event " + event.getTitle() + " is added!");

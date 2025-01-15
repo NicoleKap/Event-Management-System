@@ -11,7 +11,7 @@ import com.GTGH_team2.Organizers.OrganizerServices;
 public class Event {
 	
 	@Autowired
-	OrganizerServices organizerServices;
+	//private OrganizerServices organizerServices;
 	
 	private static AtomicInteger id_generator = new AtomicInteger(1);
 	private Integer id;

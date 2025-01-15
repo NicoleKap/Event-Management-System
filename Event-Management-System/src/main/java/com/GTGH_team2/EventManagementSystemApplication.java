@@ -4,6 +4,7 @@ import java.io.FileOutputStream;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
 
 import com.GTGH_team2.Employees.Employee;
@@ -66,7 +67,7 @@ public class EventManagementSystemApplication {
 //		eventServices.addEvent(new Event("Christmas Bazaar","Christmas Event","You can either sell objects or buy objects for charity","Athens",500,"Friday","December","2025",5,30,"5:30",org1,"Approved"));
 //	    
 		
-    	EventServices eventServices = new EventServices();
+		EventServices eventServices = new EventServices();
 		eventServices.addEvent("Christmas Bazaar","Christmas Event","You can either sell objects or buy objects for charity","Athens",500,22,12,2025,5,30,"5:30",org1.getId());
 //		System.out.println(eventServices.getAllEvents());
 	}
