@@ -25,28 +25,39 @@ public class ReservationServices {
 		return reservations;
 	}
 
+	public void viewAllReservations() {
+		if (reservations.isEmpty()) {
+			System.out.println("There are no reservations.");
+		} else {
+			System.out.println("Reservations: ");
+			for (Reservation res : reservations) {
+				System.out.println(reservations);
+			}
+		}
+	}
+	
 	public List<Reservation> addReservation(Visitor visitor, Event event) {
 		reservations.add(new Reservation(visitor, event));
 		return reservations;
 	}
 
 	// Deletes all reservations with a specific visitor id, when a visitor is deleted, his reservations are deleted too
-	public void deleteReservationsByVisitorId(Integer visitorId) {
+	public List<Reservation>  deleteReservationsByVisitorId(Integer visitorId) {
 		reservations.removeIf(reservation -> reservation.getVisitor().getId() == visitorId); // Remove reservations
 																								// where the visitor
-																								// matches the id
-		System.out.println("All reservations for visitor with id number " + visitorId + " have been deleted!");
+		System.out.println("All reservations for visitor with id number " + visitorId + " have been deleted!"); // matches the id
+		return reservations;																							
 	}
 
 	// Deletes all reservations with a specific event id.
-	public void deleteReservationsByEventId(int eventId) {
+	public List<Reservation> deleteReservationsByEventId(int eventId) {
 		reservations.removeIf(reservation -> reservation.getEvent().getId() == eventId); // Remove reservations where
 																							// the event matches the id
 		System.out.println("All reservations for event with id number " + eventId + " have been deleted!");
+		return reservations;
 	}
 
-// Get Event Id for a reservation
-    
+// Get Event Id for a reservation  
     public Integer reservationsByEvent(Integer idReservation) {
     	Integer counter = 0;
         for (Reservation reservation : reservations) {
@@ -82,17 +93,7 @@ public class ReservationServices {
 		return reservations;
 	}
 			
-	public void viewAllReservations() {
-		if (reservations.isEmpty()) {
-			System.out.println("There are no reservations.");
-		} else {
-			System.out.println("Reservations: ");
-			for (Reservation res : reservations) {
-				System.out.println(reservations);
-			}
-		}
-	}
-	
+
 	//Checking whether a visitor is a participant (has made a reservation)
 	public boolean visitorIsParticipant(Visitor visitor, Event event) {
 		for(Reservation res: reservations) {
