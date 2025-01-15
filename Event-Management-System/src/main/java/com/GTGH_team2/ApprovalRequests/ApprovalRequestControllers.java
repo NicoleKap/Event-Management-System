@@ -14,11 +14,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.GTGH_team2.Employees.Employee;
-import com.GTGH_team2.Employees.EmployeeServices;
 import com.GTGH_team2.Events.Event;
-import com.GTGH_team2.Events.EventServices;
 import com.GTGH_team2.Organizers.Organizer;
-import com.GTGH_team2.Organizers.OrganizerServices;
 
 @RestController
 @RequestMapping("approvalRequests")

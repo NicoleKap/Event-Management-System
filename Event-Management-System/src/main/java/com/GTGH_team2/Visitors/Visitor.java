@@ -2,9 +2,6 @@ package com.GTGH_team2.Visitors;
 
 //import java.util.ArrayList;
 
-import com.GTGH_team2.Events.Event;
-import com.GTGH_team2.Reservations.Reservation;
-
 public class Visitor {
 	private Integer id;
 	private String name;

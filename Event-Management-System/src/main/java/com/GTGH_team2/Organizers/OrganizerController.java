@@ -18,36 +18,40 @@ import org.springframework.web.bind.annotation.RestController;
 //The organizer requests are created here through HTTP protocol
 
 @RestController // Set the class a REST controller
-@RequestMapping("/organizers") // The path
+@RequestMapping("organizers") // The path
 public class OrganizerController {
 
 	@Autowired 
-	OrganizerServices organizerServises; 
+	OrganizerServices organizerServices; 
 	
 	@GetMapping("/allOrganizers") // Get request for the list of organizers
 	public List<Organizer> getAllOrganizers(){
-		return organizerServises.getOrganizers();
+		return organizerServices.getOrganizers();
 	}
 	
-	@PostMapping("/addOrganizer")  // Post request for adding an organizer
+	@PostMapping("/add")  // Post request for adding an organizer
 	public List<Organizer> addOrganizer(@RequestBody Organizer organizer) {
-		organizerServises.addOrganizer(organizer);
-		return organizerServises.getOrganizers();
+		return organizerServices.addOrganizer(organizer);
+		
+	}
+	
+	@PostMapping("/addMany")  // Post request for adding an organizer
+	public List<Organizer> addOrganizer(@RequestBody List<Organizer> organizer) {
+		return organizerServices.addOrganizers(organizer);
 		
 	}
 	
 	@DeleteMapping("/deleteOrganizer") // Delete request for removing organizers
-	public List<Organizer> deleteOrganizer(@RequestParam Integer id) {
-		organizerServises.removeOrganizer(id);
-		return organizerServises.getOrganizers();
+	public List<Organizer> removeOrganizer(@RequestParam Integer id) {
+		System.out.print(id);
+		return organizerServices.removeOrganizer(id);
 		
 	}
 	
 	@PutMapping("/updateOrganizer") // Update the organizers details
 	public List<Organizer> updateOrganizer(@RequestParam Integer id,@RequestParam String afmUpdated, @RequestParam String nameUpdated,@RequestParam String surnameUpdated,@RequestParam String descriptionUpdated){
-		organizerServises.updateOrganizer(id,afmUpdated,nameUpdated,surnameUpdated,descriptionUpdated);
-		return organizerServises.getOrganizers();
+		organizerServices.updateOrganizer(id,afmUpdated,nameUpdated,surnameUpdated,descriptionUpdated);
+		return organizerServices.getOrganizers();
 	}
 }
-;
 

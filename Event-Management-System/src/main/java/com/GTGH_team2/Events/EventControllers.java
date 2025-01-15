@@ -31,8 +31,7 @@ public class EventControllers {
 	
 	@DeleteMapping("/deleteEvent")
 	public List<Event> deleteEvent(@RequestParam Integer id) {
-		eventServices.removeEvent(id);
-		return eventServices.getAllEvents();
+		return eventServices.removeEvent(id);
 	}
 	
 	@PutMapping("/updateEvent")
