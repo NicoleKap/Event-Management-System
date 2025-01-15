@@ -3,31 +3,34 @@ package com.GTGH_team2.Employees;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.GTGH_team2.ApprovalRequests.ApprovalRequest;
+
 public class Employee {
-	private String name;
-	private String surname;
-	private String email;
-	private List<String> events = new ArrayList<String>();
-	/**
-	 * @param name
-	 * @param surname
-	 * @param email
-	 */
-	
-	public Employee(String name, String surname, String email) {
+	private Integer id; //id of the employee
+	private String name; //name of the employee
+	private String surname; //surname of the employee
+	private String email; //email of the employee
+	private ArrayList<ApprovalRequest> allRequests; //list of all the previous requests that the employee had
+
+	// Constructor
+	public Employee(Integer id,String name, String surname, String email) {
+		this.id = id;
 		this.name = name;
 		this.surname = surname;
 		this.email = email;
+		this.allRequests = new ArrayList<>();
 	}
-	
 		
-	public boolean disapproveEvent(String event) {
-		return true;
-	}
 	
-	public boolean approveEvent(String event) {
-		return true;
+	public Integer getId() {
+		return id;
 	}
+
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
 
 	public String getName() {
 		return name;
@@ -52,21 +55,23 @@ public class Employee {
 	public void setEmail(String email) {
 		this.email = email;
 	}
+	
 
-	public List<String> getEvents() {
-		return events;
+	public List<ApprovalRequest> getAllRequests() {
+		return allRequests;
 	}
 
-	public void setEvents(List<String> events) {
-		this.events = events;
+	public void addRequest(ApprovalRequest approvalRequest) {
+		allRequests.add(approvalRequest);
+		
 	}
 
 	@Override
 	public String toString() {
-		return "Employee [name=" + name + ", surname=" + surname + ", email=" + email + ", events=" + events + "]";
+		return "Employee [id=" + id + ", name=" + name + ", surname=" + surname + ", email=" + email + ", allRequests="
+				+ allRequests + "]";
 	}
+
 	
-	
+
 }
-
-
