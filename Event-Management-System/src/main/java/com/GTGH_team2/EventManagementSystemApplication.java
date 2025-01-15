@@ -28,28 +28,29 @@ public class EventManagementSystemApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(EventManagementSystemApplication.class, args);
 		
-//		VisitorServices visitorServices = new VisitorServices();
-        EmployeeServices employeeServices = new EmployeeServices();
+		VisitorServices visitorServices = new VisitorServices();
+    //    EmployeeServices employeeServices = new EmployeeServices();
 //        ReservationServices reservationServices = new ReservationServices(visitorServices, null);
-        OrganizerServices organizerServices = new OrganizerServices();
+    //    OrganizerServices organizerServices = new OrganizerServices();
 //        EventServices eventServices = new EventServices(employeeServices);
 //        ApprovalRequestServices approvalRequestServices = new ApprovalRequestServices(organizerServices,  employeeServices, eventServices);
         
-//        visitorServices.addVisitor(new Visitor(1, "John", "A", "johnA@gmail.com"));
-//        visitorServices.addVisitor(new Visitor(2, "Jim", "B", "jimB@gmail.com"));
-//        visitorServices.addVisitor(new Visitor(3, "Mary", "C", "maryC@gmail.com"));
+        visitorServices.addVisitor(new Visitor( "John", "A", "johnA@gmail.com"));
+       visitorServices.addVisitor(new Visitor("Jim", "B", "jimB@gmail.com"));
+        visitorServices.addVisitor(new Visitor( "Mary", "C", "maryC@gmail.com"));
 
-//        visitorServices.getAllVisitors();
+     //  visitorServices.getAllVisitors();
+       System.out.println(visitorServices.getAllVisitors());
 //          	
 //
 //		employeeServices.addEmployee(new Employee(1,"Daniela","Fischer", "danielafisher@nomail.com"));
 //		employeeServices.addEmployee(new Employee(2,"Henry","Oakley", "oakleyhenry@nomail.com"));
 //		employeeServices.addEmployee(new Employee(3,"Shannon","Ramirez", "shanramirez@nomail.com"));
 //		
-		Organizer org1 = new Organizer("111654321","Nikki","Ioannou","Computer Scientist");
+	//	Organizer org1 = new Organizer("111654321","Nikki","Ioannou","Computer Scientist");
 	
-		organizerServices.addOrganizer(org1);
-		System.out.println(organizerServices.getOrganizers());
+	//	organizerServices.addOrganizer(org1);
+	//	System.out.println(organizerServices.getOrganizers());
 //		Organizer org2 = new Organizer("111654321","Maria","Papadopoulou","Computer Scientist");
 //		organizerServices.addOrganizer(org2);
 //		Organizer org3 = new Organizer("111654321","Nikki","Ioannou","Computer Scientist");
@@ -67,8 +68,8 @@ public class EventManagementSystemApplication {
 //		eventServices.addEvent(new Event("Christmas Bazaar","Christmas Event","You can either sell objects or buy objects for charity","Athens",500,"Friday","December","2025",5,30,"5:30",org1,"Approved"));
 //	    
 		
-		EventServices eventServices = new EventServices();
-		eventServices.addEvent("Christmas Bazaar","Christmas Event","You can either sell objects or buy objects for charity","Athens",500,22,12,2025,5,30,"5:30",org1.getId());
+	//	EventServices eventServices = new EventServices();
+	//	eventServices.addEvent("Christmas Bazaar","Christmas Event","You can either sell objects or buy objects for charity","Athens",500,22,12,2025,5,30,"5:30",org1.getId());
 //		System.out.println(eventServices.getAllEvents());
 	}
 

@@ -42,14 +42,14 @@ public class VisitorServices {
 		for (Visitor visitor : visitors) {
 			if (visitor.getId().equals(id))
 				;
-					return visitor;
+			return visitor;
 		}
-			return null;
+		return null;
 	}
 
 	public List<Visitor> removeVisitor(Integer id) {
 		visitors.removeIf(visitor -> visitor.getId() == id);
-//	    	reservationServices.deleteReservationsByVisitorId(id);//remove reservations of visitor
+//	    	reservationServices.deleteReservationsByVisitorId(id);//remove reservations of visitor interface kai private
 		return visitors;
 	}
 
