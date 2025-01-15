@@ -28,7 +28,7 @@ public class Event {
     private Integer minutes;
     private String duration;
     private Organizer organizer;
-    private String status;
+    private String status;// is "Accepted","Rejected","Deleted"A
     private LocalDate date;
     private LocalTime time;
 
@@ -47,7 +47,7 @@ public class Event {
         this.time = LocalTime.of(hour, minutes); // Time Format
         this.duration = duration;
         this.organizer = organizer;
-        this.status = "pending";
+        this.status = "Pending";
         
     }
    

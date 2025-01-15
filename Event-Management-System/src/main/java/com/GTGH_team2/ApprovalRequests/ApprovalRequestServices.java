@@ -24,8 +24,8 @@ import com.GTGH_team2.Organizers.OrganizerServices;
 public class ApprovalRequestServices {
 
 	// List to store all the ApprovalRequests
-	private List<ApprovalRequest> approvalRequests = new ArrayList<ApprovalRequest>();
-	
+	private List<ApprovalRequest> approvalRequests = new ArrayList<>();
+
 	@Autowired
 	OrganizerServices organizerServices;
 	@Autowired
@@ -33,22 +33,18 @@ public class ApprovalRequestServices {
 	@Autowired
 	EventServices eventServices;
 
-	DateTimeFormatter formatter= DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss a");
-
-
+	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss a");
 
 	// This method creates and adds an Approval Request to the approvalRequests list
-	public List<ApprovalRequest> addApprovalRequest(String type, Event event, Organizer organizer,String comments) {
+	public void addApprovalRequest(String type, Event event, Organizer organizer, String comments) {
 		int newId = 1;
-		if(approvalRequests.size() > 0) {
-			newId = approvalRequests.get(approvalRequests.size() - 1).getId()+1;
+		if (approvalRequests.size() > 0) {
+			newId = approvalRequests.get(approvalRequests.size() - 1).getId() + 1;
 		}
+
+		approvalRequests.add(new ApprovalRequest(newId, type, event, organizer, comments));
 		
-		approvalRequests.add(new ApprovalRequest(newId,type, event, organizer, comments));
-		return approvalRequests;
 	}
-	
-	
 
 	// This method removes an Approval Request from the approvalRequests list
 	public List<ApprovalRequest> removeApprovalRequest(Integer idRequest) {
@@ -99,58 +95,70 @@ public class ApprovalRequestServices {
 	}
 
 	// This method assigns the Employee that handles the Approval Request
-	public List<ApprovalRequest> assignApprovalRequestEmployee(int idApprovalRequest, int idEmployee) {
+	public void assignApprovalRequestEmployee(int idApprovalRequest, int idEmployee) {
 		for (ApprovalRequest approvalRequest : approvalRequests) {
 			if (idApprovalRequest == approvalRequest.getId()) {
 				for (Employee employeee : employeeServices.getAllEmployees()) {
 					if (employeee.getId() == idEmployee) {
 						approvalRequest.setHandledBy(employeee);
-
 					}
 				}
 			}
 		}
-		return approvalRequests;
 	}
 
 	// This method updates the status of the Approval Request. status is "Accepted"
 	// or "Rejected"
-	public List<ApprovalRequest> updateApprovalRequestStatus(int idApprovalRequest, String newStatus) {
+	public void updateApprovalRequestStatus(int idApprovalRequest, String newStatus) {
 		for (ApprovalRequest approvalRequest : approvalRequests) {
 			if (idApprovalRequest == approvalRequest.getId()) {
 				if (newStatus != null)
 					approvalRequest.setStatus(newStatus);
 			}
 		}
-		return approvalRequests;
 	}
 
 	// This method updates the time and date that Approval Request is closed at.
-	public List<ApprovalRequest> updateApprovalRequestClosedAt(int idApprovalRequest, String newClosedAt) {
+	public void updateApprovalRequestClosedAt(int idApprovalRequest, String newClosedAt) {
 		for (ApprovalRequest approvalRequest : approvalRequests) {
 			if (idApprovalRequest == approvalRequest.getId()) {
 				if (newClosedAt != null)
 					approvalRequest.setClosedAt(newClosedAt);
 			}
 		}
-		return approvalRequests;
 	}
 
-	// This method allows the Organizer to make a request to add or delete an Event
-	// with comments. type is "Add" or "Delete"
-	public List<ApprovalRequest> makeRequestToAddorDelete(Integer idEvent, Integer idOrganizer, String comments,
-			String type) {
+	// This method allows the Organizer to make a request to add an Event
+	public List<ApprovalRequest> makeRequestToAddAnEvent(String title, String theme, String description,
+			String location, Integer maxCapacity, Integer day, Integer month, Integer year, Integer hour,
+			Integer minutes, String duration, Integer idOrganizer, String comments) {
+		for (Organizer organizer : organizerServices.getOrganizers()) {
+			if (idOrganizer == organizer.getId()) {
+				Event event = eventServices.createAnEvent(title, theme, description, location, maxCapacity, day, month,
+						year, hour, minutes, duration, organizer);
+				addApprovalRequest("Add", event, organizer, comments);
+				
+			}
+		}
+		return approvalRequests;
+	}
+	
+	
+	// This method allows the Organizer to make a request to delete an Event
+	// with comments.
+	public List<ApprovalRequest> makeRequestToDelete(Integer idEvent, Integer idOrganizer, String comments) {
 		for (Event event : eventServices.getAllEvents()) {
 			if (event.getId() == idEvent) {
 				for (Organizer organizer : organizerServices.getOrganizers()) {
 					if (idOrganizer == organizer.getId()) {
-						addApprovalRequest(type, event, organizer, comments);
+						addApprovalRequest("Delete", event, organizer, comments);
 					}
 				}
 			}
 		}
 		return approvalRequests;
 	}
+
 
 	// This method allows the Employee to accept or reject a request to add an
 	// event. updatedStatus
@@ -160,21 +168,23 @@ public class ApprovalRequestServices {
 		for (ApprovalRequest approvalRequest : getApprovalRequest()) {
 			if (approvalRequest.getId() == idApprovalRequest) {
 				Employee employee = employeeServices.getEmployeeById(idEmployee);
-				employee.getAllRequests().add(approvalRequest);
+				employee.addRequest(approvalRequest);
 				assignApprovalRequestEmployee(idApprovalRequest, idEmployee);
 				updateApprovalRequestStatus(idApprovalRequest, updatedStatus);
-				// Creating an object of LocalDateTime class
-			    // and getting local date and time using now() method
 				LocalDateTime time = LocalDateTime.now();
-			    // Formatting LocalDateTime to string
 				String timeClosed = time.format(formatter);
 				updateApprovalRequestClosedAt(idApprovalRequest, timeClosed);
-				if (updatedStatus == "Accepted")
-					eventServices.updateEventStatus(getEventID(idApprovalRequest), updatedStatus);
+				eventServices.updateEventStatus(getEventID(idApprovalRequest), updatedStatus);
+				if (updatedStatus.equals("Accepted"))
+					updateOrganizersEvent(approvalRequest.getSubmittedBy(),approvalRequest.getEvent());
 			}
 
 		}
 		return approvalRequests;
+	}
+
+	private void updateOrganizersEvent(Organizer organizer, Event event) {
+		organizer.setEvents(event);
 	}
 
 	// This method allows the Employee to approve or reject a request to delete an
@@ -187,15 +197,12 @@ public class ApprovalRequestServices {
 					if (idEmployee == employee.getId()) {
 						assignApprovalRequestEmployee(idApprovalRequest, idEmployee);// maybe not needed QUESTION
 						updateApprovalRequestStatus(idApprovalRequest, updatedStatus);
-						// Creating an object of LocalDateTime class
-					    // and getting local date and time using now() method
 						LocalDateTime time = LocalDateTime.now();
-					    // Formatting LocalDateTime to string
 						String timeClosed = time.format(formatter);
 						updateApprovalRequestClosedAt(idApprovalRequest, timeClosed);
 						employee.getAllRequests().add(approvalRequest);
-						if (updatedStatus == "Accepted")
-							eventServices.updateEventStatus(getEventID(idApprovalRequest), updatedStatus);
+						if (updatedStatus.equals("Accepted"))
+							eventServices.updateEventStatus(getEventID(idApprovalRequest), "Deleted");
 
 					}
 				}
@@ -218,15 +225,21 @@ public class ApprovalRequestServices {
 		}
 		return employeeServices.getAllEmployees();
 	}
-	
-	//This method returns the ID of the event that is in the request
-	public Integer getEventID (Integer idApprovalRequest) {
-		for (ApprovalRequest approvalRequest : getApprovalRequest()) {
-			if (approvalRequest.getId() == idApprovalRequest) 
+
+	// This method returns the ID of the event that is in the request
+	public Integer getEventID(Integer idApprovalRequest) {
+		for (ApprovalRequest approvalRequest : approvalRequests) {
+			if (approvalRequest.getId() == idApprovalRequest)
 				return approvalRequest.getEvent().getId();
-			}
+		}
 		return null;
+	}
+
+	@Override
+	public String toString() {
+		return "ApprovalRequestServices [approvalRequests=" + approvalRequests + "]";
 	}
 	
 	
+
 }

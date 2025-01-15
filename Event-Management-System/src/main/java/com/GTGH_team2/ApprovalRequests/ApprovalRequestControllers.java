@@ -28,6 +28,10 @@ public class ApprovalRequestControllers {
 		return approvalRequestServices.getApprovalRequest();
 	}
  	
+	@GetMapping("/allPendingRequests")
+	public List<ApprovalRequest> getAllPendingRequest() {
+		return approvalRequestServices.getAllPendingRequests();
+	}
  	
  	@DeleteMapping("/delete")
 	public List<ApprovalRequest> deleteApprovalRequest(@RequestParam Integer id ) {
@@ -40,9 +44,15 @@ public class ApprovalRequestControllers {
 		return approvalRequestServices.updateApprovalRequest(id, newType, newEvent, newOrganizer, newCreatedAt, newStatus, newEmployee,newClosedAt, newComments);
 	}
  	
- 	@PostMapping("/addRequest")
-	public List<ApprovalRequest> addRequest(@RequestParam Integer idEvent, Integer idOrganizer, String comments,String type) {
-		return approvalRequestServices.makeRequestToAddorDelete(idEvent, idOrganizer, comments, type);
+ 	 	
+ 	@PostMapping("/addAnEventRequest")
+	public List<ApprovalRequest> addAnEventRequest(@RequestParam String title, String theme, String description, String location, Integer maxCapacity, Integer day, Integer month, Integer year, Integer hour, Integer minutes, String duration, Integer idOrganizer, String comments) {
+		return approvalRequestServices.makeRequestToAddAnEvent(title, theme, description, location, maxCapacity, day, month, year, hour, minutes, duration, idOrganizer, comments);
+	}
+ 	
+ 	@PostMapping("/deleteAnEventRequest")
+	public List<ApprovalRequest> deleteAnEventRequest(@RequestParam Integer idEvent, Integer idOrganizer, String comments) {
+		return approvalRequestServices.makeRequestToDelete(idEvent, idOrganizer, comments);
 	}
  	
  	@PostMapping("/handleToAdd")

@@ -35,19 +35,6 @@ public class ApprovalRequest {
 		this.comments = comments;
 	}
 	
-	
-    
-    // Getter and setter methods
-    
-	@Override
-	public String toString() {
-		return "ApprovalRequest [id=" + id + ", type=" + type + ", event=" + event + ", submittedBy=" + submittedBy
-				+ ", createdAt=" + createdAt + ", status=" + status + ", handledBy=" + handledBy + ", closedAt="
-				+ closedAt + ", comments=" + comments + "]";
-	}
-
-
-
 
 	public Integer getId() {
 		return id;

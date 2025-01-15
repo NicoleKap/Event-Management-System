@@ -92,8 +92,19 @@ public class ReservationServices {
 		}
 		return reservations;
 	}
-			
-
+    
+	//This method returs the reservations that a visitor has made
+	public List<Reservation> getReservationsByVisitor(Integer visitorId){
+		List<Reservation> visitorsReservations = new ArrayList<>();
+		for(Reservation reservation : reservations) {
+			if(reservation.getVisitor().getId()==visitorId) {
+				visitorsReservations.add(reservation);
+			}			
+		}
+		return visitorsReservations;
+		
+	}
+	
 	//Checking whether a visitor is a participant (has made a reservation)
 	public boolean visitorIsParticipant(Visitor visitor, Event event) {
 		for(Reservation res: reservations) {

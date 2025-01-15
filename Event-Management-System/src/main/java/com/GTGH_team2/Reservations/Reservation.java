@@ -9,7 +9,6 @@ public class Reservation {
 	private Integer id;
 
 	public Reservation(Visitor visitor, Event event) {
-		this.id = 1;
 		this.visitor = visitor;
 		this.event = event;
 	}

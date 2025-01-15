@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.GTGH_team2.Employees.Employee;
 import com.GTGH_team2.Employees.EmployeeServices;
+import com.GTGH_team2.Organizers.Organizer;
 import com.GTGH_team2.Organizers.OrganizerServices;
 import com.GTGH_team2.Reservations.Reservation;
 import com.GTGH_team2.Reservations.ReservationServices;
@@ -298,13 +299,20 @@ public class EventServices {
 			for (Visitor visitor : visitorServices.getAllVisitors()) {
 				if (visitor.getId() == visitorId)
 					for (Event event : allEvents) {
-						if (event.getId() == eventId && reservationServices.visitorHasMadeARes(visitor,event)) {
+						if (event.getId() == eventId && reservationServices.visitorHasMadeARes(visitor,event) && event.getStatus().equals("Accepted")) {
 							reservationServices.addReservation(visitor, event);
 						}
 					}
 			}
 			return reservationServices.getReservations();
 		}
+		
+		public Event createAnEvent(String title, String theme, String description, String location, Integer maxCapacity, Integer day, Integer month, Integer year, Integer hour, Integer minutes, String duration,Organizer organizer) {
+			Event event = new Event(title, theme, description, location, maxCapacity, day, month, year, hour, minutes, duration, organizer);
+			addEvent(event);
+			return event;
+		}
+		
 }
 
 

@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.GTGH_team2.Reservations.Reservation;
+
 @RestController // Set the class as a rest controller 
 @RequestMapping("/events") // The Path
 public class EventControllers {
@@ -40,6 +42,9 @@ public class EventControllers {
 		return eventServices.getAllEvents();
 	}
 	
-	
+	@PostMapping("/bookAnEvent")
+	public List<Reservation> bookAnEvent(@RequestParam Integer visitorId, @RequestParam Integer eventId) {
+		return eventServices.bookingAnEvent(visitorId,eventId);
+	}
 
 }
