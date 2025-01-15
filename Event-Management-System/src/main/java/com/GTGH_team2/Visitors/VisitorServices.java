@@ -3,10 +3,7 @@ package com.GTGH_team2.Visitors;
 	import java.util.ArrayList;
 	import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import com.GTGH_team2.Reservations.ReservationServices;
 
 	@Service
 	public class VisitorServices {

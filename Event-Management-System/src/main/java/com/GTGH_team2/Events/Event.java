@@ -1,5 +1,8 @@
 package com.GTGH_team2.Events;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+
 //import java.time.LocalDate;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,22 +14,23 @@ public class Event {
 	
 	@Autowired
 	OrganizerServices organizerServices;
+	
 	private Integer id;
     private String title;
     private String theme;
     private String description;
     private String location;
     private Integer maxCapacity;
-    private static Integer day;
-    private static Integer month;
-    private static Integer year;
-    private int hour;
-    private int minutes;
+    private Integer day;
+    private Integer month;
+    private Integer year;
+    private Integer hour;
+    private Integer minutes;
     private String duration;
     private Organizer organizer;
     private String status;
-    
- //   private static LocalDate date = LocalDate.of(year,month,day);
+    private LocalDate date;
+    private LocalTime time;
 
     public Event(String title, String theme, String description, String location, Integer maxCapacity, Integer day, Integer month, Integer year, Integer hour, Integer minutes, String duration,Organizer organizer) {
         this.title = title;
@@ -37,12 +41,13 @@ public class Event {
         this.day = day;
         this.month = month;
         this.year = year;
-        this.hour = hour;
+        this.date = LocalDate.of(year,month,day); // Date Format
+        this.hour = hour; 
         this.minutes = minutes;
+        this.time = LocalTime.of(hour, minutes); // Time Format
         this.duration = duration;
         this.organizer = organizer;
         this.status = "pending";
-//        this.id = nextId;
         
     }
    
@@ -178,11 +183,8 @@ public class Event {
                 "\nDescription: " + description  +
                 "\nLocation: " + location +
                 "\nMax Capacity: " + maxCapacity +
-                "\nDay: " + day +
-                "\nMonth: " + month +
-                "\nYear: " + year  +
-                "\nHour: " + hour +
-                "\nMinutes: " + minutes +
+                "\nDate: " + date +
+                "\nTime: " + time +
                 "\nDuration: " + duration  +
                 "\nOrganizer: " + organizer +
                 "\nStatus: " + status;

@@ -2,13 +2,9 @@ package com.GTGH_team2.Organizers;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
-
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
-
-import com.GTGH_team2.Events.Event;
 
 @Service
 public class OrganizerServices {
@@ -26,12 +22,22 @@ public class OrganizerServices {
 		this.organizers = organizers;
 	}
 
-	public List<Organizer> addOrganizer(Organizer organizer) {
-		organizers.add(organizer);
-		return organizers;
-		
-	}
+	// add organizer to the list & ids generation 
 	
+	public List<Organizer> addOrganizer(Organizer organizer) {
+		int newId = 1;
+		if(organizers.size() > 0) {
+			newId = organizers.get(organizers.size() - 1).getId() + 1;
+		}
+		if (!organizers.contains(organizer)) { // It checks if the list contains the event given and if not the event is added 
+			organizer.setId(newId);
+			organizers.add(organizer);
+			System.out.println("The event " + organizer.getName() + " " + organizer.getSurname()+ " is added!");
+		} else {
+			System.out.println("This event already exists in the list");
+		}
+		return organizers;
+	}
 	// Find the organizer by Id
 	
 	public Organizer findOrganizerById(Integer idOrganizer) {
