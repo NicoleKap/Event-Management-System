@@ -26,9 +26,6 @@ import com.GTGH_team2.Reservations.ReservationServices;
 	        return visitors;
 	    }
 	    
-	    
-	    //TODO teleutaios visitor ths listas kai pairnw to id, auksanw 
-		
 	   
 	    public List<Visitor> removeVisitor(Integer id) {
 	    	visitors.removeIf(visitor -> visitor.getId() == id);

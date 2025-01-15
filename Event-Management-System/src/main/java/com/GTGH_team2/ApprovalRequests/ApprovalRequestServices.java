@@ -19,11 +19,13 @@ import com.GTGH_team2.Organizers.OrganizerServices;
 //that an organizer makes for the events. The organizer makes a request
 //to add or delete an event. This request has to be approved or rejected by the 
 //employee
+
 @Service
 public class ApprovalRequestServices {
 
 	// List to store all the ApprovalRequests
 	private List<ApprovalRequest> approvalRequests = new ArrayList<ApprovalRequest>();
+	
 	@Autowired
 	OrganizerServices organizerServices;
 	@Autowired
@@ -33,13 +35,7 @@ public class ApprovalRequestServices {
 
 	DateTimeFormatter formatter= DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss a");
 
-    
-	public ApprovalRequestServices(OrganizerServices organizerServices, EmployeeServices employeeServices,
-			EventServices eventServices) {
-		this.organizerServices = organizerServices;
-		this.employeeServices = employeeServices;
-		this.eventServices = eventServices;
-	}
+
 
 	// This method creates and adds an Approval Request to the approvalRequests list
 	public List<ApprovalRequest> addApprovalRequest(String type, Event event, Organizer organizer,String comments) {

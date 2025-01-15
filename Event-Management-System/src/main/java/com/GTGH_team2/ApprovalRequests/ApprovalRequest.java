@@ -7,6 +7,7 @@ import com.GTGH_team2.Organizers.Organizer;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+
 public class ApprovalRequest {
 	private Integer id;
     private String type; // Type of the request ("Add" or "Delete")
