@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.GTGH_team2.Employees.Employee;
 import com.GTGH_team2.Employees.EmployeeServices;
+import com.GTGH_team2.Organizers.Organizer;
 import com.GTGH_team2.Organizers.OrganizerServices;
 import com.GTGH_team2.Reservations.Reservation;
 import com.GTGH_team2.Reservations.ReservationServices;
@@ -26,7 +27,6 @@ public class EventServices {
 	OrganizerServices organizerServices;
 	@Autowired
 	VisitorServices visitorServices;
-
 
 
 	public List<Event> getAllEvents() {
@@ -74,20 +74,24 @@ public class EventServices {
 
 	// Add an Event to the list
 
-	public void addEvent(Event event) {
-		int newId = 1;
-		if(allEvents.size() > 0) {
-			newId = allEvents.get(allEvents.size() - 1).getId()+1;
+	public void addEvent(String title, String theme, String description, String location, int maxCapacity,
+			int day, int month, int year, int hour, int minutes, String duration, int organizerID) {
+		for(Organizer organizer : organizerServices.getOrganizers()) {
+			if(organizerID == organizer.getId())
+				allEvents.add(new Event(title, theme, description,location, maxCapacity, day, month, year, hour, minutes, duration, organizer));
+		System.out.println("Success!");
+		return;
 		}
-		if (!allEvents.contains(event)) { // It checks if the list contains the event given and if not the event is added 
-			event.setId(newId);
-			allEvents.add(event);
-			System.out.println("The event " + event.getTitle() + " is added!");
-		} else {
-			System.out.println("This event already exists in the list");
-		}
+		
+//		if (!allEvents.contains(event)) { // It checks if the list contains the event given and if not the event is added 
+//			allEvents.add(event);
+//			System.out.println("The event " + event.getTitle() + " is added!");
+//		} else {
+//			System.out.println("This event already exists in the list");
+//		}
 	}
 
+	
 	// Remove an Event from the list - If it is approved
 
 	public List<Event> removeEvent(Integer id) {
@@ -129,15 +133,15 @@ public class EventServices {
 					if(isValidDay(newDay))
 						event.setDay(newDay);
 				}while (!isValidDay(newDay));
-			//if (newMonth != null)
-//				do {
-//					if(isValidDay(newMonth))
-//						event.setMonth(newMonth);
-//				}while (!isValidMonth(newMonth));
-			//do {
-//				if(isValidYear(newYear)) {
-			//		event.setYear(newYear);
-//				}
+			if (newMonth != null)
+				do {
+					if(isValidDay(newMonth))
+						event.setMonth(newMonth);
+				}while (!isValidMonth(newMonth));
+//			do {
+////				if(isValidYear(newYear)) {
+////					event.setYear(newYear);
+////				}
 //			}while(!isValidYear(newYear));
 			if (newYear != null)
 				event.setYear(newYear);
@@ -277,7 +281,7 @@ public class EventServices {
 		}
 	}
 
-	// Partcipants of a specific event
+	// Participants of a specific event
 	
 	public List<Visitor> participantsOfAnEvent(Integer idVisitor, Event event) {
 		List<Visitor> participants = new ArrayList<>();
@@ -290,19 +294,19 @@ public class EventServices {
 		return participants;	
 	}
 	
-	   
-		// Booking an Event
-		// This method allows a visitor to book an event by their IDs , it checks if the
-		// reservation already exists and creates a new one if not.
-		public List<Reservation> bookingAnEvent(Integer visitorId, Integer eventId) {
-			for (Visitor visitor : visitorServices.getAllVisitors()) {
-				if (visitor.getId() == visitorId)
-					for (Event event : allEvents) {
-						if (event.getId() == eventId && reservationServices.visitorHasMadeARes(visitor,event)) {
-							reservationServices.addReservation(visitor, event);
-						}
+    
+	// Booking an Event
+	// This method allows a visitor to book an event by their IDs , it checks if the
+	// reservation already exists and creates a new one if not.
+	public List<Reservation> bookingAnEvent(Integer visitorId, Integer eventId) {
+		for (Visitor visitor : visitorServices.getAllVisitors()) {
+			if (visitor.getId() == visitorId)
+				for (Event event : allEvents) {
+					if (event.getId() == eventId && reservationServices.visitorHasMadeARes(visitor,event)) {
+						reservationServices.addReservation(visitor, event);
 					}
-			}
-			return reservationServices.getReservations();
+				}
 		}
+		return reservationServices.getReservations();
+	}
 }
