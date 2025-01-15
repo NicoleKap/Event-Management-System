@@ -3,9 +3,12 @@ package com.GTGH_team2.Employees;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
 
 //The EmployeeServices class handles the employees.It adds,deletes and updates the employee.
 //
+@Service
 public class EmployeeServices {
 	
 	// List to store all the Employees

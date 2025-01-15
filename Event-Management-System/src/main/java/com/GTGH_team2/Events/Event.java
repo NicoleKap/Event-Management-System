@@ -12,8 +12,8 @@ public class Event {
 	@Autowired
 	OrganizerServices organizerServices;
 	
-	private static int nextId = 1; // Initializing the counter for auto-uncrementing IDs
-	private int id;
+//	private Integer newId; // Initializing the counter for auto-uncrementing IDs
+	private Integer id;
     private String title;
     private String theme;
     private String description;
@@ -28,9 +28,9 @@ public class Event {
     private Organizer organizer;
     private String status;
     
-    private static LocalDate date = LocalDate.of(year,month,day);
+ //   private static LocalDate date = LocalDate.of(year,month,day);
 
-    public Event(String title, String theme, String description, String location, Integer maxCapacity, Integer day, Integer month, Integer year, Integer hour, Integer minutes, String duration,Integer idOrganizer, String status) {
+    public Event(String title, String theme, String description, String location, Integer maxCapacity, Integer day, Integer month, Integer year, Integer hour, Integer minutes, String duration,Organizer organizer) {
         this.title = title;
         this.theme = theme;
         this.description = description;
@@ -42,9 +42,9 @@ public class Event {
         this.hour = hour;
         this.minutes = minutes;
         this.duration = duration;
-        this.organizer = organizerServices.findOrganizerById(idOrganizer);
-        this.status = status;
-        this.id = nextId;
+        this.organizer = organizer;
+        this.status = "pending";
+//        this.id = nextId;
         
     }
    
@@ -164,18 +164,18 @@ public class Event {
 	}
 
 	
-    public static LocalDate getDate() {
-		return date;
-	}
-
-	public void setDate(LocalDate date) {
-		Event.date = date;
-	}
+//    public static LocalDate getDate() {
+//		return date;
+//	}
+//
+//	public void setDate(LocalDate date) {
+//		Event.date = date;
+//	}
 
 	@Override
     public String toString() {
         return  "Id: " + id +
-        		"Event title: " + title  +
+        		"\nEvent title: " + title  +
                 "\nTheme: " + theme +
                 "\nDescription: " + description  +
                 "\nLocation: " + location +

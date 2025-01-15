@@ -3,15 +3,17 @@ package com.GTGH_team2.Events;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.GTGH_team2.Employees.Employee;
 import com.GTGH_team2.Employees.EmployeeServices;
 import com.GTGH_team2.Organizers.OrganizerServices;
+import com.GTGH_team2.Reservations.Reservation;
 import com.GTGH_team2.Reservations.ReservationServices;
 import com.GTGH_team2.Visitors.Visitor;
 import com.GTGH_team2.Visitors.VisitorServices;
 
-
+@Service
 public class EventServices {
 
 	private List<Event> allEvents = new ArrayList<>();
@@ -26,9 +28,6 @@ public class EventServices {
 	VisitorServices visitorServices;
 
 
-	public EventServices(EmployeeServices employeeServices) {
-		this.employeeServices = employeeServices;
-	}
 
 	public List<Event> getAllEvents() {
 		return allEvents;
@@ -50,11 +49,11 @@ public class EventServices {
 		return false;
 	}
 	
-	public Boolean isValidYear(Integer year) {
-		if(Event.getDate().getYear() < year)
-			return false;
-		return true;
-	}
+//	public Boolean isValidYear(Integer year) {
+//		if(Event.getDate().getYear() < year)
+//			return false;
+//		return true;
+//	}
 
 	public List<Event> viewApprovedEvents() {
 		List<Event> approvedEvents = new ArrayList<>();
@@ -76,7 +75,12 @@ public class EventServices {
 	// Add an Event to the list
 
 	public void addEvent(Event event) {
+		int newId = 1;
+		if(allEvents.size() > 0) {
+			newId = allEvents.get(allEvents.size() - 1).getId()+1;
+		}
 		if (!allEvents.contains(event)) { // It checks if the list contains the event given and if not the event is added 
+			event.setId(newId);
 			allEvents.add(event);
 			System.out.println("The event " + event.getTitle() + " is added!");
 		} else {
@@ -125,16 +129,16 @@ public class EventServices {
 					if(isValidDay(newDay))
 						event.setDay(newDay);
 				}while (!isValidDay(newDay));
-			if (newMonth != null)
-				do {
-					if(isValidDay(newMonth))
-						event.setMonth(newMonth);
-				}while (!isValidMonth(newMonth));
-			do {
-				if(isValidYear(newYear)) {
-					event.setYear(newYear);
-				}
-			}while(!isValidYear(newYear));
+			//if (newMonth != null)
+//				do {
+//					if(isValidDay(newMonth))
+//						event.setMonth(newMonth);
+//				}while (!isValidMonth(newMonth));
+			//do {
+//				if(isValidYear(newYear)) {
+			//		event.setYear(newYear);
+//				}
+//			}while(!isValidYear(newYear));
 			if (newYear != null)
 				event.setYear(newYear);
 			if (newHour != null)
@@ -184,11 +188,11 @@ public class EventServices {
 					if(isValidDay(newMonth))
 						event.setMonth(newMonth);
 				}while (!isValidMonth(newMonth));
-			do {
-				if(isValidYear(newYear)) {
-					event.setYear(newYear);
-				}
-			}while(!isValidYear(newYear));
+//			do {
+//				if(isValidYear(newYear)) {
+//					event.setYear(newYear);
+//				}
+//			}while(!isValidYear(newYear));
 		}
 		return allEvents;
 	}
@@ -285,4 +289,20 @@ public class EventServices {
 		}
 		return participants;	
 	}
+	
+	   
+		// Booking an Event
+		// This method allows a visitor to book an event by their IDs , it checks if the
+		// reservation already exists and creates a new one if not.
+		public List<Reservation> bookingAnEvent(Integer visitorId, Integer eventId) {
+			for (Visitor visitor : visitorServices.getAllVisitors()) {
+				if (visitor.getId() == visitorId)
+					for (Event event : allEvents) {
+						if (event.getId() == eventId && reservationServices.visitorHasMadeARes(visitor,event)) {
+							reservationServices.addReservation(visitor, event);
+						}
+					}
+			}
+			return reservationServices.getReservations();
+		}
 }

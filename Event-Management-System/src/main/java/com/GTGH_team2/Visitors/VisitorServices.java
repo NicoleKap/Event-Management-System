@@ -11,8 +11,6 @@ import com.GTGH_team2.Reservations.ReservationServices;
 	@Service
 	public class VisitorServices {
 		
-		@Autowired
-		private ReservationServices reservationServices;
 	    private List<Visitor> visitors = new ArrayList<Visitor>();
 
 	    public List<Visitor> getVisitors() {
@@ -34,7 +32,7 @@ import com.GTGH_team2.Reservations.ReservationServices;
 	   
 	    public List<Visitor> removeVisitor(Integer id) {
 	    	visitors.removeIf(visitor -> visitor.getId() == id);
-	    	reservationServices.deleteReservationsByVisitorId(id);//remove reservations of visitor
+	//    	reservationServices.deleteReservationsByVisitorId(id);//remove reservations of visitor
 	        return visitors;
 	    }
 	  
