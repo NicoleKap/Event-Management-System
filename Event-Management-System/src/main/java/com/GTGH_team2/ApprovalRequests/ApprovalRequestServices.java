@@ -39,9 +39,16 @@ public class ApprovalRequestServices {
 
 	// This method creates and adds an Approval Request to the approvalRequests list
 	public List<ApprovalRequest> addApprovalRequest(String type, Event event, Organizer organizer,String comments) {
-		approvalRequests.add(new ApprovalRequest(type, event, organizer, comments));
+		int newId = 1;
+		if(approvalRequests.size() > 0) {
+			newId = approvalRequests.get(approvalRequests.size() - 1).getId()+1;
+		}
+		
+		approvalRequests.add(new ApprovalRequest(newId,type, event, organizer, comments));
 		return approvalRequests;
 	}
+	
+	
 
 	// This method removes an Approval Request from the approvalRequests list
 	public List<ApprovalRequest> removeApprovalRequest(Integer idRequest) {

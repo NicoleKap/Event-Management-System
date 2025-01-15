@@ -22,8 +22,8 @@ public class ApprovalRequest {
     DateTimeFormatter formatter= DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss a");
     
     // Constructor
-	public ApprovalRequest(String type, Event event, Organizer submittedBy, String comments) {
-	    this.id = 1;
+	public ApprovalRequest(Integer id,String type, Event event, Organizer submittedBy, String comments) {
+	    this.id = id;
 		this.type = type;
 		this.event = event;
 		this.submittedBy = submittedBy;
