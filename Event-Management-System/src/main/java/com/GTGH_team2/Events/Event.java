@@ -11,7 +11,7 @@ public class Event {
 	
 	@Autowired
 	OrganizerServices organizerServices;
-	
+	private Integer id;
     private String title;
     private String theme;
     private String description;
