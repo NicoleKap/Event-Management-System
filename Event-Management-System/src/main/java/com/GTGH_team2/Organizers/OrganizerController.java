@@ -36,7 +36,7 @@ public class OrganizerController {
 	}
 	
 	@PostMapping("/addMany")  // Post request for adding an organizer
-	public List<Organizer> addOrganizer(@RequestBody List<Organizer> organizer) {
+	public List<Organizer> addOrganizers(@RequestBody List<Organizer> organizer) {
 		return organizerServices.addOrganizers(organizer);
 		
 	}

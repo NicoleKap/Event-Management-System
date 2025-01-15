@@ -76,9 +76,9 @@ public class OrganizerServices {
 			    if(nameUpdated != null)
 			        organizer.setName(nameUpdated);
 				if(surnameUpdated != null)
-				    organizer.setName(surnameUpdated);
+				    organizer.setSurname(surnameUpdated);
 			    if(descriptionUpdated != null)
-				    organizer.setName(descriptionUpdated);
+				    organizer.setDescription(descriptionUpdated);
 			    return organizer;
 			}	   
 		}
