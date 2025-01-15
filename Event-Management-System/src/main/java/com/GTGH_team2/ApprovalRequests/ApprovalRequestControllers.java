@@ -41,17 +41,17 @@ public class ApprovalRequestControllers {
 	}
  	
  	@PostMapping("/addRequest")
-	public List<ApprovalRequest> makeRequestToAddorDelete(@RequestBody Integer idEvent, Integer idOrganizer, String comments,String type) {
+	public List<ApprovalRequest> addRequest(@RequestParam Integer idEvent, Integer idOrganizer, String comments,String type) {
 		return approvalRequestServices.makeRequestToAddorDelete(idEvent, idOrganizer, comments, type);
 	}
  	
  	@PostMapping("/handleToAdd")
-	public List<ApprovalRequest> handleRequestToAdd(@RequestBody Integer idAppReq, Integer idEmployee, String status) {
+	public List<ApprovalRequest> handleRequestToAdd(@RequestParam Integer idAppReq, Integer idEmployee, String status) {
 		return approvalRequestServices.handleRequestToAdd(idAppReq, idEmployee, status);
 	}
  	
  	@PostMapping("/handleToDelete")
-	public List<ApprovalRequest> handleRequestToDelete(@RequestBody Integer idAppReq, Integer idEmployee, String status) {
+	public List<ApprovalRequest> handleRequestToDelete(@RequestParam Integer idAppReq, Integer idEmployee, String status) {
 		return approvalRequestServices.handleRequestToDelete(idAppReq, idEmployee, status);
 	}
 }
