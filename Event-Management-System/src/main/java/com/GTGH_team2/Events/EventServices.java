@@ -245,7 +245,7 @@ public class EventServices {
 			if (idEmployee == employee.getId()) {
 				for (Event event : allEvents) {
 					if (event.getId() == idEvent) {
-						removeEvent(idEvent);
+						event.setStatus("Deleted");
 					}
 				}
 			}

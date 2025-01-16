@@ -86,7 +86,7 @@ public class ReservationServices {
 	//checking if the visitor has already made a reservation for the event
 	public boolean visitorHasMadeARes(Visitor visitor, Event event) {
 		for(Reservation res: reservations) {
-			if(res.getVisitor() == visitor && res.getEvent()== event)
+			if(res.getVisitor() == visitor && res.getEvent() == event)
 				return false;
 		}
 		return true;
@@ -95,11 +95,11 @@ public class ReservationServices {
 	// Canceling an Event
 	// This method allows a visitor to cancel a booking for a specific event by
 	// their IDs, it checks if the reservation exists and removes it if found
-	public List<Reservation> ReservationCanceling(Integer visitorId, Integer reservationtId) {
+	public List<Reservation> ReservationCanceling(Integer visitorId, Integer eventId) {
 		for (Visitor visitor : visitorServices.getAllVisitors()) {
 			if (visitor.getId() == visitorId )
 				for (Reservation res : reservations) {
-					if (res.getId() == reservationtId && visitorHasMadeARes(visitor, res.getEvent()))
+					if(res.getEvent().equals(eventId))
 						reservations.remove(res);
 				}
 		}

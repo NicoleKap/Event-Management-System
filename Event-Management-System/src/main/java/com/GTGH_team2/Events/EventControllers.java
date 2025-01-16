@@ -65,4 +65,10 @@ public class EventControllers {
 	public List<Event> searchingEvent(@RequestParam Integer day, @RequestParam Integer month, @RequestParam Integer year, @RequestParam String theme){
 		return eventServices.searchingAnEvent(day,  month, year,  theme);
 	}
+
+
+	@PostMapping("/deleteEventByEmployee")
+	public List<Event> deleteEvent(@RequestParam Integer idEvent, @RequestParam Integer idEmployee) {
+	    return eventServices.deleteEvent(idEvent, idEmployee);
+	}
 }
