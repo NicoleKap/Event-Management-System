@@ -83,4 +83,10 @@ public class EventControllers {
 	public List<Event> deleteEvent(@RequestParam Integer idEvent, @RequestParam Integer idEmployee) {
 	    return eventServices.deleteEvent(idEvent, idEmployee);
 	}
+	
+	@PostMapping("/CancelEvent")
+	public List<Event> cancelEvent(@RequestParam Integer idEvent){
+		return eventServices.eventCancellation(idEvent);
+	}
+	
 }
