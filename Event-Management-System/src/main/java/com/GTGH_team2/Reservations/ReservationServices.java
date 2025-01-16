@@ -51,25 +51,13 @@ public class ReservationServices {
 	}
 
 	// Deletes all reservations with a specific event id.
-	public List<Reservation> deleteReservationsByEventId(int eventId) {
+	public List<Reservation> deleteReservationsByEventId(Integer eventId) {
 		reservations.removeIf(reservation -> reservation.getEvent().getId() == eventId); // Remove reservations where
 																							// the event matches the id
 		System.out.println("All reservations for event with id number " + eventId + " have been deleted!");
 		return reservations;
 	}
 
-
-	
-//    public List<Reservation> reservationsByEvent(Integer idEvent) {
-//    	List<Reservation> reservationByEvent = new ArrayList<>();
-//        for (Reservation reservation : reservations) {
-//            if (reservation.getEvent().getId().equals(idEvent)) {
-//            	reservationByEvent.add(reservation);
-//               
-//            }
-//        }
-//        return  reservationByEvent; 
-//    }
 	
 	public Integer reservationsByEvent(Integer idEvent) {
     	Integer counter = 0;
