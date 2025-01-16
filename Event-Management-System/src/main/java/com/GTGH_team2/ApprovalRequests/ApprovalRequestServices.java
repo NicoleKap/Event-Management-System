@@ -182,7 +182,7 @@ public class ApprovalRequestServices {
 	}
 
 	private void updateOrganizersEvent(Organizer organizer, Event event) {
-		// organizer.setEvents(event);
+		organizer.addEvent(event);
 	}
 
 	// This method allows the Employee to approve or reject a request to delete an
