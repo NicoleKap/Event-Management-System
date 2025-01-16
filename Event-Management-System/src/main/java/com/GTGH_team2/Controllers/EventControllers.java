@@ -63,7 +63,7 @@ public class EventControllers {
 		return eventServices.updateDescription(idEvent, newDescription);
 	}
 	
-	@PutMapping("/updateDescription")
+	@PutMapping("/updateDate")
 	public List<Event> updateDate(@RequestParam Integer idEvent, @RequestParam Integer day, Integer month, Integer year) {
 		return eventServices.updateDateOfEvent(idEvent, day,month,year);
 	}
@@ -77,5 +77,10 @@ public class EventControllers {
 	public List<Event> searchingAnEvent(Integer day, Integer month, Integer year, String theme){
 		return eventServices.searchingAnEvent(day,  month, year,  theme);
    }
-	
- }
+ 
+
+	@PostMapping("/deleteEventByEmployee")
+	public List<Event> deleteEvent(@RequestParam Integer idEvent, @RequestParam Integer idEmployee) {
+	    return eventServices.deleteEvent(idEvent, idEmployee);
+	}
+}

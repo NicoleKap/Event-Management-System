@@ -29,6 +29,11 @@ public class ReservationControllers {
 		reservationServices.viewAllReservations();
 		return reservationServices.getReservations();
 	}
+	
+	@GetMapping("/reservationsByVisitor")
+	public List<Reservation> viewReservationsByVisitor(@RequestParam Integer idVisitor) {
+		return reservationServices.getReservationsByVisitor(idVisitor);
+	}
 
 	@PostMapping("/add")
 	public List<Reservation> addReservation(@RequestBody Visitor visitor, @RequestBody Event event) {
@@ -47,8 +52,8 @@ public class ReservationControllers {
 
 	@PutMapping("/canceling")
 	public List<Reservation> ReservationCanceling(@RequestParam Integer visitorId,
-			@RequestParam Integer reservationtId) {
-		return reservationServices.ReservationCanceling(visitorId, reservationtId);
+			@RequestParam Integer eventId) {
+		return reservationServices.ReservationCanceling(visitorId, eventId);
 	}
 
 }

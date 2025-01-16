@@ -48,25 +48,13 @@ public class ReservationServices {
 	}
 
 	// Deletes all reservations with a specific event id.
-	public List<Reservation> deleteReservationsByEventId(int eventId) {
+	public List<Reservation> deleteReservationsByEventId(Integer eventId) {
 		reservations.removeIf(reservation -> reservation.getEvent().getId() == eventId); // Remove reservations where
 																							// the event matches the id
 		System.out.println("All reservations for event with id number " + eventId + " have been deleted!");
 		return reservations;
 	}
 
-
-	
-//    public List<Reservation> reservationsByEvent(Integer idEvent) {
-//    	List<Reservation> reservationByEvent = new ArrayList<>();
-//        for (Reservation reservation : reservations) {
-//            if (reservation.getEvent().getId().equals(idEvent)) {
-//            	reservationByEvent.add(reservation);
-//               
-//            }
-//        }
-//        return  reservationByEvent; 
-//    }
 	
 	public Integer reservationsByEvent(Integer idEvent) {
     	Integer counter = 0;
@@ -83,7 +71,7 @@ public class ReservationServices {
 	//checking if the visitor has already made a reservation for the event
 	public boolean visitorHasMadeARes(Visitor visitor, Event event) {
 		for(Reservation res: reservations) {
-			if(res.getVisitor() == visitor && res.getEvent()== event)
+			if(res.getVisitor() == visitor && res.getEvent() == event)
 				return false;
 		}
 		return true;
@@ -92,11 +80,11 @@ public class ReservationServices {
 	// Canceling an Event
 	// This method allows a visitor to cancel a booking for a specific event by
 	// their IDs, it checks if the reservation exists and removes it if found
-	public List<Reservation> ReservationCanceling(Integer visitorId, Integer reservationtId) {
+	public List<Reservation> ReservationCanceling(Integer visitorId, Integer eventId) {
 		for (Visitor visitor : visitorServices.getAllVisitors()) {
 			if (visitor.getId() == visitorId )
 				for (Reservation res : reservations) {
-					if (res.getId() == reservationtId && visitorHasMadeARes(visitor, res.getEvent()))
+					if(res.getEvent().equals(eventId))
 						reservations.remove(res);
 				}
 		}
