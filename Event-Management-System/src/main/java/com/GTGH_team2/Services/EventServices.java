@@ -17,7 +17,6 @@ import com.GTGH_team2.Entities.Visitor;
 public class EventServices {
 
 	private List<Event> allEvents = new ArrayList<>();
-	private List<Event> availableEvents = new ArrayList<>();
 	@Autowired
 	ReservationServices reservationServices;
 	@Autowired
@@ -160,9 +159,9 @@ public class EventServices {
 			if (event.getDay() == day)
 				eventByCriteria.add(event);
 			if (event.getMonth() == month) {
-
+				eventByCriteria.add(event);
 			}
-			eventByCriteria.add(event);
+			
 			if (event.getYear() == year)
 				eventByCriteria.add(event);
 			if (event.getTheme() == theme)
