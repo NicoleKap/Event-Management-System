@@ -185,7 +185,7 @@ public class EventServices {
 
 	public List<Event> eventCancellation(Integer idEvent) {
 		for (Event event : allEvents) {
-			if (event.getId() == idEvent) {
+			if (event.getId().equals(idEvent)) {
 				reservationServices.deleteReservationsByEventId(idEvent);
 			}
 			removeEvent(idEvent);
