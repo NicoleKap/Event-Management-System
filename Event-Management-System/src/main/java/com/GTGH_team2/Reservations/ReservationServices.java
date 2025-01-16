@@ -58,18 +58,28 @@ public class ReservationServices {
 		return reservations;
 	}
 
-// Get Event Id for a reservation 
-// It returns a list of reservations fon an event
+
 	
-    public List<Reservation> reservationsByEvent(Integer idEvent) {
-    	List<Reservation> reservationByEvent = new ArrayList<>();
+//    public List<Reservation> reservationsByEvent(Integer idEvent) {
+//    	List<Reservation> reservationByEvent = new ArrayList<>();
+//        for (Reservation reservation : reservations) {
+//            if (reservation.getEvent().getId().equals(idEvent)) {
+//            	reservationByEvent.add(reservation);
+//               
+//            }
+//        }
+//        return  reservationByEvent; 
+//    }
+	
+	public Integer reservationsByEvent(Integer idEvent) {
+    	Integer counter = 0;
         for (Reservation reservation : reservations) {
             if (reservation.getEvent().getId().equals(idEvent)) {
-            	reservationByEvent.add(reservation);
+            	counter++;
                
             }
         }
-        return  reservationByEvent; 
+        return  counter; 
     }
  
 

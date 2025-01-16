@@ -28,7 +28,7 @@ public class Event {
     private Integer minutes;
     private String duration;
     private Organizer organizer;
-    private String status;// is "Accepted","Rejected","Deleted"A
+    private String status;// is "Accepted","Rejected","Deleted"
     private LocalDate date;
     private LocalTime time;
 

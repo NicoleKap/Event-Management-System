@@ -103,7 +103,7 @@ public class OrganizerServices {
 
 	public List<Organizer> addOrganizers(List<Organizer> organizerList) {
 		
-		for(Organizer organizer : organizers) {
+		for(Organizer organizer : organizerList) {
 			this.addOrganizer(organizer);
 		}
 		return organizers;

@@ -47,8 +47,8 @@ public class EventControllers {
 	}
 	
 	@GetMapping("/getApprovedEvents") // Get all the approved events
-	public List<Event> viewApprovedEvents(){
-		return eventServices.viewApprovedEvents();
+	public List<Event> getApprovedEvents(){
+		return eventServices.getAllApprovedEvents();
 	}
 	
 	@PutMapping("/updateLocation")
@@ -59,11 +59,6 @@ public class EventControllers {
 	@PutMapping("/updateDescription")
 	public List<Event> updateDescription(@RequestParam Integer idEvent, @RequestParam String newDescription) {
 		return eventServices.updateDescription(idEvent, newDescription);
-	}
-	
-	@PutMapping("/updateStatus")
-	public List<Event> updateStatus(@RequestParam Integer idEvent, @RequestParam String newStatus){
-		return eventServices.updateEventStatus(idEvent, newStatus);
 	}
 
 	@GetMapping("/getSearchingEvents")

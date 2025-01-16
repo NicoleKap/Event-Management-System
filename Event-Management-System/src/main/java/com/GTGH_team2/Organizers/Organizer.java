@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.GTGH_team2.Events.Event;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public class Organizer {
 	
@@ -17,6 +18,7 @@ public class Organizer {
     private String name;
     private String surname;
     private String description;
+    @JsonIgnore
     private List<Event> eventsByOrganizer = new ArrayList<>();
 
     // Constructor
