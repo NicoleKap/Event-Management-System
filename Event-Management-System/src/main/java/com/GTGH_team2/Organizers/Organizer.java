@@ -1,20 +1,25 @@
 package com.GTGH_team2.Organizers;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
 import com.GTGH_team2.Events.Event;
 
 public class Organizer {
+	
+	@Autowired
+	OrganizerServices organizerServices;
+	
 	private Integer id;
     private String afm;
     private String name;
     private String surname;
     private String description;
-    private Event events;
+    private List<Event> eventsByOrganizer = new ArrayList<>();
 
     // Constructor
-
-    public Organizer () {
-    	
-    }
     
     public Organizer(String afm, String name, String surname, String description) {
     	this.afm = afm;
@@ -22,6 +27,10 @@ public class Organizer {
         this.surname = surname;
         this.description = description;
     }
+    
+    public void addEvent(Event event) {
+		this.eventsByOrganizer.add(event);
+	}
 
     public Integer getId() {
 		return id;
@@ -55,12 +64,12 @@ public class Organizer {
         this.surname = surname;
     }
 
-    public Event getEvents() {
-		return events;
+	public List<Event> getEventsByOrganizer() {
+		return eventsByOrganizer;
 	}
 
-	public void setEvents(Event events) {
-		this.events = events;
+	public void setEventsByOrganizer(List<Event> eventsByOrganizer) {
+		this.eventsByOrganizer = eventsByOrganizer;
 	}
 
 	public void setDescription(String description) {

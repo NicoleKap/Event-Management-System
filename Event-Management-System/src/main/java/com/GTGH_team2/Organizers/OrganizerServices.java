@@ -2,14 +2,21 @@ package com.GTGH_team2.Organizers;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import com.GTGH_team2.Events.Event;
+import com.GTGH_team2.Events.EventServices;
+
 @Service
 public class OrganizerServices {
 
+	@Autowired
+	EventServices eventServices;
 	
 	private List<Organizer> organizers = new ArrayList<>(); // The organizers are stored here
 	
@@ -31,13 +38,7 @@ public class OrganizerServices {
 		if(organizers.size() > 0) {
 			newId = organizers.get(organizers.size() - 1).getId() + 1;
 		}
-		organizer.setId(newId);
-//		try {
-//			organizers.add(organizer);
-//		}catch(Exception e) {
-//			System.out.println(e.getMessage());
-//		}
-		
+		organizer.setId(newId);		
 		if (!organizers.contains(organizer)) { // It checks if the list contains the event given and if not the event is added 
 			organizer.setId(newId);
 			organizers.add(organizer);
@@ -60,13 +61,8 @@ public class OrganizerServices {
 	// Remove an organizer from the list
 
 	public List<Organizer> removeOrganizer(Integer id) {
-		try {
-			organizers.removeIf(organizer -> organizer.getId().equals(id));
-		}catch(Exception e) {
-			System.out.println(e.getMessage());
-		}
+		organizers.removeIf(organizer -> organizer.getId().equals(id));
 			
-		
 		return organizers;
 	}
 	
@@ -87,18 +83,29 @@ public class OrganizerServices {
 			}	   
 		}
 		throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Organizer with id " + id + " doesn't exist"); // In case the organizer not found
+	}	
+	
+	public Organizer addEvent(Integer id, Integer eventId) {
+		 for(Organizer organizer :organizers) {
+	            if (organizer.getId() == id){
+	                for(Event event: eventServices.getAllEvents()){
+	                    if (event.getId() == eventId){
+	                    	organizer.addEvent(event);
+	                    }
+	                }
+	            return organizer;
+	        }
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Organizer with id " + id + "or event with id " + eventId + " doesn't exist");
+	    
+		 }
+		return null;
 	}
 
 	public List<Organizer> addOrganizers(List<Organizer> organizerList) {
-		for(Organizer organizer : organizerList) {
-			Integer newId = 1;
-			if(organizers.size() > 0) {
-				newId = organizers.get(organizers.size() - 1).getId() + 1;
-			}
-			organizer.setId(newId);
-			organizers.add(organizer);
+		
+		for(Organizer organizer : organizers) {
+			this.addOrganizer(organizer);
 		}
 		return organizers;
 	}
-	
 }

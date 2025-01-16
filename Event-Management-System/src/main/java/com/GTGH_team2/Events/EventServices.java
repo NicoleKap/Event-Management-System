@@ -2,13 +2,14 @@ package com.GTGH_team2.Events;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.GTGH_team2.Employees.Employee;
 import com.GTGH_team2.Employees.EmployeeServices;
 import com.GTGH_team2.Organizers.Organizer;
-import com.GTGH_team2.Organizers.OrganizerServices;
 import com.GTGH_team2.Reservations.Reservation;
 import com.GTGH_team2.Reservations.ReservationServices;
 import com.GTGH_team2.Visitors.Visitor;
@@ -18,13 +19,11 @@ import com.GTGH_team2.Visitors.VisitorServices;
 public class EventServices {
 
 	private List<Event> allEvents = new ArrayList<>();
-
+	private List<Event> availableEvents = new ArrayList<>();
 	@Autowired
 	ReservationServices reservationServices;
 	@Autowired
 	EmployeeServices employeeServices;
-	@Autowired
-	OrganizerServices organizerServices;
 	@Autowired
 	VisitorServices visitorServices;
 
@@ -38,20 +37,20 @@ public class EventServices {
 		this.allEvents = allEvents;
 	}
 	
-	public Boolean isValidMonth(Integer month) {
-		if((month >=1 && month <= 12))
-			return true;
-		return false;
-	}
-	
-	public Boolean isValidDay(Integer day) {
-		if(day >=1 && day <= 31)
-			return true;
-		return false;
-	}
-	
+//	public Boolean isValidMonth(Integer month) {
+//		if((month >=1 && month <= 12))
+//			return true;
+//		return false;
+//	}
+//	
+//	public Boolean isValidDay(Integer day) {
+//		if(day >=1 && day <= 31)
+//			return true;
+//		return false;
+//	}
+//	
 //	public Boolean isValidYear(Integer year) {
-//		if(Event.getDate().getYear() < year)
+//		if(event.getDate().getYear() < year)
 //			return false;
 //		return true;
 //	}
@@ -92,19 +91,6 @@ public class EventServices {
 	// Remove an Event from the list - If it is approved
 
 	public List<Event> removeEvent(Integer id) {
-//		Event eventToBeRemoved = null;
-//		for (Event event : allEvents) {
-//			if (event.getId() == id) {
-//				eventToBeRemoved = event;
-//				break;
-//			}
-//		}
-//		if (eventToBeRemoved != null) {
-//			allEvents.remove(eventToBeRemoved);
-//			System.out.println("The event " + eventToBeRemoved.getTitle() + " is removed successfully!");
-//		} else {
-//			System.out.println("The event does not exists in the list!");
-//		}
 		allEvents.removeIf(event -> event.getId() == id);
 		return allEvents;
 	}
@@ -125,19 +111,19 @@ public class EventServices {
 				event.setTitle(newLocation);
 			if (newMaxCapacity != null)
 				event.setMaxCapacity(newMaxCapacity);
-			if (newDay != null)
-				do {
-					if(isValidDay(newDay))
-						event.setDay(newDay);
-				}while (!isValidDay(newDay));
-			//if (newMonth != null)
+//			if (newDay != null)
+//				do {
+//					if(isValidDay(newDay))
+//						event.setDay(newDay);
+//				}while (!isValidDay(newDay));
+//			if (newMonth != null)
 //				do {
 //					if(isValidDay(newMonth))
 //						event.setMonth(newMonth);
 //				}while (!isValidMonth(newMonth));
-			//do {
+//			do {
 //				if(isValidYear(newYear)) {
-			//		event.setYear(newYear);
+//					event.setYear(newYear);
 //				}
 //			}while(!isValidYear(newYear));
 			if (newYear != null)
@@ -179,16 +165,16 @@ public class EventServices {
 	
 	public List<Event> updateDateOfEvent(Integer idEvent, Integer newDay, Integer newMonth, Integer newYear){
 		for(Event event : allEvents) {
-			if (newDay != null)
-				do {
-					if(isValidDay(newDay))
-						event.setDay(newDay);
-				}while (!isValidDay(newDay));
-			if (newMonth != null)
-				do {
-					if(isValidDay(newMonth))
-						event.setMonth(newMonth);
-				}while (!isValidMonth(newMonth));
+//			if (newDay != null)
+//				do {
+//					if(isValidDay(newDay))
+//						event.setDay(newDay);
+//				}while (!isValidDay(newDay));
+//			if (newMonth != null)
+//				do {
+//					if(isValidDay(newMonth))
+//						event.setMonth(newMonth);
+//				}while (!isValidMonth(newMonth));
 //			do {
 //				if(isValidYear(newYear)) {
 //					event.setYear(newYear);
@@ -270,12 +256,13 @@ public class EventServices {
 	
 	// A method for searching only the available events (< max capacity)
 	
-	public void searchingAvailableEvents(Integer idReservation, Integer maxCapacity) {
+	public List<Event> searchingAvailableEvents(Integer idReservation, Integer maxCapacity) {
 		List<Event> availableEvents = new ArrayList<>();
 		for(Event event : allEvents) {
-			if(reservationServices.reservationsByEvent(idReservation) < maxCapacity) 
+			if(reservationServices.reservationsByEvent(event.getId()).size() < event.getMaxCapacity()) 
 				availableEvents.add(event);
 		}
+		return availableEvents;
 	}
 
 	// Partcipants of a specific event
@@ -299,13 +286,20 @@ public class EventServices {
 			for (Visitor visitor : visitorServices.getAllVisitors()) {
 				if (visitor.getId() == visitorId)
 					for (Event event : allEvents) {
-						if (event.getId() == eventId && reservationServices.visitorHasMadeARes(visitor,event) && event.getStatus().equals("Accepted")) {
-							reservationServices.addReservation(visitor, event);
+						if(availableEvents.contains(event)) {
+							if (event.getId() == eventId && reservationServices.visitorHasMadeARes(visitor,event) && event.getStatus().equals("Accepted")) {
+								reservationServices.addReservation(visitor, event);
+				
+							}
+						}else {
+							System.out.println("This event is fully booked");
 						}
+						
 					}
 			}
 			return reservationServices.getReservations();
 		}
+		
 		
 		public Event createAnEvent(String title, String theme, String description, String location, Integer maxCapacity, Integer day, Integer month, Integer year, Integer hour, Integer minutes, String duration,Organizer organizer) {
 			Event event = new Event(title, theme, description, location, maxCapacity, day, month, year, hour, minutes, duration, organizer);
@@ -313,6 +307,38 @@ public class EventServices {
 			return event;
 		}
 		
+		// Events by organizer 
+		
+		public List<Event> getEventsByOrganizer(Integer organizerId) {
+		    return allEvents.stream()
+		                    .filter(event -> event.getOrganizer().getId().equals(organizerId))
+		                    .collect(Collectors.toList());
+		}
+		
+		
+		public void printEventDetails() {
+		    for (Event event : allEvents) {
+		        System.out.println("Event: " + event.getTitle() + "\nOrganizer: " + event.getOrganizer().getName());
+		        // Reservation List for an event
+		        List<Reservation> reservations = reservationServices.reservationsByEvent(event.getId());
+		        System.out.println("Reservation Numbers " + reservations.size());
+		    }
+		}
+
+		// Book an event by Title
+		
+		public void bookAnEventByTitle(Integer idVisitor, String title) {
+			for(Visitor visitor : visitorServices.getAllVisitors()) {
+				if(visitor.getId() == idVisitor) {
+					for(Event event : allEvents ) {
+						if(event.getTitle() == title) {
+							reservationServices.visitorHasMadeARes(visitor, event);
+						}
+					}
+				}
+			}
+		}
+	    
 }
 
 

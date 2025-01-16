@@ -38,6 +38,7 @@ public class ReservationServices {
 	
 	public List<Reservation> addReservation(Visitor visitor, Event event) {
 		reservations.add(new Reservation(visitor, event));
+		System.out.println("Booked Successfully");
 		return reservations;
 	}
 
@@ -57,16 +58,18 @@ public class ReservationServices {
 		return reservations;
 	}
 
-// Get Event Id for a reservation  
-    public Integer reservationsByEvent(Integer idReservation) {
-    	Integer counter = 0;
+// Get Event Id for a reservation 
+// It returns a list of reservations fon an event
+	
+    public List<Reservation> reservationsByEvent(Integer idEvent) {
+    	List<Reservation> reservationByEvent = new ArrayList<>();
         for (Reservation reservation : reservations) {
-            if (reservation.getId().equals(idReservation)) {
-            	counter++;
+            if (reservation.getEvent().getId().equals(idEvent)) {
+            	reservationByEvent.add(reservation);
                
             }
         }
-        return  counter; 
+        return  reservationByEvent; 
     }
  
 
