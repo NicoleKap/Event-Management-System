@@ -15,9 +15,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.GTGH_team2.Entities.Employee;
 import com.GTGH_team2.Services.EmployeeServices;
 
-
-
-
 @RestController
 @RequestMapping("employees")
 public class EmployeeControllers {

@@ -17,7 +17,6 @@ import com.GTGH_team2.Entities.Visitor;
 public class EventServices {
 
 	private List<Event> allEvents = new ArrayList<>();
-	private List<Event> availableEvents = new ArrayList<>();
 	@Autowired
 	ReservationServices reservationServices;
 	@Autowired

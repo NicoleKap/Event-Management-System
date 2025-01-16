@@ -1,8 +1,5 @@
 package com.GTGH_team2.Entities;
 
-import java.util.ArrayList;
-import java.util.List;
-
 
 public class Employee {
 	private Integer id; //id of the employee
