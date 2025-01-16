@@ -159,9 +159,9 @@ public class EventServices {
 			if (event.getDay() == day)
 				eventByCriteria.add(event);
 			if (event.getMonth() == month) {
-
+				eventByCriteria.add(event);
 			}
-			eventByCriteria.add(event);
+			
 			if (event.getYear() == year)
 				eventByCriteria.add(event);
 			if (event.getTheme() == theme)
