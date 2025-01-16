@@ -1,9 +1,11 @@
-package com.GTGH_team2.Visitors;
+package com.GTGH_team2.Services;
 
 	import java.util.ArrayList;
 	import java.util.List;
 
 import org.springframework.stereotype.Service;
+
+import com.GTGH_team2.Entities.Visitor;
 
 	@Service
 	public class VisitorServices {

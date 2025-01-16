@@ -1,7 +1,6 @@
-package com.GTGH_team2.Reservations;
+package com.GTGH_team2.Entities;
 
-import com.GTGH_team2.Events.Event;
-import com.GTGH_team2.Visitors.Visitor;
+
 
 public class Reservation {
 	private Visitor visitor;

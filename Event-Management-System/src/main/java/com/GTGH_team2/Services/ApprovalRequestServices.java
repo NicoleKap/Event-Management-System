@@ -1,4 +1,4 @@
-package com.GTGH_team2.ApprovalRequests;
+package com.GTGH_team2.Services;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -8,13 +8,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.GTGH_team2.Employees.Employee;
-import com.GTGH_team2.Employees.EmployeeServices;
-import com.GTGH_team2.Events.Event;
-import com.GTGH_team2.Events.EventServices;
-import com.GTGH_team2.Organizers.Organizer;
-import com.GTGH_team2.Organizers.OrganizerServices;
-import com.GTGH_team2.Reservations.Reservation;
+import com.GTGH_team2.Entities.ApprovalRequest;
+import com.GTGH_team2.Entities.Employee;
+import com.GTGH_team2.Entities.Event;
+import com.GTGH_team2.Entities.Organizer;
 
 //The ApprovalRequestServices class handles the requests 
 //that an organizer makes for the events. The organizer makes a request

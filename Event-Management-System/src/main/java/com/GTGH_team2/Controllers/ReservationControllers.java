@@ -1,6 +1,5 @@
-package com.GTGH_team2.Reservations;
+package com.GTGH_team2.Controllers;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,8 +12,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.GTGH_team2.Events.Event;
-import com.GTGH_team2.Visitors.Visitor;
+import com.GTGH_team2.Entities.Event;
+import com.GTGH_team2.Entities.Reservation;
+import com.GTGH_team2.Entities.Visitor;
+import com.GTGH_team2.Services.ReservationServices;
 
 @RestController
 @RequestMapping("reservations")

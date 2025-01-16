@@ -1,4 +1,4 @@
-package com.GTGH_team2.Events;
+package com.GTGH_team2.Entities;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -7,8 +7,7 @@ import java.time.LocalTime;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.GTGH_team2.Organizers.Organizer;
-import com.GTGH_team2.Organizers.OrganizerServices;
+import com.GTGH_team2.Services.OrganizerServices;
 
 public class Event {
 	

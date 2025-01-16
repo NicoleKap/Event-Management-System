@@ -1,11 +1,11 @@
-package com.GTGH_team2.Organizers;
+package com.GTGH_team2.Entities;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.GTGH_team2.Events.Event;
+import com.GTGH_team2.Services.OrganizerServices;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public class Organizer {
