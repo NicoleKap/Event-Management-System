@@ -55,6 +55,8 @@ public class EventServices {
 //		return true;
 //	}
 
+	// View the approved events
+	
 	public List<Event> viewApprovedEvents() {
 		List<Event> approvedEvents = new ArrayList<>();
 		System.out.println("------------------------------------------------------------------------");
@@ -63,7 +65,7 @@ public class EventServices {
 		}else {
 			System.out.println("Approved Events");
 			for (Event event : allEvents) {
-				if(event.getStatus() == "Approved")
+				if(event.getStatus() == "Accepted")
 					approvedEvents.add(event);
 					System.out.println(event + " ");
 			}

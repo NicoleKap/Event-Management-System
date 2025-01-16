@@ -39,5 +39,7 @@ public class VisitorControllers {
 		public List<Visitor> updateVisitor(@RequestParam Integer id, @RequestParam(required = false) String newName, @RequestParam(required = false) String newSurname, @RequestParam(required = false) String newEmail){
 	 		return visitorServices.updateVisitor(id, newName, newSurname, newEmail);
 		}
+	 	
+	 	
 }
 	 	
