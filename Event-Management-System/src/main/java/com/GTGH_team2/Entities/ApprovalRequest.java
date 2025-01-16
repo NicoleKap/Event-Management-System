@@ -1,8 +1,4 @@
-package com.GTGH_team2.ApprovalRequests;
-
-import com.GTGH_team2.Employees.Employee;
-import com.GTGH_team2.Events.Event;
-import com.GTGH_team2.Organizers.Organizer;
+package com.GTGH_team2.Entities;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;

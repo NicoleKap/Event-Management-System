@@ -1,4 +1,4 @@
-package com.GTGH_team2.Organizers;
+package com.GTGH_team2.Controllers;
 
 import java.util.List;
 
@@ -11,6 +11,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.GTGH_team2.Entities.Organizer;
+import com.GTGH_team2.Services.OrganizerServices;
 
 
 

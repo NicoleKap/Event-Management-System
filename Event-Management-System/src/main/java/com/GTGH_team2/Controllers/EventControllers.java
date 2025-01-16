@@ -1,4 +1,4 @@
-package com.GTGH_team2.Events;
+package com.GTGH_team2.Controllers;
 
 import java.util.List;
 
@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.GTGH_team2.Reservations.Reservation;
+import com.GTGH_team2.Entities.Event;
+import com.GTGH_team2.Entities.Reservation;
+import com.GTGH_team2.Services.EventServices;
 
 @RestController // Set the class as a rest controller 
 @RequestMapping("/events") // The Path
@@ -60,12 +62,22 @@ public class EventControllers {
 	public List<Event> updateDescription(@RequestParam Integer idEvent, @RequestParam String newDescription) {
 		return eventServices.updateDescription(idEvent, newDescription);
 	}
+	
+	@PutMapping("/updateDate")
+	public List<Event> updateDate(@RequestParam Integer idEvent, @RequestParam Integer day, Integer month, Integer year) {
+		return eventServices.updateDateOfEvent(idEvent, day,month,year);
+	}
 
 	@GetMapping("/getSearchingEvents")
 	public List<Event> searchingEvent(@RequestParam Integer day, @RequestParam Integer month, @RequestParam Integer year, @RequestParam String theme){
 		return eventServices.searchingAnEvent(day,  month, year,  theme);
 	}
-
+	
+	@GetMapping("/getSearchingCriteria")
+	public List<Event> searchingAnEvent(Integer day, Integer month, Integer year, String theme){
+		return eventServices.searchingAnEvent(day,  month, year,  theme);
+   }
+ 
 
 	@PostMapping("/deleteEventByEmployee")
 	public List<Event> deleteEvent(@RequestParam Integer idEvent, @RequestParam Integer idEmployee) {

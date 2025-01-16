@@ -1,4 +1,4 @@
-package com.GTGH_team2.Events;
+package com.GTGH_team2.Services;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,20 +7,16 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.GTGH_team2.ApprovalRequests.ApprovalRequest;
-import com.GTGH_team2.Employees.Employee;
-import com.GTGH_team2.Employees.EmployeeServices;
-import com.GTGH_team2.Organizers.Organizer;
-import com.GTGH_team2.Reservations.Reservation;
-import com.GTGH_team2.Reservations.ReservationServices;
-import com.GTGH_team2.Visitors.Visitor;
-import com.GTGH_team2.Visitors.VisitorServices;
+import com.GTGH_team2.Entities.Employee;
+import com.GTGH_team2.Entities.Event;
+import com.GTGH_team2.Entities.Organizer;
+import com.GTGH_team2.Entities.Reservation;
+import com.GTGH_team2.Entities.Visitor;
 
 @Service
 public class EventServices {
 
 	private List<Event> allEvents = new ArrayList<>();
-	private List<Event> availableEvents = new ArrayList<>();
 	@Autowired
 	ReservationServices reservationServices;
 	@Autowired
@@ -35,24 +31,6 @@ public class EventServices {
 	public void setAllEvents(ArrayList<Event> allEvents) {
 		this.allEvents = allEvents;
 	}
-
-//	public Boolean isValidMonth(Integer month) {
-//		if((month >=1 && month <= 12))
-//			return true;
-//		return false;
-//	}
-//	
-//	public Boolean isValidDay(Integer day) {
-//		if(day >=1 && day <= 31)
-//			return true;
-//		return false;
-//	}
-//	
-//	public Boolean isValidYear(Integer year) {
-//		if(event.getDate().getYear() < year)
-//			return false;
-//		return true;
-//	}
 
 	// This method returns only the pending requests from the approvalRequests list
 		public List<Event> getAllApprovedEvents() {
@@ -106,21 +84,10 @@ public class EventServices {
 				event.setTitle(newLocation);
 			if (newMaxCapacity != null)
 				event.setMaxCapacity(newMaxCapacity);
-//			if (newDay != null)
-//				do {
-//					if(isValidDay(newDay))
-//						event.setDay(newDay);
-//				}while (!isValidDay(newDay));
-//			if (newMonth != null)
-//				do {
-//					if(isValidDay(newMonth))
-//						event.setMonth(newMonth);
-//				}while (!isValidMonth(newMonth));
-//			do {
-//				if(isValidYear(newYear)) {
-//					event.setYear(newYear);
-//				}
-//			}while(!isValidYear(newYear));
+			if (newDay != null)
+				event.setDay(newDay);	
+			if (newMonth != null)
+				event.setMonth(newMonth);
 			if (newYear != null)
 				event.setYear(newYear);
 			if (newHour != null)
@@ -160,26 +127,15 @@ public class EventServices {
 
 	public List<Event> updateDateOfEvent(Integer idEvent, Integer newDay, Integer newMonth, Integer newYear) {
 		for (Event event : allEvents) {
-//			if (newDay != null)
-//				do {
-//					if(isValidDay(newDay))
-//						event.setDay(newDay);
-//				}while (!isValidDay(newDay));
-//			if (newMonth != null)
-//				do {
-//					if(isValidDay(newMonth))
-//						event.setMonth(newMonth);
-//				}while (!isValidMonth(newMonth));
-//			do {
-//				if(isValidYear(newYear)) {
-//					event.setYear(newYear);
-//				}
-//			}while(!isValidYear(newYear));
+			if (newDay != null)
+				event.setDay(newDay);	
+			if (newMonth != null)
+				event.setMonth(newMonth);
+			if (newYear != null)
+				event.setYear(newYear);
 		}
 		return allEvents;
 	}
-
-	// Update Hour & Minutes Method
 
 	// Update Event Status
 
@@ -203,9 +159,9 @@ public class EventServices {
 			if (event.getDay() == day)
 				eventByCriteria.add(event);
 			if (event.getMonth() == month) {
-
+				eventByCriteria.add(event);
 			}
-			eventByCriteria.add(event);
+			
 			if (event.getYear() == year)
 				eventByCriteria.add(event);
 			if (event.getTheme() == theme)
@@ -302,15 +258,6 @@ public class EventServices {
 				.collect(Collectors.toList());
 	}
 
-//	public void printEventDetails() {
-//		for (Event event : allEvents) {
-//			System.out.println("Event: " + event.getTitle() + "\nOrganizer: " + event.getOrganizer().getName());
-//			// Reservation List for an event
-//			List<Reservation> reservations = reservationServices.reservationsByEvent(event.getId());
-//			System.out.println("Reservation Numbers " + reservations.size());
-//		}
-//	}
-
 	// Book an event by Title
 
 	public void bookAnEventByTitle(Integer idVisitor, String title) {
@@ -318,7 +265,7 @@ public class EventServices {
 			if (visitor.getId() == idVisitor) {
 				for (Event event : allEvents) {
 					if (event.getTitle() == title) {
-						reservationServices.visitorHasMadeARes(visitor, event);
+						reservationServices.addReservation(visitor, event);
 					}
 				}
 			}

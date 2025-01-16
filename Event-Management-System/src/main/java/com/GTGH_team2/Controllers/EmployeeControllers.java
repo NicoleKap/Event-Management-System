@@ -1,4 +1,4 @@
-package com.GTGH_team2.Employees;
+package com.GTGH_team2.Controllers;
 
 import java.util.List;
 
@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-
-
+import com.GTGH_team2.Entities.Employee;
+import com.GTGH_team2.Services.EmployeeServices;
 
 @RestController
 @RequestMapping("employees")

@@ -1,4 +1,4 @@
-package com.GTGH_team2.ApprovalRequests;
+package com.GTGH_team2.Services;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -8,13 +8,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.GTGH_team2.Employees.Employee;
-import com.GTGH_team2.Employees.EmployeeServices;
-import com.GTGH_team2.Events.Event;
-import com.GTGH_team2.Events.EventServices;
-import com.GTGH_team2.Organizers.Organizer;
-import com.GTGH_team2.Organizers.OrganizerServices;
-import com.GTGH_team2.Reservations.Reservation;
+import com.GTGH_team2.Entities.ApprovalRequest;
+import com.GTGH_team2.Entities.Employee;
+import com.GTGH_team2.Entities.Event;
+import com.GTGH_team2.Entities.Organizer;
 
 //The ApprovalRequestServices class handles the requests 
 //that an organizer makes for the events. The organizer makes a request
@@ -191,18 +188,15 @@ public class ApprovalRequestServices {
 			String updatedStatus) {
 		for (ApprovalRequest approvalRequest : getApprovalRequest()) {
 			if (approvalRequest.getId() == idApprovalRequest) {
-				for (Employee employee : employeeServices.getAllEmployees()) {
-					if (idEmployee == employee.getId()) {
-						assignApprovalRequestEmployee(idApprovalRequest, idEmployee);// maybe not needed QUESTION
-						updateApprovalRequestStatus(idApprovalRequest, updatedStatus);
-						LocalDateTime time = LocalDateTime.now();
-						String timeClosed = time.format(formatter);
-						updateApprovalRequestClosedAt(idApprovalRequest, timeClosed);
-						if (updatedStatus.equals("Accepted"))
-							eventServices.updateEventStatus(getEventID(idApprovalRequest), "Deleted");
+				Employee employee = employeeServices.getEmployeeById(idEmployee);
+				assignApprovalRequestEmployee(idApprovalRequest, idEmployee);
+				updateApprovalRequestStatus(idApprovalRequest, updatedStatus);
+				LocalDateTime time = LocalDateTime.now();
+				String timeClosed = time.format(formatter);
+				updateApprovalRequestClosedAt(idApprovalRequest, timeClosed);
+				if (updatedStatus.equals("Accepted"))
+					eventServices.updateEventStatus(getEventID(idApprovalRequest), "Deleted");
 
-					}
-				}
 			}
 		}
 		return approvalRequests;
@@ -218,7 +212,6 @@ public class ApprovalRequestServices {
 		}
 		return tempList;
 	}
-
 
 	// This method returns the ID of the event that is in the request
 	public Integer getEventID(Integer idApprovalRequest) {

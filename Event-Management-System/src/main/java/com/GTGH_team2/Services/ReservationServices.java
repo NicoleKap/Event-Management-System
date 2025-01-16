@@ -1,4 +1,4 @@
-package com.GTGH_team2.Reservations;
+package com.GTGH_team2.Services;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,12 +6,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-//import com.GTGH_team2.ApprovalRequests.ApprovalRequest;
-//import com.GTGH_team2.Employees.Employee;
-import com.GTGH_team2.Events.Event;
-//import com.GTGH_team2.Organizers.Organizer;
-import com.GTGH_team2.Visitors.Visitor;
-import com.GTGH_team2.Visitors.VisitorServices;
+import com.GTGH_team2.Entities.Event;
+import com.GTGH_team2.Entities.Reservation;
+import com.GTGH_team2.Entities.Visitor;
 
 @Service
 public class ReservationServices {
