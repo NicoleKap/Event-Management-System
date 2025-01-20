@@ -1,5 +1,6 @@
 package com.GTGH_team2.Services;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -81,7 +82,7 @@ public class EventServices {
 			if (newDescription != null)
 				event.setDescription(newDescription);
 			if (newLocation != null)
-				event.setTitle(newLocation);
+				event.setLocation(newLocation);
 			if (newMaxCapacity != null)
 				event.setMaxCapacity(newMaxCapacity);
 			if (newDay != null)
@@ -149,36 +150,31 @@ public class EventServices {
 		}
 		
 	}
+	
+	// Searching for an event by a specific date
 
-	// Searching for an event in the existing events list - filter : multiple
-	// methods
-
-	public List<Event> searchingAnEvent(Integer day, Integer month, Integer year, String theme) {
-		List<Event> eventByCriteria = new ArrayList<>(); // The events which are found is stored in this list
-		for (Event event : allEvents) {
-			if (event.getDay() == day)
-				eventByCriteria.add(event);
-			if (event.getMonth() == month) {
-				eventByCriteria.add(event);
-			}
-			
-			if (event.getYear() == year)
-				eventByCriteria.add(event);
-			if (event.getTheme() == theme)
-				eventByCriteria.add(event);
-		}
-		return eventByCriteria;
+	public List<Event> findingByDate(LocalDate date) {
+		return allEvents.stream()
+				.filter(event -> event.getDate().equals(date))
+				.collect(Collectors.toList());	
 	}
-
+	
+	// Searching an event by its location
+	
+	public List<Event> findingByLocation(String Location) {
+		return allEvents.stream()
+				.filter(event -> event.getLocation().equalsIgnoreCase(Location))
+				.collect(Collectors.toList());
+			
+		
+	}
+	
 	// Find an event by its Id
 
-	public Event findEventById(Integer id) {
-		for (Event event : allEvents) {
-			if (event.getId().equals(id))
-				;
-			return event;
-		}
-		return null;
+	public List<Event> findEventById(Integer id) {
+		return allEvents.stream()
+				.filter(event -> event.getId().equals(id))
+				.collect(Collectors.toList());
 	}
 
 	// Cancel an Event and the relative reservations
